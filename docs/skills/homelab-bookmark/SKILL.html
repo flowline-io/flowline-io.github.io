@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Flowbot Bookmark — Flowbot</title>
+<meta name="description" content="Manage bookmarks via the Flowbot CLI. Create, list, search, archive, and tag bookmarks stored in the Flowbot server. Make sure to use this skill whenever the user mentions bookmarks, saving URLs, link collection, web clippings, reading list, tagging URLs, URL archiving, checking saved links." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../../index.html#overview">Overview</a></li>
+<li><a href="../../../index.html#problem">Problem</a></li>
+<li><a href="../../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../../index.html#workflow">Workflow</a></li>
+<li><a href="../../../design.html">Design</a></li>
+<li><a href="../../../api.html">API</a></li>
+<li><a href="../../../tutorials.html">Tutorials</a></li>
+<li><a href="../../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Flowbot Bookmark</h1>
+<p class="docs-hero-desc">Manage bookmarks via the Flowbot CLI. Create, list, search, archive, and tag bookmarks stored in the Flowbot server. Make sure to use this skill whenever the user mentions bookmarks, saving URLs, link collection, web clippings, reading list, tagging URLs, URL archiving, checking saved links.</p>
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub active">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Flowbot Bookmark</h1>
+
+<p>Manage bookmarks via the Flowbot CLI. Create, list, search, archive, and tag bookmarks stored in the Flowbot server.</p>
+
+<h2>Prerequisites</h2>
+
+<ul>
+<li>The <code>flowbot</code> CLI must be installed and logged in (<code>flowbot login</code>).</li>
+<li>The Flowbot server must be running and reachable.</li>
+<li>Global flags: <code>--server-url</code> (server address), <code>--profile</code> (config profile), <code>--debug</code> (enable debug logging).</li>
+</ul>
+
+<h2>Global Flags Reference</h2>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--server-url</code></td>
+<td></td>
+<td>string</td>
+<td>Flowbot server URL (or set <code>FLOWBOT_SERVER_URL</code> env var)</td>
+</tr>
+
+<tr>
+<td><code>--profile</code></td>
+<td></td>
+<td>string</td>
+<td>Configuration profile name</td>
+</tr>
+
+<tr>
+<td><code>--debug</code></td>
+<td><code>-d</code></td>
+<td>bool</td>
+<td>Enable debug mode</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Common Output Options</h2>
+
+<p>Most commands support <code>--output</code> / <code>-o</code> to choose between <code>table</code> (default, human-readable) and <code>json</code> (structured) output.</p>
+
+<h2>Operations</h2>
+
+<h3>Create a new bookmark</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark create --url &lt;url&gt;</code>
+Add a new bookmark to the Flowbot server</p>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--url</code></td>
+<td><code>-u</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Bookmark URL</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h3>List all bookmarks</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark list [flags]</code>
+Display bookmarks from the Flowbot server</p>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--limit</code></td>
+<td><code>-n</code></td>
+<td>int</td>
+<td>no</td>
+<td>Maximum number of bookmarks</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h3>Get a bookmark by ID</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark get &lt;id&gt;</code>
+Display details of a specific bookmark</p>
+
+<p><strong>Positional Arguments:</strong></p>
+
+<ul>
+<li><code>&lt;id&gt;</code></li>
+</ul>
+
+<hr/>
+
+<h3>Toggle archive status of a bookmark</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark archive &lt;id&gt; [flags]</code>
+Archive or unarchive a bookmark by ID</p>
+
+<p><strong>Positional Arguments:</strong></p>
+
+<ul>
+<li><code>&lt;id&gt;</code></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--yes</code></td>
+<td><code>-y</code></td>
+<td>bool</td>
+<td>no</td>
+<td>Skip confirmation</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h3>Delete (archive) a bookmark</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark delete &lt;id&gt; [flags]</code>
+Archive a bookmark by ID</p>
+
+<p><strong>Positional Arguments:</strong></p>
+
+<ul>
+<li><code>&lt;id&gt;</code></li>
+</ul>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--yes</code></td>
+<td><code>-y</code></td>
+<td>bool</td>
+<td>no</td>
+<td>Skip confirmation</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h3>Check if a URL is already bookmarked</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark check-url --url &lt;url&gt;</code>
+Check if a URL exists in the bookmark collection</p>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--url</code></td>
+<td><code>-u</code></td>
+<td>string</td>
+<td>yes</td>
+<td>URL to check</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h3>Search bookmarks</h3>
+
+<p><strong>Command:</strong> <code>flowbot bookmark search --query &lt;query&gt; [flags]</code>
+Full-text search across all bookmarks</p>
+
+<table>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Shorthand</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>--query</code></td>
+<td><code>-q</code></td>
+<td>string</td>
+<td>yes</td>
+<td>Search query</td>
+</tr>
+
+<tr>
+<td><code>--sort-order</code></td>
+<td><code>-s</code></td>
+<td>string</td>
+<td>no</td>
+<td>Sort order (asc, desc, relevance)</td>
+</tr>
+
+<tr>
+<td><code>--limit</code></td>
+<td><code>-n</code></td>
+<td>int</td>
+<td>no</td>
+<td>Maximum number of results</td>
+</tr>
+
+<tr>
+<td><code>--cursor</code></td>
+<td><code>-c</code></td>
+<td>string</td>
+<td>no</td>
+<td>Pagination cursor</td>
+</tr>
+
+<tr>
+<td><code>--include-content</code></td>
+<td><code>-i</code></td>
+<td>bool</td>
+<td>no</td>
+<td>Include full content in results</td>
+</tr>
+</tbody>
+</table>
+
+<hr/>
+
+<h2>Common Workflows</h2>
+
+<h3>Save a URL from a chat message</h3>
+
+<p>When a user shares a URL they want to save:</p>
+
+<ol>
+<li><code>flowbot bookmark check-url -u &lt;url&gt;</code></li>
+<li><code>flowbot bookmark create -u &lt;url&gt;</code></li>
+<li><code>Report back with the bookmark details including the assigned ID.</code></li>
+</ol>
+
+<h3>Find and review bookmarks</h3>
+
+<p>When a user wants to find previously saved content:</p>
+
+<ol>
+<li><code>flowbot bookmark search -q &#34;&lt;keywords&gt;&#34; --limit 10</code></li>
+<li><code>flowbot bookmark get &lt;id&gt;</code></li>
+<li><code>Present the bookmark details to the user.</code></li>
+</ol>
+
+<h2>Troubleshooting</h2>
+
+<ul>
+<li><strong>“not logged in”</strong>: Run <code>flowbot login</code> first.</li>
+<li><strong>“server URL is required”</strong>: Set <code>FLOWBOT_SERVER_URL</code> env var or use <code>--server-url</code> flag.</li>
+<li><strong>Empty results</strong>: Check the server is running and you have access to the requested resources.</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../../design.html">Design</a>
+<a href="../../../api.html">API</a>
+<a href="../../../tutorials.html">Tutorials</a>
+<a href="../../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../../js/main.js"></script>
+</body>
+</html>

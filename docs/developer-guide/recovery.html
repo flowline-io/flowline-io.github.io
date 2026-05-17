@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Recovery Manager — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Recovery Manager</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub active">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Recovery Manager</h1>
+
+<p>Restart recovery for incomplete pipeline runs and workflow jobs.</p>
+
+<p>Source: <code>pkg/recovery/</code></p>
+
+<h2>Overview</h2>
+
+<p>When Flowbot restarts after a crash or intentional shutdown, long-running pipelines and workflows may be left in a non-terminal state (<code>PipelineStart</code>, <code>JobRunning</code>). The Recovery Manager scans for these incomplete executions and attempts to resume them.</p>
+
+<pre><code>Flowbot startup
+    │
+    ▼
+Recovery Manager (pkg/recovery/recovery.go)
+    │
+    ├── Pipeline recovery
+    │     ├── Query pipeline_runs WHERE status = PipelineStart
+    │     ├── Check heartbeat freshness (stale threshold)
+    │     ├── Skip active runs (recent heartbeat)
+    │     ├── Mark expired runs as cancelled
+    │     └── Resume stale runs (if auto_resume enabled)
+    │
+    └── Workflow recovery
+          ├── Query jobs WHERE state = JobRunning
+          ├── Mark stale jobs as failed
+          └── Mark for resume (if auto_resume enabled)
+</code></pre>
+
+<h2>Configuration</h2>
+
+<p>Add a <code>recovery</code> section to <code>flowbot.yaml</code>:</p>
+
+<pre><code>recovery:
+  enabled: true # Enable the recovery manager
+  stale_timeout: 5m # Time since last heartbeat before a run is considered stale
+  auto_resume: true # Automatically resume stale runs (false = mark as cancelled/failed)
+  max_resume_age: 24h # Maximum age of a run to attempt resumption (older runs are cancelled)
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Master switch for recovery manager</td>
+</tr>
+
+<tr>
+<td><code>stale_timeout</code></td>
+<td>duration</td>
+<td><code>0s</code></td>
+<td>Inactivity threshold; runs with no heartbeat for this duration are considered stale. <code>0</code> means no timeout (all incomplete runs are stale).</td>
+</tr>
+
+<tr>
+<td><code>auto_resume</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>If <code>true</code>, stale runs are resumed. If <code>false</code>, stale runs are marked as <code>PipelineCancel</code> / <code>JobFailed</code>.</td>
+</tr>
+
+<tr>
+<td><code>max_resume_age</code></td>
+<td>duration</td>
+<td><code>0s</code></td>
+<td>Maximum allowed age of a run to attempt resumption. Runs older than this are cancelled regardless of <code>auto_resume</code>. <code>0</code> disables age check.</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Pipeline Recovery</h2>
+
+<h3>How It Works</h3>
+
+<ol>
+<li>On startup, <code>Recover()</code> queries <code>pipeline_runs</code> where <code>status = PipelineStart</code>.</li>
+<li>For each incomplete run:
+a. <strong>Active check</strong>: If <code>last_heartbeat</code> is recent (within <code>stale_timeout</code>), the run is still being executed — skip it.
+b. <strong>Age check</strong>: If <code>started_at</code> is older than <code>max_resume_age</code>, mark as <code>PipelineCancel</code> — too old to resume.
+c. <strong>Auto-resume</strong>: If <code>auto_resume: true</code>, the run is marked for resumption (actual resume is wired externally via <code>Engine.ResumePipeline</code>).
+d. <strong>Manual recovery</strong>: If <code>auto_resume: false</code>, the run is marked as <code>PipelineCancel</code> — administrator must manually initiate recovery.</li>
+</ol>
+
+<h3>Staleness Detection</h3>
+
+<pre><code>isStale(run):
+  if stale_timeout &lt;= 0: return true          # all runs immediately stale
+  if last_heartbeat == nil:
+    return time.Since(started_at) &gt; stale_timeout  # fallback to started_at
+  return time.Since(last_heartbeat) &gt; stale_timeout
+</code></pre>
+
+<p>A run is considered “active” (not stale) if its <code>last_heartbeat</code> was updated within <code>stale_timeout</code>. This requires the pipeline to have <code>resumable: true</code> (which enables the heartbeat goroutine).</p>
+
+<h3>Resume Process</h3>
+
+<p>When a pipeline is resumed:</p>
+
+<ol>
+<li><code>Engine.ResumePipeline(ctx, runID)</code> loads the run record to get the pipeline name.</li>
+<li>The checkpoint data (<code>pipeline_runs.checkpoint_data</code>) is deserialized.</li>
+<li>The pipeline definition is matched by name (must have <code>resumable: true</code>).</li>
+<li><code>RenderContext</code> is reconstructed from the saved step results.</li>
+<li>Execution continues from the checkpointed <code>step_index</code>.</li>
+<li>New checkpoints are saved before each remaining step.</li>
+<li>On completion, the run is marked <code>PipelineDone</code> or <code>PipelineCancel</code>.</li>
+</ol>
+
+<h2>Workflow Recovery</h2>
+
+<h3>How It Works</h3>
+
+<ol>
+<li>On startup, <code>Recover()</code> queries <code>jobs</code> where <code>state = JobRunning</code>.</li>
+<li>For each incomplete job:
+a. If <code>auto_resume: false</code>, mark as <code>JobFailed</code> — administrator intervention required.
+b. If <code>auto_resume: true</code>, the job is marked for resumption.</li>
+</ol>
+
+<p>Workflow jobs don’t currently have a heartbeat mechanism. The recovery manager treats all incomplete jobs as immediately stale.</p>
+
+<h3>Limitations</h3>
+
+<ul>
+<li>Workflow recovery currently only identifies stale jobs for manual/external resumption.</li>
+<li>The actual resume execution from a specific step requires the workflow YAML and task definitions — these must still be available on disk.</li>
+<li>For workflows with <code>resumable: true</code>, step states are written to the <code>steps</code> table, but automatic resume from the last incomplete step is not yet implemented.</li>
+</ul>
+
+<h2>Admin Endpoints</h2>
+
+<p>The Recovery Manager exposes methods for programmatic access:</p>
+
+<pre><code>// List incomplete pipeline runs
+manager.GetIncompletePipelines()  // → []*model.PipelineRun
+
+// List incomplete workflow jobs
+manager.GetIncompleteWorkflows()  // → []*model.Job
+</code></pre>
+
+<p>HTTP endpoints can be built on top of these methods (not yet implemented):</p>
+
+<pre><code>GET  /service/recovery/incomplete           # list all incomplete runs
+POST /service/recovery/resume/pipeline/:id  # manually resume a pipeline
+POST /service/recovery/resume/workflow/:id  # manually resume a workflow
+</code></pre>
+
+<h2>Best Practices</h2>
+
+<h3>Enable for Long-Running Workloads</h3>
+
+<pre><code>resumable: true   →  pipelines that process batch RSS feeds, large file imports
+resumable: false  →  fast pipelines (&lt; 5 seconds), simple notifications
+</code></pre>
+
+<h3>Tune the Stale Timeout</h3>
+
+<pre><code>stale_timeout: 2m   →  fast pipelines, aggressive recovery
+stale_timeout: 10m  →  batch processing, lenient recovery
+stale_timeout: 1h   →  very slow pipelines, conservative
+</code></pre>
+
+<h3>Safety</h3>
+
+<ul>
+<li>Recovery only touches runs in <code>PipelineStart</code> status. Runs that already completed (<code>PipelineDone</code> / <code>PipelineCancel</code>) are never touched.</li>
+<li>The idempotency guard (<code>event_consumptions</code>) prevents a recovered run from re-processing an already-consumed event.</li>
+<li>The <code>max_resume_age</code> cap prevents attempting to resume runs that are so old the original event context is meaningless.</li>
+</ul>
+
+<h2>Testing</h2>
+
+<pre><code>go test ./pkg/recovery/...
+go test ./pkg/pipeline/...     # ResumePipeline tests
+go test ./internal/store/...   # PipelineStore checkpoint tests
+</code></pre>
+
+<h2>Dependencies</h2>
+
+<ul>
+<li>Requires PostgreSQL for state persistence (checkpoint data, heartbeat timestamps).</li>
+<li>Pipeline recovery requires pipeline definitions to still be present in the running config.</li>
+<li>Workflow recovery requires workflow YAML files to still exist on disk.</li>
+<li>The <code>resumable</code> flag must be set on the pipeline/workflow definition to opt in.</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

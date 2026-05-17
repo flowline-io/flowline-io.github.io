@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Homelab App Discovery — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Homelab App Discovery</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub active">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Homelab App Discovery</h1>
+
+<p>Automatic identification of API endpoints and authentication mechanisms for self-hosted
+apps registered through the Homelab Scanner. The system uses two complementary strategies:
+<strong>label-based static discovery</strong> and <strong>runtime probe-based detection</strong>.</p>
+
+<h2>Overview</h2>
+
+<p>The discovery subsystem enriches scanned homelab apps with capability, endpoint, and
+authentication metadata, enabling the Hub to present discovered capabilities and the
+health checker to probe API endpoints directly.</p>
+
+<pre><code>docker-compose labels     runtime HTTP probes
+        \                       /
+         \                     /
+        App Scanning (scanner.go)
+                  |
+          ParseLabels() + ProbeEngine
+                  |
+        App.Capabilities[] field
+                  |
+        hub.AutoBind() / LogDiscovered()
+                  |
+        hub.EndpointHealthChecker
+</code></pre>
+
+<h2>Strategy 1: Label-Based Discovery (Static)</h2>
+
+<p>Define capabilities, endpoints, and auth mechanisms directly in your
+<code>docker-compose.yaml</code> using the <code>flowbot.*</code> label convention. Labels are parsed
+during filesystem scanning with zero runtime cost.</p>
+
+<h3>Label Convention</h3>
+
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Required</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>flowbot.capability</code></td>
+<td>Yes</td>
+<td>Capability type the app provides</td>
+<td><code>bookmark</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.backend</code></td>
+<td>No</td>
+<td>Backend provider name (defaults to capability)</td>
+<td><code>karakeep</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.endpoint.base</code></td>
+<td>No</td>
+<td>Base URL for the API</td>
+<td><code>http://linkwarden:3000/api/v1</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.endpoint.health</code></td>
+<td>No</td>
+<td>Health check path (relative to base)</td>
+<td><code>/health</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.endpoint.health_ttl</code></td>
+<td>No</td>
+<td>Health check cache TTL (duration string)</td>
+<td><code>30s</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.auth.type</code></td>
+<td>No</td>
+<td>Auth type: <code>api_token</code>, <code>basic</code>, <code>oauth2</code>, <code>oidc</code>, <code>none</code></td>
+<td><code>api_token</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.auth.header</code></td>
+<td>No</td>
+<td>HTTP header name for auth</td>
+<td><code>Authorization</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.auth.prefix</code></td>
+<td>No</td>
+<td>Header value prefix</td>
+<td><code>Bearer</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.auth.token_key</code></td>
+<td>No</td>
+<td>Environment variable name holding the token</td>
+<td><code>LW_API_KEY</code></td>
+</tr>
+
+<tr>
+<td><code>flowbot.auth.token_source</code></td>
+<td>No</td>
+<td>Where to read the token: <code>env</code>, <code>file</code>, <code>config</code></td>
+<td><code>env</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Supported Capabilities</h3>
+
+<table>
+<thead>
+<tr>
+<th>Label Value</th>
+<th>Capability Type</th>
+<th>Typical Backend</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>bookmark</code></td>
+<td>Bookmark</td>
+<td>karakeep</td>
+</tr>
+
+<tr>
+<td><code>archive</code></td>
+<td>Archive</td>
+<td>archivebox</td>
+</tr>
+
+<tr>
+<td><code>reader</code></td>
+<td>Reader (RSS)</td>
+<td>miniflux</td>
+</tr>
+
+<tr>
+<td><code>kanban</code></td>
+<td>Kanban</td>
+<td>kanboard</td>
+</tr>
+
+<tr>
+<td><code>finance</code></td>
+<td>Finance</td>
+<td>fireflyiii</td>
+</tr>
+
+<tr>
+<td><code>infra</code></td>
+<td>Infrastructure</td>
+<td>—</td>
+</tr>
+
+<tr>
+<td><code>shell_history</code></td>
+<td>Shell History</td>
+<td>atuin</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Example</h3>
+
+<pre><code># docker-compose.yaml
+services:
+  linkwarden:
+    image: ghcr.io/linkwarden/linkwarden:latest
+    container_name: linkwarden
+    ports:
+      - &#34;3000:3000&#34;
+    labels:
+      flowbot.capability: &#34;bookmark&#34;
+      flowbot.backend: &#34;karakeep&#34;
+      flowbot.endpoint.base: &#34;http://linkwarden:3000/api/v1&#34;
+      flowbot.endpoint.health: &#34;/health&#34;
+      flowbot.endpoint.health_ttl: &#34;30s&#34;
+      flowbot.auth.type: &#34;api_token&#34;
+      flowbot.auth.header: &#34;Authorization&#34;
+      flowbot.auth.prefix: &#34;Bearer&#34;
+      flowbot.auth.token_key: &#34;LW_API_KEY&#34;
+      flowbot.auth.token_source: &#34;env&#34;
+</code></pre>
+
+<p>With this label configuration, the scanner automatically:</p>
+
+<ol>
+<li>Registers <code>bookmark</code> as a discovered capability for this app.</li>
+<li>Records the base URL, health path, and auth metadata.</li>
+<li>The hub logs the discovery and exposes it through <code>/hub/capabilities</code> responses.</li>
+<li>The health checker probes <code>http://linkwarden:3000/api/v1/health</code> on each check cycle.</li>
+</ol>
+
+<h2>Strategy 2: Runtime Probe Engine (Dynamic)</h2>
+
+<p>When labels are absent or incomplete, an optional HTTP probe engine can discover
+endpoints and auth mechanisms by making requests to running containers.</p>
+
+<h3>What It Detects</h3>
+
+<table>
+<thead>
+<tr>
+<th>Discovery Target</th>
+<th>Method</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>API endpoint reachability</td>
+<td>HTTP GET to each published TCP port (http and https)</td>
+</tr>
+
+<tr>
+<td>Health endpoint</td>
+<td>Probes common paths: <code>/health</code>, <code>/healthz</code>, <code>/api/health</code>, <code>/api/v1/health</code>, <code>/ping</code>, <code>/status</code></td>
+</tr>
+
+<tr>
+<td>Authentication mechanism</td>
+<td>Analyses HTTP <sup>401</sup>⁄<sub>403</sub> responses and <code>WWW-Authenticate</code> headers</td>
+</tr>
+
+<tr>
+<td>OIDC support</td>
+<td>Probes <code>/.well-known/openid-configuration</code></td>
+</tr>
+
+<tr>
+<td>Service fingerprint</td>
+<td>Matches known API paths against the fingerprint database</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Auth Detection Logic</h3>
+
+<table>
+<thead>
+<tr>
+<th>Response</th>
+<th>Detected Auth</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>401 with <code>WWW-Authenticate: Bearer</code></td>
+<td><code>oauth2</code></td>
+</tr>
+
+<tr>
+<td>401 with <code>WWW-Authenticate: Basic</code></td>
+<td><code>basic</code></td>
+</tr>
+
+<tr>
+<td><sup>401</sup>⁄<sub>403</sub> with no <code>WWW-Authenticate</code></td>
+<td><code>api_token</code></td>
+</tr>
+
+<tr>
+<td>200 at <code>/.well-known/openid-configuration</code></td>
+<td><code>oidc</code></td>
+</tr>
+
+<tr>
+<td>200 at base URL</td>
+<td><code>none</code></td>
+</tr>
+
+<tr>
+<td>Other</td>
+<td><code>unknown</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Fingerprint Database</h3>
+
+<p>The probe engine maintains a fingerprint database of known self-hosted services.
+When a service’s API paths match a fingerprint, the capability type is automatically
+inferred. Currently supported fingerprints:</p>
+
+<table>
+<thead>
+<tr>
+<th>Service</th>
+<th>Capability</th>
+<th>Detection Path</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>LinkWarden</td>
+<td>bookmark</td>
+<td><code>/api/v1/health</code></td>
+</tr>
+
+<tr>
+<td>ArchiveBox</td>
+<td>archive</td>
+<td><code>/admin</code></td>
+</tr>
+
+<tr>
+<td>Miniflux</td>
+<td>reader</td>
+<td><code>/v1/healthcheck</code></td>
+</tr>
+
+<tr>
+<td>Kanboard</td>
+<td>kanban</td>
+<td><code>/jsonrpc.php</code></td>
+</tr>
+
+<tr>
+<td>Firefly III</td>
+<td>finance</td>
+<td><code>/api/v1/about</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Probe Behavior</h3>
+
+<ul>
+<li>Probes only run when <code>homelab.discovery.probe_enabled</code> is <code>true</code>.</li>
+<li>Non-running apps are skipped (probes require an active container).</li>
+<li>Both HTTP and HTTPS are attempted for each TCP port.</li>
+<li>A configurable concurrency limit controls simultaneous probes.</li>
+<li>Each probe respects a configurable per-request timeout.</li>
+<li>Probes do not follow redirects (to avoid false positives on login pages).</li>
+<li>All probe requests include <code>User-Agent: Flowbot-Homelab-Probe/1.0</code>.</li>
+</ul>
+
+<h2>Configuration</h2>
+
+<p>Add the <code>discovery</code> block under <code>homelab</code> in your <code>flowbot.yaml</code>:</p>
+
+<pre><code>homelab:
+  root: &#34;/home/user/homelab&#34;
+  apps_dir: &#34;/home/user/homelab/apps&#34;
+  compose_file: &#34;docker-compose.yaml&#34;
+  runtime:
+    mode: &#34;docker_socket&#34;
+    docker_socket: &#34;unix:///var/run/docker.sock&#34;
+  allowlist: []
+  permissions:
+    status: true
+    logs: true
+    start: false
+    stop: false
+    restart: false
+    pull: false
+    update: false
+    exec: false
+  discovery:
+    probe_enabled: true
+    probe_timeout: &#34;5s&#34;
+    probe_concurrency: 4
+    probe_port_strategy: &#34;published&#34;
+    fingerprint_enabled: true
+    label_priority: true
+</code></pre>
+
+<h3>Discovery Configuration Reference</h3>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>probe_enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable runtime HTTP probing of running containers</td>
+</tr>
+
+<tr>
+<td><code>probe_timeout</code></td>
+<td>duration</td>
+<td><code>&#34;5s&#34;</code></td>
+<td>Per-request timeout for probe HTTP calls</td>
+</tr>
+
+<tr>
+<td><code>probe_concurrency</code></td>
+<td>int</td>
+<td><code>4</code></td>
+<td>Maximum number of parallel probe goroutines</td>
+</tr>
+
+<tr>
+<td><code>probe_networks</code></td>
+<td>[]string</td>
+<td><code>[]</code></td>
+<td>Docker network names to resolve (reserved for future use)</td>
+</tr>
+
+<tr>
+<td><code>probe_port_strategy</code></td>
+<td>string</td>
+<td><code>&#34;published&#34;</code></td>
+<td>Port resolution strategy: <code>published</code>, <code>container</code>, or <code>both</code></td>
+</tr>
+
+<tr>
+<td><code>fingerprint_enabled</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>Enable service fingerprint matching against known patterns</td>
+</tr>
+
+<tr>
+<td><code>label_priority</code></td>
+<td>bool</td>
+<td><code>true</code></td>
+<td>When true, label-derived data takes precedence over probes</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Port Strategy</h3>
+
+<table>
+<thead>
+<tr>
+<th>Strategy</th>
+<th>Behaviour</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>published</code></td>
+<td>Probe the host-published port (e.g., <code>8080:3000</code> probes <code>8080</code>)</td>
+</tr>
+
+<tr>
+<td><code>container</code></td>
+<td>Probe the container-internal port (e.g., probes <code>3000</code> on <code>localhost</code>)</td>
+</tr>
+
+<tr>
+<td><code>both</code></td>
+<td>Try published first, fall back to container port</td>
+</tr>
+</tbody>
+</table>
+
+<h2>How Discovery Feeds Into the Hub</h2>
+
+<h3>Scanning Phase</h3>
+
+<ol>
+<li><code>Scanner.Scan()</code> reads <code>apps/*/docker-compose.yaml</code> files.</li>
+<li><code>ParseLabels()</code> extracts <code>AppCapability</code> entries from labels.</li>
+<li>If discovery probes are enabled, <code>ProbeEngine.ProbeAll()</code> enriches apps with runtime data.</li>
+<li>Results are merged into <code>App.Capabilities[]</code> and persisted to PostgreSQL via <code>hub_store</code>.</li>
+</ol>
+
+<h3>Capability Awareness</h3>
+
+<ul>
+<li><code>hub.AutoBind()</code> reads homelab registry apps and returns a list of discovered bindings
+with their registration status in the hub.</li>
+<li><code>hub.LogDiscovered()</code> logs discovered capabilities that are not yet configured as
+full hub descriptors.</li>
+<li>The <code>/hub/capabilities</code> API endpoint exposes binding information.</li>
+<li>The homelab app listing at <code>/hub/apps</code> includes <code>capabilities</code> in each app response.</li>
+</ul>
+
+<h3>Health Check Integration</h3>
+
+<ul>
+<li><code>EndpointHealthChecker</code> probes discovered health URLs on each health check cycle.</li>
+<li>Results are included in the <code>/hub/health</code> response alongside registered hub descriptors.</li>
+<li>Capabilities already registered in the hub are excluded to avoid duplicate entries.</li>
+<li>The overall health status degrades if any endpoint health check fails.</li>
+</ul>
+
+<h2>Design Decisions</h2>
+
+<table>
+<thead>
+<tr>
+<th>Decision</th>
+<th>Rationale</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Label convention uses a flat namespace (<code>flowbot.*</code>)</td>
+<td>Matches docker-compose label conventions; discoverable by grep</td>
+</tr>
+
+<tr>
+<td>Labels take priority over probe results when <code>label_priority</code> is true</td>
+<td>User intent is authoritative; probes are best-effort</td>
+</tr>
+
+<tr>
+<td>Probe engine returns <code>nil</code> when disabled (not an empty engine)</td>
+<td>Avoids unnecessary allocations; callers check for nil</td>
+</tr>
+
+<tr>
+<td>Homelab capability types use string constants, not <code>hub.CapabilityType</code></td>
+<td>Breaks import cycle between <code>homelab</code> and <code>hub</code> packages</td>
+</tr>
+
+<tr>
+<td>Only TCP ports are probed (UDP skipped)</td>
+<td>Self-hosted APIs are HTTP-based; UDP probing adds noise</td>
+</tr>
+
+<tr>
+<td>Probes do not follow redirects</td>
+<td>Avoids probing login pages that return 200 on redirect</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Adding New Service Fingerprints</h2>
+
+<p>To add fingerprint support for a new service, edit
+<code>pkg/homelab/probe/fingerprints.go</code>:</p>
+
+<pre><code>{
+    Capability: &#34;bookmark&#34;,
+    Provider:   &#34;your-provider&#34;,
+    Patterns: []FingerprintPattern{
+        {Field: &#34;path&#34;, Key: &#34;/api/v1/health&#34;, Value: &#34;&#34;},
+    },
+}
+</code></pre>
+
+<p>Each pattern contributes a confidence score. When the cumulative confidence exceeds
+zero, the engine emits a match. Currently only the <code>path</code> field type is implemented;
+future work may add <code>header</code> and <code>body_key</code> field types with regex <code>Value</code> patterns.</p>
+
+<h2>Testing</h2>
+
+<pre><code># Label parsing tests
+go test -run TestParseLabels ./pkg/homelab/
+
+# Auth detector tests
+go test ./pkg/homelab/probe/ -run TestAuthDetector
+
+# Auto-binding tests
+go test ./pkg/hub/ -run TestAutoBind
+
+# Full homelab suite
+go test ./pkg/homelab/...
+</code></pre>
+
+<h2>Limitations</h2>
+
+<ul>
+<li><strong>No container network resolution</strong>: Probes use <code>localhost</code> for published ports.
+Docker network-level resolution (e.g., <code>docker inspect</code> for container IPs) is not
+yet implemented. This means probes may fail for containers on isolated networks.</li>
+<li><strong>Fingerprint engine is path-only</strong>: Header pattern matching and body-key JSON
+parsing are defined in the type system but not yet implemented in the matcher.</li>
+<li><strong>Auth detection is heuristic</strong>: API key header detection is inferred from the
+absence of a <code>WWW-Authenticate</code> header on <sup>401</sup>⁄<sub>403</sub> responses. The exact header
+name (e.g., <code>X-API-Key</code> vs <code>X-Auth-Token</code>) cannot be determined from the
+response alone.</li>
+<li><strong>Single capability per app</strong>: The current label convention supports one
+capability per compose file. Multi-service apps with different capabilities
+require separate compose files or manual hub registration.</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

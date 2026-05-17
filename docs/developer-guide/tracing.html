@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Distributed Tracing — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Distributed Tracing</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub active">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Distributed Tracing</h1>
+
+<p>OpenTelemetry-based distributed tracing for end-to-end visibility of requests, database queries, Redis commands, external API calls, pipeline executions, and Watermill event flows.</p>
+
+<p>Source: <code>pkg/trace/</code> (core), with instrumentation spread across <code>pkg/event/</code>, <code>pkg/pipeline/</code>, <code>pkg/ability/</code>, <code>pkg/utils/</code>, <code>pkg/rdb/</code>, <code>pkg/flog/</code>, <code>internal/store/mysql/</code>, <code>internal/server/</code>.</p>
+
+<h2>Architecture</h2>
+
+<pre><code>                    ┌─────────────────────────────────┐
+                    │       OTLP Collector            │
+                    │  (Jaeger / Tempo / Datadog)     │
+                    └──────────────┬──────────────────┘
+                                   │ OTLP HTTP (protobuf)
+                    ┌──────────────▼──────────────────┐
+                    │   TracerProvider (SDK)           │
+                    │   - BatchSpanProcessor           │
+                    │   - OTLP HTTP exporter            │
+                    │   - Resource (service.name, etc.) │
+                    └──────────────┬──────────────────┘
+                                   │
+         ┌─────────────────────────┼─────────────────────────┐
+         │                         │                         │
+  ┌──────▼──────┐   ┌──────────────▼──────┐   ┌──────────────▼──────┐
+  │ Fiber OTel  │   │  Pipeline Engine    │   │  ability.Invoke     │
+  │ middleware  │   │  (custom spans)     │   │  (custom spans)     │
+  └──────┬──────┘   └──────────┬──────────┘   └──────────┬──────────┘
+         │                     │                         │
+  ┌──────▼──────┐   ┌──────────▼──────────┐   ┌──────────▼──────────┐
+  │ GORM plugin │   │ Watermill handler   │   │ resty + otelhttp    │
+  │ (DB traces) │   │ (pub/sub traces)    │   │ (outgoing HTTP)     │
+  └─────────────┘   └─────────────────────┘   └─────────────────────┘
+</code></pre>
+
+<h3>Components</h3>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>TracerProvider</code></td>
+<td><code>pkg/trace/trace.go</code></td>
+<td>OTLP HTTP exporter init, sampler, lifecycle</td>
+</tr>
+
+<tr>
+<td>Fiber middleware</td>
+<td><code>pkg/trace/fiber.go</code></td>
+<td>HTTP request spans, W3C context extraction</td>
+</tr>
+
+<tr>
+<td>Span helpers</td>
+<td><code>pkg/trace/helper.go</code></td>
+<td><code>StartSpan</code>, <code>RecordError</code>, <code>SetSpanAttributes</code></td>
+</tr>
+
+<tr>
+<td>GORM plugin</td>
+<td><code>internal/store/mysql/adapter.go</code></td>
+<td>Auto-span for all GORM queries</td>
+</tr>
+
+<tr>
+<td>Redis hook</td>
+<td><code>pkg/rdb/rdb.go</code>, <code>pkg/event/redis.go</code></td>
+<td>Auto-span for all Redis commands</td>
+</tr>
+
+<tr>
+<td>Pipeline spans</td>
+<td><code>pkg/pipeline/engine.go</code></td>
+<td>Pipeline + step execution spans</td>
+</tr>
+
+<tr>
+<td>ability.Invoke span</td>
+<td><code>pkg/ability/invoke.go</code></td>
+<td>Capability invocation span</td>
+</tr>
+
+<tr>
+<td>HTTP client</td>
+<td><code>pkg/utils/resty.go</code></td>
+<td><code>otelhttp</code> transport for outgoing HTTP</td>
+</tr>
+
+<tr>
+<td>Watermill trace</td>
+<td><code>pkg/event/pubsub.go</code></td>
+<td>Publish span + consumer span + W3C propagation</td>
+</tr>
+
+<tr>
+<td>Log correlation</td>
+<td><code>pkg/flog/flog.go</code></td>
+<td><code>Ctx(ctx)</code> annotates log entries with <code>trace_id</code> / <code>span_id</code></td>
+</tr>
+
+<tr>
+<td>Trace context</td>
+<td><code>pkg/types/context.go</code></td>
+<td><code>TraceCtx</code> field in <code>types.Context</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Span Naming Convention</h2>
+
+<p>Spans follow a hierarchical dot-separated naming scheme. Each layer prefixes its span with the component namespace.</p>
+
+<table>
+<thead>
+<tr>
+<th>Level</th>
+<th>Span name</th>
+<th>Location</th>
+<th>Automatic</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>HTTP request</td>
+<td><code>HTTP {method} {route}</code></td>
+<td><code>trace/fiber.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Event publish</td>
+<td><code>event.publish {topic}</code></td>
+<td><code>event/pubsub.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Event consume</td>
+<td><code>event.receive {topic}</code></td>
+<td><code>event/pubsub.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Pipeline execute</td>
+<td><code>pipeline.{name}.execute</code></td>
+<td><code>pipeline/engine.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Pipeline step</td>
+<td><code>pipeline.{pipeline}.step.{step}</code></td>
+<td><code>pipeline/engine.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Ability invoke</td>
+<td><code>ability.{capability}.{operation}</code></td>
+<td><code>ability/invoke.go</code></td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>GORM query</td>
+<td><code>gorm.Query</code> / <code>gorm.Row</code> / <code>gorm.Transaction</code></td>
+<td>GORM plugin</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Redis command</td>
+<td><code>GET</code> / <code>SET</code> / <code>LPUSH</code> / <code>XADD</code> / …</td>
+<td>redisotel hook</td>
+<td>Yes</td>
+</tr>
+
+<tr>
+<td>Outgoing HTTP</td>
+<td><code>HTTP {method}</code></td>
+<td>otelhttp transport</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Span attribute conventions</h3>
+
+<table>
+<thead>
+<tr>
+<th>Span type</th>
+<th>Key attributes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>HTTP server</td>
+<td><code>http.method</code>, <code>http.route</code>, <code>http.target</code>, <code>net.host.name</code>, <code>http.scheme</code>, <code>http.status_code</code></td>
+</tr>
+
+<tr>
+<td>Event publish</td>
+<td><code>messaging.destination</code>, <code>messaging.message.id</code></td>
+</tr>
+
+<tr>
+<td>Event consume</td>
+<td><code>messaging.operation</code> (<code>receive</code>), <code>messaging.destination</code>, <code>messaging.message.id</code></td>
+</tr>
+
+<tr>
+<td>Pipeline execute</td>
+<td><code>pipeline.name</code>, <code>event.id</code>, <code>event.type</code></td>
+</tr>
+
+<tr>
+<td>Pipeline step</td>
+<td><code>pipeline.step.name</code>, <code>pipeline.step.capability</code>, <code>pipeline.step.operation</code></td>
+</tr>
+
+<tr>
+<td>Ability invoke</td>
+<td><code>capability.name</code>, <code>capability.operation</code></td>
+</tr>
+
+<tr>
+<td>GORM</td>
+<td><code>db.system</code> (<code>mysql</code>), <code>db.statement</code>, <code>db.rows_affected</code></td>
+</tr>
+
+<tr>
+<td>Redis</td>
+<td><code>db.system</code> (<code>redis</code>), <code>db.statement</code></td>
+</tr>
+
+<tr>
+<td>Outgoing HTTP</td>
+<td><code>http.method</code>, <code>http.url</code>, <code>net.peer.name</code>, <code>http.status_code</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Call Chain</h2>
+
+<h3>Trace 1: Chat message → module → external API</h3>
+
+<pre><code>HTTP POST /service/{module}/command          ← Fiber middleware span
+  │
+  ├── gorm.Query (user lookup)               ← GORM auto-span
+  ├── GET (redis:get chat session)           ← Redis auto-span
+  ├── ability.{capability}.{operation}       ← ability.Invoke span
+  │     ├── HTTP GET https://api.example.com ← otelhttp auto-span
+  │     └── gorm.Query (data fetch)          ← GORM auto-span
+  └── event.publish message:send             ← PublishMessage span
+        │
+        └── [cross-process via W3C traceparent in metadata]
+              │
+              event.receive message:send     ← TraceConsumerMiddleware span
+                └── gorm.Query (platform lookup) ← GORM auto-span
+</code></pre>
+
+<h3>Trace 2: Pipeline execution from durable event</h3>
+
+<pre><code>event.receive pipeline:data_event            ← TraceConsumerMiddleware span
+  │
+  └── pipeline.{name}.execute               ← Pipeline engine span
+        ├── gorm.Query (consumption check)   ← GORM auto-span
+        ├── gorm.Query (create run)          ← GORM auto-span
+        ├── pipeline.{name}.step.{step1}     ← Step span
+        │     └── ability.{cap}.{operation}  ← ability.Invoke span
+        │           └── HTTP GET ...         ← otelhttp auto-span
+        ├── pipeline.{name}.step.{step2}     ← Step span
+        │     └── ability.{cap}.{operation}
+        └── gorm.Query (update run status)   ← GORM auto-span
+</code></pre>
+
+<h3>Trace 3: Webhook → pipeline</h3>
+
+<pre><code>HTTP POST /webhook/{id}                      ← Fiber middleware span
+  │
+  ├── gorm.Query (webhook lookup)            ← GORM auto-span
+  ├── ability.{cap}.{operation}              ← ability.Invoke span
+  │     └── event.publish {data_event}       ← Emitted DataEvent span
+  │           │
+  │           └── [cross-process via Watermill]
+  │                 │
+  │                 event.receive pipeline:data_event
+  │                   └── pipeline.{name}.execute
+  │                         └── ... (steps as in Trace 2)
+  └── HTTP 200 OK
+</code></pre>
+
+<h2>W3C Trace Context Propagation</h2>
+
+<p>Trace context flows through the system via two mechanisms:</p>
+
+<ol>
+<li><p><strong>HTTP</strong>: W3C <code>traceparent</code> and <code>tracestate</code> headers extracted by the Fiber middleware and injected by <code>otelhttp.Transport</code> on outgoing requests.</p></li>
+
+<li><p><strong>Watermill (Redis Stream)</strong>: <code>PublishMessage</code> injects <code>traceparent</code> into message metadata via <code>otel.GetTextMapPropagator().Inject()</code>. <code>TraceConsumerMiddleware</code> extracts it on the consumer side with <code>prop.Extract()</code>, restoring the parent-child span relationship across process boundaries.</p>
+
+<pre><code>Publish side:
+ctx (with span) → Inject() → msg.Metadata[&#34;traceparent&#34;] = &#34;00-...&#34;
+Consume side:
+msg.Metadata[&#34;traceparent&#34;] → Extract() → ctx (restored span context)
+</code></pre></li>
+</ol>
+
+<h2>Log Correlation</h2>
+
+<p>Use <code>flog.Ctx(ctx)</code> to annotate log entries with <code>trace_id</code> and <code>span_id</code> from the current OpenTelemetry span:</p>
+
+<pre><code>flog.Ctx(ctx).Info().Msg(&#34;processing event&#34;)
+// Output: {&#34;level&#34;:&#34;info&#34;,&#34;trace_id&#34;:&#34;abc...&#34;,&#34;span_id&#34;:&#34;def...&#34;,&#34;message&#34;:&#34;processing event&#34;}
+</code></pre>
+
+<p>When both <code>trace_id</code> and <code>span_id</code> are present in logs, Jaeger/Tempo/Grafana can correlate log lines to specific spans.</p>
+
+<h2>Configuration</h2>
+
+<pre><code># flowbot.yaml
+tracing:
+  enabled: false # Set to true to enable trace export
+  endpoint: &#34;http://localhost:4318/v1/traces&#34; # OTLP HTTP endpoint
+  service_name: &#34;flowbot&#34; # Service name in traces
+  environment: &#34;development&#34; # deployment.environment attribute
+  sample_rate: 1.0 # 1.0 = all traces, 0.1 = 10%
+</code></pre>
+
+<h3>Collector endpoints</h3>
+
+<table>
+<thead>
+<tr>
+<th>Backend</th>
+<th>Endpoint</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Jaeger (OTLP)</td>
+<td><code>http://localhost:4318/v1/traces</code></td>
+</tr>
+
+<tr>
+<td>Grafana Tempo</td>
+<td><code>http://localhost:4318/v1/traces</code></td>
+</tr>
+
+<tr>
+<td>Datadog Agent</td>
+<td><code>http://localhost:4318/v1/traces</code></td>
+</tr>
+
+<tr>
+<td>Grafana Cloud</td>
+<td><code>https://otlp-gateway-{region}.grafana.net/otlp/v1/traces</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Performance</h2>
+
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Overhead</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Disabled (<code>enabled: false</code>)</td>
+<td>Zero — noop TracerProvider, no allocations</td>
+</tr>
+
+<tr>
+<td>Enabled, 100% sampling</td>
+<td>&lt; 1% throughput impact (batch export, async)</td>
+</tr>
+
+<tr>
+<td>Enabled, 10% sampling</td>
+<td>Negligible</td>
+</tr>
+</tbody>
+</table>
+<p>Skipped paths (<code>/livez</code>, <code>/readyz</code>, <code>/healthz</code>, <code>/metrics</code>) create no spans, preventing noise from health-check and metrics scraping traffic.</p>
+
+<h2>Development</h2>
+
+<h3>Running a local collector</h3>
+
+<pre><code># Jaeger all-in-one with OTLP HTTP
+docker run -d --name jaeger \
+  -p 16686:16686 \
+  -p 4318:4318 \
+  jaegertracing/all-in-one:latest
+
+# View traces at http://localhost:16686
+</code></pre>
+
+<h3>Verification</h3>
+
+<pre><code># Start server with tracing enabled
+go run ./cmd/main.go
+
+# Send a request and check for trace_id in response headers
+curl -v http://localhost:8888/livez
+
+# Check Jaeger UI for traces
+open http://localhost:16686
+</code></pre>
+
+<h3>Testing</h3>
+
+<pre><code>go test ./pkg/trace/...
+go test ./pkg/event/...      # Watermill trace tests
+go test ./pkg/pipeline/...   # Pipeline span tests
+go test ./pkg/flog/...       # Log correlation tests
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

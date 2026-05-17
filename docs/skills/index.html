@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Skills — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Skills</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link active">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Skills</h1>
+
+<p>Flowbot ships with AI assistant skills that teach Claude Code, opencode, and
+other AI coding assistants how to use the <code>flowbot</code> CLI for daily tasks. Each
+skill corresponds to a Flowbot capability and describes its full command tree,
+flags, workflows, and troubleshooting tips.</p>
+
+<p>Skills follow the SKILL.md convention. The AI assistant loads the skill’s
+frontmatter (name + description) at startup, and only pulls the full SKILL.md
+body when the user’s request matches the description.</p>
+
+<h2>Available Skills</h2>
+
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>homelab-bookmark</code></td>
+<td>Create, search, and archive bookmarks / saved links</td>
+</tr>
+
+<tr>
+<td><code>homelab-kanban</code></td>
+<td>Manage kanban boards, tasks, and subtasks</td>
+</tr>
+
+<tr>
+<td><code>homelab-reader</code></td>
+<td>Subscribe to RSS/Atom feeds, read entries, mark status</td>
+</tr>
+</tbody>
+</table>
+<p>Each skill file is in the corresponding subdirectory:</p>
+
+<pre><code>docs/skills/
+├── homelab-bookmark/
+│   └── SKILL.md
+├── homelab-kanban/
+│   └── SKILL.md
+├── homelab-reader/
+│   └── SKILL.md
+└── README.md          (you are here)
+</code></pre>
+
+<h2>How Skills Work with AI Assistants</h2>
+
+<ol>
+<li><p>An AI assistant (Claude Code, opencode, etc.) reads <code>available_skills</code> at
+startup, which includes every skill’s <strong>name</strong> and <strong>description</strong> from the
+SKILL.md YAML frontmatter.</p></li>
+
+<li><p>When the user sends a message that matches a skill’s description (e.g.
+“save this URL to my bookmarks”), the assistant loads the full SKILL.md body
+into its context.</p></li>
+
+<li><p>The SKILL.md body contains:</p>
+
+<ul>
+<li>Prerequisites (CLI login, server URL)</li>
+<li>Global flags reference</li>
+<li>Full command tree (nested operations with flags and arguments)</li>
+<li>Common workflows (multi-step task recipes)</li>
+<li>Troubleshooting guidance</li>
+</ul></li>
+
+<li><p>The assistant follows the instructions in the skill to compose the correct
+<code>flowbot</code> CLI commands and handle errors.</p></li>
+</ol>
+
+<h3>Enabling Skills in Your Environment</h3>
+
+<p>Skills files are already generated in <code>docs/skills/</code>. To use them with your AI
+assistant, configure the tool to scan this directory.</p>
+
+<p><strong>opencode</strong>: Add a <code>--skill-dir</code> or equivalent path pointing to this directory.</p>
+
+<p><strong>Claude Code</strong>: Place the skill directories under your global skills path.
+For example, to make them available project-wide:</p>
+
+<pre><code># Symlink Flowbot skills into your project&#39;s .claude/skills/
+mkdir -p .claude/skills/
+ln -sf &#34;$(pwd)/docs/skills/homelab-bookmark&#34; .claude/skills/homelab-bookmark
+ln -sf &#34;$(pwd)/docs/skills/homelab-kanban&#34;    .claude/skills/homelab-kanban
+ln -sf &#34;$(pwd)/docs/skills/homelab-reader&#34;    .claude/skills/homelab-reader
+</code></pre>
+
+<p>For global availability:</p>
+
+<pre><code># Symlink into the global Claude Code skills directory
+mkdir -p ~/.claude/skills/
+ln -sf &#34;$(pwd)/docs/skills/homelab-bookmark&#34; ~/.claude/skills/homelab-bookmark
+ln -sf &#34;$(pwd)/docs/skills/homelab-kanban&#34;    ~/.claude/skills/homelab-kanban
+ln -sf &#34;$(pwd)/docs/skills/homelab-reader&#34;    ~/.claude/skills/homelab-reader
+</code></pre>
+
+<h2>Generating Skills</h2>
+
+<p>Skills are generated from the live CLI command tree by the composer tool.
+This ensures the skill always matches the actual CLI interface.</p>
+
+<pre><code># Generate all SKILL.md files to docs/skills/
+go tool task build:composer
+./flowbot-composer skills --output ./docs/skills
+</code></pre>
+
+<p>When you add a new CLI command tree (kanban, bookmark, reader, etc.), register
+it in <code>metaSpecs</code> in <code>cmd/composer/action/skills/skills.go</code> and re-run the
+generator.</p>
+
+<h2>Adding a New Skill</h2>
+
+<ol>
+<li><p>Implement the CLI command tree in <code>cmd/cli/command/</code> following existing
+conventions.</p></li>
+
+<li><p>Register the capability in <code>metaSpecs</code> in
+<code>cmd/composer/action/skills/skills.go</code>:</p></li>
+</ol>
+
+<pre><code>   {
+       Name:        &#34;homelab-myapp&#34;,
+       Title:       &#34;MyApp&#34;,
+       CommandFn:   command.MyAppCommand,
+       Description: &#34;Manage MyApp resources via the Flowbot CLI.&#34;,
+       Keywords:    &#34;myapp, keywords, that trigger this skill&#34;,
+       Workflows: []workflowSpec{
+           {
+               Title:       &#34;Common task name&#34;,
+               Description: &#34;When the user wants to do X:&#34;,
+               Steps: []workflowStep{
+                   {Step: 1, Command: &#34;flowbot myapp list&#34;},
+                   {Step: 2, Command: &#34;flowbot myapp get &lt;id&gt;&#34;},
+               },
+           },
+       },
+   },
+</code></pre>
+
+<ol>
+<li>Regenerate the skills:</li>
+</ol>
+
+<pre><code>   go tool task build:composer
+   ./flowbot-composer skills --output ./docs/skills
+</code></pre>
+
+<p>The new subdirectory and SKILL.md will appear under <code>docs/skills/</code>.</p>
+
+<ol>
+<li>Add the skill directory to your AI assistant’s skills path as shown above.</li>
+</ol>
+
+<h2>Skill File Anatomy</h2>
+
+<p>Each <code>SKILL.md</code> follows this structure:</p>
+
+<pre><code>---
+name: homelab-bookmark
+description: &gt;
+  What the skill does in one sentence.
+  Make sure to use this skill whenever the user mentions &lt;trigger keywords&gt;.
+---
+
+# Flowbot Bookmark
+
+## Prerequisites
+
+## Global Flags Reference
+
+## Common Output Options
+
+## Operations (auto-generated from CLI tree)
+
+## Common Workflows
+
+## Troubleshooting
+</code></pre>
+
+<ul>
+<li><strong>Frontmatter</strong>: <code>name</code> (identifier) and <code>description</code> (trigger + summary).</li>
+<li><strong>Prerequisites</strong>: CLI setup requirements.</li>
+<li><strong>Global Flags</strong>: <code>--server-url</code>, <code>--profile</code>, <code>--debug</code>.</li>
+<li><strong>Operations</strong>: Auto-generated command reference from the live <code>*cli.Command</code>
+tree. Flags are extracted via <code>RequiredFlag</code> and <code>DocGenerationFlag</code>
+interfaces.</li>
+<li><strong>Workflows</strong>: Hand-written multi-step recipes for common tasks.</li>
+<li><strong>Troubleshooting</strong>: Common errors and their solutions.</li>
+</ul>
+
+<h2>References</h2>
+
+<ul>
+<li><a href="../skill_spec.html" rel="nofollow">Skill specification</a> — Full format reference and
+conventions for SKILL.md files.</li>
+<li><a href="../../cmd/composer/action/skills/skills.go" rel="nofollow">Composer skills code</a> — The
+generator that produces these files.</li>
+<li><a href="../../cmd/cli/command/" rel="nofollow">CLI commands</a> — The CLI command tree implementations.</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

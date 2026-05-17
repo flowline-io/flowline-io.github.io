@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Database Documentation — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Database Documentation</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub active">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Database Documentation</h1>
+
+<p>Flowbot uses PostgreSQL as the primary database. Models are auto-generated via GORM Gen (see <code>internal/store/</code>).</p>
+
+<h2>Schema Reference</h2>
+
+<p>Full table schema is in <a href="./schema.html" rel="nofollow"><code>schema.md</code></a>.</p>
+
+<h2>Table Categories</h2>
+
+<h3>Users and Authentication</h3>
+
+<ul>
+<li><code>users</code> — User accounts</li>
+<li><code>oauth</code> — OAuth authentication tokens</li>
+<li><code>topics</code> — Context/tenant management</li>
+</ul>
+
+<h3>Platform Integration</h3>
+
+<ul>
+<li><code>platforms</code> — Registered chat platforms</li>
+<li><code>platform_users</code> — Platform user mappings</li>
+<li><code>platform_channels</code> — Platform channel mappings</li>
+<li><code>platform_channel_users</code> — Channel-user associations</li>
+<li><code>platform_bots</code> — Platform bot registrations</li>
+</ul>
+
+<h3>Workflow System</h3>
+
+<ul>
+<li><code>workflow</code> — Workflow definitions</li>
+<li><code>workflow_script</code> — Versioned workflow scripts</li>
+<li><code>workflow_trigger</code> — Triggers (manual, webhook, cron)</li>
+<li><code>jobs</code> — Execution jobs</li>
+<li><code>steps</code> — Job execution steps</li>
+<li><code>dag</code> — DAG definitions</li>
+</ul>
+
+<h3>Bot System</h3>
+
+<ul>
+<li><code>bots</code> — Bot definitions</li>
+<li><code>agents</code> — Desktop agent records</li>
+<li><code>webhook</code> — Webhook configurations</li>
+</ul>
+
+<h3>Messaging</h3>
+
+<ul>
+<li><code>messages</code> — Message records</li>
+<li><code>channels</code> — Channel management</li>
+</ul>
+
+<h3>OKR System</h3>
+
+<ul>
+<li><code>objectives</code> — Objectives</li>
+<li><code>key_results</code> — Key results</li>
+<li><code>key_result_values</code> — Key result value tracking</li>
+<li><code>reviews</code> / <code>review_evaluations</code> — Review records</li>
+<li><code>cycles</code> — OKR cycles</li>
+<li><code>todos</code> — Todo items</li>
+</ul>
+
+<h3>Data Storage</h3>
+
+<ul>
+<li><code>configs</code> — Key-value configuration storage</li>
+<li><code>data</code> — General key-value data storage</li>
+<li><code>form</code> — Form schemas and submissions</li>
+<li><code>pages</code> — Page configurations</li>
+<li><code>parameter</code> — Temporary parameter storage</li>
+<li><code>instruct</code> — Instruction records</li>
+</ul>
+
+<h3>Pipeline &amp; Session</h3>
+
+<ul>
+<li><code>pipelines</code> — Pipeline execution records</li>
+<li><code>session</code> — Pipeline session state</li>
+</ul>
+
+<h3>Analytics</h3>
+
+<ul>
+<li><code>behavior</code> — User behavior statistics</li>
+<li><code>counters</code> / <code>counter_records</code> — Counter system</li>
+<li><code>action</code> — Action tracking</li>
+</ul>
+
+<h3>Other</h3>
+
+<ul>
+<li><code>urls</code> — URL tracking</li>
+<li><code>fileuploads</code> — File upload records</li>
+<li><code>schema_migrations</code> — Migration version tracking</li>
+</ul>
+
+<h2>Database Migration</h2>
+
+<p>Migrations run automatically at server startup via <code>pkg/migrate/</code>.</p>
+
+<h2>Code Generation</h2>
+
+<pre><code>task doc       # Generate schema documentation
+</code></pre>
+
+<h2>Configuration</h2>
+
+<pre><code>store_config:
+  use_adapter: mysql
+  adapters:
+    mysql:
+      dsn: &#34;user:password@tcp(localhost:3306)/flowbot?parseTime=True&amp;collation=utf8mb4_unicode_ci&#34;
+</code></pre>
+
+<h2>Backup</h2>
+
+<pre><code>mysqldump -u user -p flowbot &gt; backup_$(date +%Y%m%d_%H%M%S).sql
+mysql -u user -p flowbot &lt; backup_file.sql
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

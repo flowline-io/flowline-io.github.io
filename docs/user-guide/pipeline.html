@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pipeline Engine — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Pipeline Engine</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub active">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Pipeline Engine</h1>
+
+<p>Event-driven pipeline automation with retry, checkpointing, and restart recovery.</p>
+
+<p>Source: <code>pkg/pipeline/</code></p>
+
+<h2>Overview</h2>
+
+<p>The pipeline engine executes multi-step workflows in response to <code>DataEvent</code> messages published via Redis Stream. Each pipeline is defined in YAML configuration and consists of a trigger event and an ordered sequence of steps that invoke capability operations.</p>
+
+<pre><code>DataEvent (PostgreSQL data_events + Redis Stream)
+    │
+    ▼
+Pipeline Engine (pkg/pipeline/engine.go)
+    │
+    ├── Idempotency check (event_consumptions)
+    ├── Create pipeline_run record
+    ├── For each step:
+    │     ├── Save checkpoint (if resumable)
+    │     ├── Render template params
+    │     ├── Create step_run record
+    │     ├── ability.Invoke (with retry)
+    │     └── Update step_run result
+    └── Update pipeline_run status
+</code></pre>
+
+<h2>YAML Schema</h2>
+
+<p>Pipelines are defined under the <code>pipelines</code> key in <code>flowbot.yaml</code>:</p>
+
+<pre><code>pipelines:
+  - name: rss_fetch_and_notify          # unique name, used as consumer_name
+    description: &#34;Fetch RSS feeds and send notification&#34;
+    enabled: true                        # false to skip loading
+    resumable: true                      # enable checkpoint + restart recovery
+
+    trigger:
+      event: rss.fetch.requested        # DataEvent.EventType to match
+
+    steps:
+      - name: fetch_feeds
+        capability: rss                  # capability type
+        operation: fetch                 # operation name
+        params:                          # template-rendered input
+          url: &#34;{{event.url}}&#34;
+          max_items: 10
+        retry:                           # step-level retry (optional)
+          max_attempts: 3
+          delay: 1s
+          backoff: exponential           # fixed | linear | exponential
+          max_delay: 60s
+          jitter: true
+          retry_on:                      # filter which errors to retry
+            - timeout
+            - rate_limited
+
+      - name: send_notification
+        capability: notify
+        operation: send
+        params:
+          channel: slack
+          message: &#34;New feeds: {{step &#34;fetch_feeds&#34; &#34;count&#34;}}&#34;
+</code></pre>
+
+<h2>Retry Strategy</h2>
+
+<h3>Configuration</h3>
+
+<p>Each pipeline step can specify an optional <code>retry</code> block. If omitted, the step runs exactly once.</p>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>max_attempts</code></td>
+<td>int</td>
+<td><code>0</code></td>
+<td>Maximum retry attempts. <code>0</code> disables retry.</td>
+</tr>
+
+<tr>
+<td><code>delay</code></td>
+<td>duration</td>
+<td><code>0s</code></td>
+<td>Initial delay before first retry</td>
+</tr>
+
+<tr>
+<td><code>backoff</code></td>
+<td>string</td>
+<td><code>&#34;exponential&#34;</code></td>
+<td><code>fixed</code> (constant delay), <code>linear</code> (multiplier=1.0), <code>exponential</code> (multiplier=2.0)</td>
+</tr>
+
+<tr>
+<td><code>max_delay</code></td>
+<td>duration</td>
+<td><code>0s</code></td>
+<td>Caps the delay between retries</td>
+</tr>
+
+<tr>
+<td><code>jitter</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Adds +/-50% randomization to delay</td>
+</tr>
+
+<tr>
+<td><code>retry_on</code></td>
+<td>[]string</td>
+<td>(all errors)</td>
+<td>Filter: only retry errors matching these codes or with <code>Retryable=true</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>Behavior</h3>
+
+<ol>
+<li>On first failure, the engine checks if <code>max_attempts &gt; 0</code>.</li>
+<li>If <code>retry_on</code> is set, the error is checked against the filter:
+
+<ul>
+<li><code>types.Error.Retryable == true</code> always qualifies for retry.</li>
+<li><code>types.Error.Code</code> is matched against <code>retry_on</code> entries.</li>
+<li>If no filter is configured, all errors are retried.</li>
+</ul></li>
+<li>The engine waits for the computed delay, then retries.</li>
+<li>Retries continue until success, <code>max_attempts</code> is exhausted, or context is cancelled.</li>
+<li>Each attempt is recorded (the <code>attempt</code> column on <code>pipeline_step_runs</code>).</li>
+</ol>
+
+<h3>Backoff Calculation</h3>
+
+<p><strong>Fixed</strong> (<code>backoff: fixed</code>): every retry waits the same <code>delay</code>.
+<strong>Linear</strong> (<code>backoff: linear</code>): delay = <code>delay * attempt_number</code>, capped at <code>max_delay</code>.
+<strong>Exponential</strong> (<code>backoff: exponential</code>): delay = <code>delay * 2^(attempt-1)</code>, capped at <code>max_delay</code>.</p>
+
+<p>Jitter is only applied to linear and exponential modes (built on <code>ExponentialBackOff</code>).</p>
+
+<h3>Database Recording</h3>
+
+<p>The <code>pipeline_step_runs</code> table tracks retries:</p>
+
+<table>
+<thead>
+<tr>
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>attempt</code></td>
+<td>Count of attempts including the first (1-based)</td>
+</tr>
+
+<tr>
+<td><code>retry_config</code></td>
+<td>JSON snapshot of the retry configuration used</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Checkpointing</h2>
+
+<h3>Enabling</h3>
+
+<p>Set <code>resumable: true</code> on the pipeline definition. Without this flag, no checkpoints are saved.</p>
+
+<h3>Save Mechanics</h3>
+
+<p>Before each step executes, the engine serializes and persists a <code>CheckpointData</code> JSON blob to <code>pipeline_runs.checkpoint_data</code>:</p>
+
+<pre><code>{
+  &#34;step_index&#34;: 2,
+  &#34;step_results&#34;: {
+    &#34;fetch_feeds&#34;: {
+      &#34;name&#34;: &#34;fetch_feeds&#34;,
+      &#34;capability&#34;: &#34;rss&#34;,
+      &#34;operation&#34;: &#34;fetch&#34;,
+      &#34;output&#34;: {&#34;count&#34;: 42, &#34;items&#34;: [...]},
+      &#34;completed_at&#34;: &#34;2026-05-03T10:00:00Z&#34;
+    }
+  },
+  &#34;event&#34;: { /* the triggering DataEvent */ },
+  &#34;heartbeat_at&#34;: &#34;2026-05-03T10:00:05Z&#34;
+}
+</code></pre>
+
+<p>This captures enough state to reconstruct the <code>RenderContext</code> and resume from the checkpointed step.</p>
+
+<h3>Heartbeat</h3>
+
+<p>When <code>resumable: true</code>, each step starts a background goroutine that writes <code>last_heartbeat</code> to <code>pipeline_runs</code> every 30 seconds. This allows the Recovery Manager to distinguish genuinely in-progress runs from orphaned ones.</p>
+
+<p>Heartbeats stop automatically when the step completes (context cancelled via <code>defer hbCancel()</code>).</p>
+
+<h3>Resume</h3>
+
+<p><code>Engine.ResumePipeline(ctx, runID)</code> restores execution from the last checkpoint:</p>
+
+<ol>
+<li>Loads <code>pipeline_runs</code> to get the pipeline name.</li>
+<li>Loads <code>checkpoint_data</code> to get step index, step results, and the original event.</li>
+<li>Matches the pipeline definition by name.</li>
+<li>Reconstructs <code>RenderContext</code> from saved step results.</li>
+<li>Continues executing from <code>step_index</code>, saving new checkpoints along the way.</li>
+</ol>
+
+<h2>Execution States</h2>
+
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Value</th>
+<th>Meaning</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>PipelineStateUnknown</code></td>
+<td>0</td>
+<td>Default</td>
+</tr>
+
+<tr>
+<td><code>PipelineStart</code></td>
+<td>1</td>
+<td>Run in progress</td>
+</tr>
+
+<tr>
+<td><code>PipelineDone</code></td>
+<td>2</td>
+<td>All steps succeeded</td>
+</tr>
+
+<tr>
+<td><code>PipelineCancel</code></td>
+<td>3</td>
+<td>Step failed or run cancelled</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Database Tables</h2>
+
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Purpose</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>pipeline_definitions</code></td>
+<td>Persisted YAML definitions (upserted on startup)</td>
+</tr>
+
+<tr>
+<td><code>pipeline_runs</code></td>
+<td>One row per pipeline execution: status, error, checkpoint, heartbeat</td>
+</tr>
+
+<tr>
+<td><code>pipeline_step_runs</code></td>
+<td>Per-step execution: params, result, attempt, status, error</td>
+</tr>
+
+<tr>
+<td><code>event_consumptions</code></td>
+<td>Idempotency guard: <code>(consumer_name, event_id)</code> unique</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Event Flow</h2>
+
+<ol>
+<li><code>ability.Invoke</code> returns <code>InvokeResult</code> with <code>Events</code> — a list of business events (<code>bookmark.created</code>, <code>rss.item.fetched</code>, etc.).</li>
+<li>The event emitter (registered in <code>initPipeline</code>) creates a <code>DataEvent</code> and persists it:
+
+<ul>
+<li><code>data_events</code> table (durable store)</li>
+<li><code>event_outbox</code> table (transactional outbox pattern)</li>
+</ul></li>
+<li>The event is published to Redis Stream topic <code>pipeline:data_event</code>.</li>
+<li>A Watermill consumer deserializes the event and calls <code>engine.Handler()</code>.</li>
+<li>The engine runs <code>FindByEvent</code> to match pipeline definitions, executes them sequentially.</li>
+</ol>
+
+<h2>Idempotency</h2>
+
+<p>Each pipeline run is gated by <code>event_consumptions</code> which has a unique composite index on <code>(consumer_name, event_id)</code>. Before execution:</p>
+
+<ol>
+<li><code>HasConsumed(pipelineName, eventID)</code> checks if this pipeline already processed this event.</li>
+<li>If consumed, the event is skipped (logged, no error).</li>
+<li>Otherwise, <code>RecordConsumption</code> inserts a row, then the pipeline executes.</li>
+</ol>
+
+<p>This guarantees at-most-once processing per (pipeline, event) pair.</p>
+
+<h2>Template Rendering</h2>
+
+<p>Step <code>params</code> are rendered through the template engine before each invocation. See <a href="pipeline-template.html" rel="nofollow">Pipeline Template Engine</a> for syntax reference.</p>
+
+<h2>Testing</h2>
+
+<pre><code>go test ./pkg/pipeline/...        # Unit tests
+go test ./pkg/pipeline/template/...  # Template engine tests
+</code></pre>
+
+<h2>Recovery</h2>
+
+<p>See <a href="../developer-guide/recovery.html" rel="nofollow">Recovery Manager</a> for restart recovery of incomplete pipeline runs.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

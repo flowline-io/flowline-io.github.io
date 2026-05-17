@@ -1,0 +1,883 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Monitoring — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Monitoring</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub active">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Monitoring</h1>
+
+<p>Observability stack — Prometheus metrics via PushGateway, OpenTelemetry traces via OTLP, and a pre-built Grafana dashboard for visualization.</p>
+
+<h2>Architecture</h2>
+
+<pre><code>┌─────────────┐     push (15s)     ┌──────────────┐     scrape       ┌─────────────┐
+│   Flowbot   │ ──────────────────▶│ PushGateway  │ ◀─────────────── │  Prometheus │
+│  pkg/stats/ │                    │  :9091       │                  │             │
+└──────┬──────┘                    └──────────────┘                  └──────┬──────┘
+       │                                                                    │
+       │ OTLP HTTP (/v1/traces)                                             │ datasource
+       │                                                                    │
+       ▼                                                                    ▼
+┌──────────────┐                                                   ┌─────────────┐
+│  Tempo/Jaeger│ ◀─────────────────────────────────────────────── │   Grafana   │
+│  :4318       │                                                   │   :3000     │
+└──────────────┘                                                   └─────────────┘
+       ▲                                                                  │
+       │ OTLP traces                                                      │
+       │                                                                  │
+┌──────┴──────┐                              ┌──────────────┐             │
+│   Flowbot   │                              │  Meilisearch  │            │
+│  pkg/trace/ │                              │  Prometheus   │────────────┘
+│  Fiber OTel │                              │  /metrics     │  (optional)
+│  GORM OTel  │                              └──────────────┘
+│  Redis OTel │
+└─────────────┘
+</code></pre>
+
+<p>Two data paths feed into Grafana:</p>
+
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Protocol</th>
+<th>Exporter</th>
+<th>Default Port</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Metrics</td>
+<td>PushGateway → Prometheus scrape</td>
+<td><code>pkg/stats/</code> push every 15s</td>
+<td><code>:9091</code></td>
+</tr>
+
+<tr>
+<td>Traces</td>
+<td>OTLP HTTP (protobuf)</td>
+<td><code>pkg/trace/</code> batch export</td>
+<td><code>:4318</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Prerequisites</h2>
+
+<p>Start the observability services before configuring Flowbot:</p>
+
+<pre><code># PushGateway — metrics relay
+docker run -d --name pushgateway \
+  -p 9091:9091 \
+  prom/pushgateway:latest
+
+# Tempo — trace storage (all-in-one for development)
+docker run -d --name tempo \
+  -p 4318:4318 \
+  -p 3200:3200 \
+  grafana/tempo:latest
+
+# Grafana — dashboards &amp; visualization
+docker run -d --name grafana \
+  -p 3000:3000 \
+  -e &#34;GF_AUTH_ANONYMOUS_ENABLED=true&#34; \
+  grafana/grafana:latest
+</code></pre>
+
+<p>For production, add Prometheus:</p>
+
+<pre><code>docker run -d --name prometheus \
+  -p 9090:9090 \
+  -v ./prometheus.yml:/etc/prometheus/prometheus.yml \
+  prom/prometheus:latest
+</code></pre>
+
+<h2>Flowbot Configuration</h2>
+
+<p>Enable both metrics push and trace export in <code>flowbot.yaml</code>:</p>
+
+<pre><code># Metrics — pushed to PushGateway every 15s
+metrics:
+  enabled: true
+  endpoint: &#34;http://localhost:9091&#34;
+
+# Tracing — OTLP HTTP batch export
+tracing:
+  enabled: true
+  endpoint: &#34;http://localhost:4318/v1/traces&#34;
+  service_name: &#34;flowbot&#34;
+  environment: &#34;production&#34;
+  sample_rate: 1.0
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>metrics.enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable PushGateway push</td>
+</tr>
+
+<tr>
+<td><code>metrics.endpoint</code></td>
+<td>string</td>
+<td><code>http://localhost:9091</code></td>
+<td>PushGateway base URL</td>
+</tr>
+
+<tr>
+<td><code>tracing.enabled</code></td>
+<td>bool</td>
+<td><code>false</code></td>
+<td>Enable OTLP trace export</td>
+</tr>
+
+<tr>
+<td><code>tracing.endpoint</code></td>
+<td>string</td>
+<td><code>http://localhost:4318/v1/traces</code></td>
+<td>OTLP HTTP collector</td>
+</tr>
+
+<tr>
+<td><code>tracing.service_name</code></td>
+<td>string</td>
+<td><code>flowbot</code></td>
+<td><code>service.name</code> resource attribute</td>
+</tr>
+
+<tr>
+<td><code>tracing.environment</code></td>
+<td>string</td>
+<td><code>development</code></td>
+<td><code>deployment.environment</code> attribute</td>
+</tr>
+
+<tr>
+<td><code>tracing.sample_rate</code></td>
+<td>float</td>
+<td><code>1.0</code></td>
+<td>1.0 = all, 0.1 = 10%</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Prometheus Configuration</h2>
+
+<p>Point Prometheus at the PushGateway:</p>
+
+<pre><code># prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: pushgateway
+    honor_labels: true
+    static_configs:
+      - targets: [&#34;pushgateway:9091&#34;]
+
+  # Optional: scrape Flowbot&#39;s internal /metrics endpoint for Go runtime metrics
+  - job_name: flowbot
+    static_configs:
+      - targets: [&#34;flowbot:8888&#34;]
+</code></pre>
+
+<p>After restarting Prometheus, verify metrics are flowing:</p>
+
+<pre><code># Check PushGateway has flowbot metrics
+curl -s http://localhost:9091/metrics | grep &#34;job=\&#34;flowbot\&#34;&#34;
+
+# Check Prometheus can see them
+curl -s &#34;http://localhost:9090/api/v1/query?query=module_total_gauge&#34; | jq .
+</code></pre>
+
+<h2>Grafana Setup</h2>
+
+<h3>1. Add datasources</h3>
+
+<p>In Grafana (<a href="http://localhost:3000" rel="nofollow">http://localhost:3000</a>), go to <strong>Connections → Data sources</strong>:</p>
+
+<p><strong>Prometheus:</strong></p>
+
+<ul>
+<li>Name: <code>Prometheus</code></li>
+<li>URL: <code>http://prometheus:9090</code></li>
+<li>Click <strong>Save &amp; test</strong></li>
+</ul>
+
+<p><strong>Tempo:</strong></p>
+
+<ul>
+<li>Name: <code>Tempo</code></li>
+<li>URL: <code>http://tempo:3200</code></li>
+<li>Click <strong>Save &amp; test</strong></li>
+</ul>
+
+<h3>2. Import the dashboard</h3>
+
+<p><strong>Dashboards → New → Import</strong>, paste the contents of <a href="../grafana-dashboard.json" rel="nofollow"><code>../grafana-dashboard.json</code></a>.</p>
+
+<p>Or import programmatically:</p>
+
+<pre><code># Via Grafana API
+curl -X POST http://admin:admin@localhost:3000/api/dashboards/db \
+  -H &#34;Content-Type: application/json&#34; \
+  -d &#34;{\&#34;dashboard\&#34;: $(cat docs/grafana-dashboard.json), \&#34;overwrite\&#34;: true}&#34;
+</code></pre>
+
+<h3>3. Select datasources</h3>
+
+<p>After import, use the dropdowns at the top of the dashboard to select your Prometheus and Tempo datasources.</p>
+
+<h2>Dashboard Reference</h2>
+
+<p>The dashboard is organized into 5 rows.</p>
+
+<h3>Overview (top row)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Query</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Active Modules</td>
+<td><code>module_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>Docker Containers</td>
+<td><code>docker_container_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>Monitors DOWN</td>
+<td><code>monitor_down_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>Monitors UP</td>
+<td><code>monitor_up_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>Module Runs by Ruleset</td>
+<td><code>rate(module_run_total_counter[5m])</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>Event Processing Rate</td>
+<td><code>rate(event_total_counter[5m])</code></td>
+<td>Time series</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Features</h3>
+
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Query</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Bookmarks</td>
+<td><code>bookmark_total_gauge</code></td>
+<td>Stat + Trend</td>
+</tr>
+
+<tr>
+<td>Torrent Downloads</td>
+<td><code>torrent_download_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>Torrents by Status</td>
+<td><code>torrent_status_total_gauge</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>RSS Unread</td>
+<td><code>reader_unread_total_gauge</code></td>
+<td>Stat</td>
+</tr>
+
+<tr>
+<td>RSS (total vs unread)</td>
+<td><code>reader_total_gauge</code>, <code>reader_unread_total_gauge</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>Kanban Tasks</td>
+<td><code>kanban_task_total_gauge</code></td>
+<td>Stat + Trend</td>
+</tr>
+
+<tr>
+<td>Kanban Events</td>
+<td><code>rate(kanban_event_total_counter[5m])</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>Gitea Open Issues</td>
+<td><code>gitea_issue_total_gauge{status=&#34;open&#34;}</code></td>
+<td>Stat</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Search</h3>
+
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Query</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Search Query Rate</td>
+<td><code>rate(search_total_counter[5m])</code> by <code>index</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>Document Indexing Rate</td>
+<td><code>rate(search_processed_document_total_counter[5m])</code> by <code>index</code></td>
+<td>Time series</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Infrastructure</h3>
+
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Query</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Docker Containers</td>
+<td><code>docker_container_total_gauge</code></td>
+<td>Time series</td>
+</tr>
+
+<tr>
+<td>Uptime Monitors</td>
+<td><code>monitor_up_total_gauge</code>, <code>monitor_down_total_gauge</code></td>
+<td>Time series</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Traces (Tempo)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Panel</th>
+<th>Query</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>HTTP Request Traces</td>
+<td><code>serviceName=flowbot spanName=HTTP</code></td>
+<td>Table</td>
+</tr>
+
+<tr>
+<td>Pipeline Execution</td>
+<td><code>serviceName=flowbot spanName=pipeline</code></td>
+<td>Table</td>
+</tr>
+
+<tr>
+<td>Ability Invocation</td>
+<td><code>serviceName=flowbot spanName=ability</code></td>
+<td>Table</td>
+</tr>
+
+<tr>
+<td>Event Processing</td>
+<td><code>serviceName=flowbot spanName=event</code></td>
+<td>Table</td>
+</tr>
+
+<tr>
+<td>Recent Pipelines</td>
+<td>Trace search</td>
+<td>Trace view</td>
+</tr>
+
+<tr>
+<td>Recent Events</td>
+<td>Trace search</td>
+<td>Trace view</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Metrics Reference</h2>
+
+<p>All 21 custom metrics, each producing a <code>_counter</code> and <code>_gauge</code> suffix variant:</p>
+
+<table>
+<thead>
+<tr>
+<th>Base Name</th>
+<th>Labels</th>
+<th>Updated By</th>
+<th>Type</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>module_total</code></td>
+<td>—</td>
+<td><code>internal/server/module.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>module_run_total</code></td>
+<td><code>ruleset</code></td>
+<td><code>internal/server/router.go</code>, <code>func.go</code></td>
+<td>Counter</td>
+</tr>
+
+<tr>
+<td><code>event_total</code></td>
+<td>—</td>
+<td><code>pkg/event/pubsub.go</code></td>
+<td>Counter</td>
+</tr>
+
+<tr>
+<td><code>bookmark_total</code></td>
+<td>—</td>
+<td><code>internal/modules/bookmark/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>search_total</code></td>
+<td><code>index</code></td>
+<td><code>pkg/search/search.go</code></td>
+<td>Counter</td>
+</tr>
+
+<tr>
+<td><code>search_processed_document_total</code></td>
+<td><code>index</code></td>
+<td><code>pkg/search/search.go</code></td>
+<td>Counter</td>
+</tr>
+
+<tr>
+<td><code>torrent_download_total</code></td>
+<td>—</td>
+<td><code>internal/modules/torrent/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>torrent_status_total</code></td>
+<td><code>status</code></td>
+<td><code>internal/modules/torrent/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>gitea_issue_total</code></td>
+<td><code>status</code></td>
+<td><code>internal/modules/gitea/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>kanban_event_total</code></td>
+<td><code>event_name</code></td>
+<td><code>internal/modules/kanban/webhook.go</code></td>
+<td>Counter</td>
+</tr>
+
+<tr>
+<td><code>kanban_task_total</code></td>
+<td>—</td>
+<td><code>internal/modules/kanban/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>reader_total</code></td>
+<td>—</td>
+<td><code>internal/modules/reader/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>reader_unread_total</code></td>
+<td>—</td>
+<td><code>internal/modules/reader/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>monitor_up_total</code></td>
+<td>—</td>
+<td><code>internal/modules/server/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>monitor_down_total</code></td>
+<td>—</td>
+<td><code>internal/modules/server/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+
+<tr>
+<td><code>docker_container_total</code></td>
+<td>—</td>
+<td><code>internal/modules/server/cron.go</code></td>
+<td>Gauge</td>
+</tr>
+</tbody>
+</table>
+<p><strong>PushGateway labels:</strong> <code>job</code> (default <code>flowbot</code>), <code>instance</code> (hostid), <code>hostname</code>.</p>
+
+<p><strong>Ruleset label values:</strong> <code>input</code>, <code>agent</code>, <code>command</code>, <code>cron</code>, <code>form</code>.</p>
+
+<h3>Query patterns</h3>
+
+<p>Since each metric exists as both Counter and Gauge, choose the right suffix:</p>
+
+<pre><code># Current value — use _gauge
+module_total_gauge{job=&#34;flowbot&#34;}
+bookmark_total_gauge{job=&#34;flowbot&#34;}
+
+# Rate of change — use rate() on _counter
+rate(event_total_counter{job=&#34;flowbot&#34;}[5m])
+rate(module_run_total_counter{job=&#34;flowbot&#34;}[5m])
+</code></pre>
+
+<h3>Redis-backed metrics API</h3>
+
+<p>A subset of metrics is also available as JSON via the internal API:</p>
+
+<pre><code>GET /user/metrics
+</code></pre>
+
+<pre><code>{
+  &#34;bot_total&#34;: 16,
+  &#34;bookmark_total&#34;: 42,
+  &#34;torrent_download_total&#34;: 3,
+  &#34;gitea_issue_total&#34;: 7,
+  &#34;reader_unread_total&#34;: 15,
+  &#34;kanban_task_total&#34;: 8,
+  &#34;monitor_up_total&#34;: 12,
+  &#34;monitor_down_total&#34;: 0,
+  &#34;docker_container_total&#34;: 20
+}
+</code></pre>
+
+<h2>Alerting</h2>
+
+<p>Example Prometheus alert rules for common failure conditions:</p>
+
+<pre><code># flowbot-alerts.yml
+groups:
+  - name: flowbot
+    rules:
+      - alert: FlowbotDown
+        expr: absent(module_total_gauge{job=&#34;flowbot&#34;})
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: &#34;Flowbot instance {{ $labels.instance }} is down&#34;
+          description: &#34;No metrics pushed for 2 minutes.&#34;
+
+      - alert: MonitorDown
+        expr: monitor_down_total_gauge{job=&#34;flowbot&#34;} &gt; 0
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: &#34;{{ $value }} UptimeKuma monitor(s) are DOWN&#34;
+
+      - alert: HighEventRate
+        expr: rate(event_total_counter{job=&#34;flowbot&#34;}[5m]) &gt; 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: &#34;Event rate above 100/s sustained for 5 minutes&#34;
+
+      - alert: NoDockerContainers
+        expr: docker_container_total_gauge{job=&#34;flowbot&#34;} == 0
+        for: 10m
+        labels:
+          severity: info
+        annotations:
+          summary: &#34;No Docker containers detected by homelab scanner&#34;
+</code></pre>
+
+<p>Load alert rules into Prometheus:</p>
+
+<pre><code># prometheus.yml
+rule_files:
+  - &#34;flowbot-alerts.yml&#34;
+</code></pre>
+
+<h2>Known Gaps</h2>
+
+<ol>
+<li><p><strong>No HTTP RED metrics.</strong> Fiber does not emit request duration histograms. The <code>/metrics</code> scrape endpoint serves only Go runtime defaults — no application-level HTTP metrics. To get request latency and error rate, enable Fiber’s built-in metrics middleware or add a custom histogram in <code>pkg/stats/</code>.</p></li>
+
+<li><p><strong>Push-only metrics.</strong> All custom metrics go through PushGateway. The <code>/metrics</code> endpoint (<code>prometheus.DefaultGatherer</code>) is empty of app metrics. If you need pull-based scraping, register metrics to both the custom registry and the default registry in <code>pkg/stats/stats.go</code>.</p></li>
+
+<li><p><strong>Queue metrics are dead code.</strong> <code>queue_processed_tasks_total</code>, <code>queue_failed_tasks_total</code>, <code>queue_in_progress_tasks</code> are defined but never called. They exist for future async task tracking.</p></li>
+
+<li><p><strong>No OTel metrics (meters).</strong> The <code>go.opentelemetry.io/otel/metric</code> package is available but unused. No custom counters, histograms, or gauges are defined in the OTel SDK.</p></li>
+
+<li><p><strong>Cache metrics missing.</strong> The Ristretto cache in <code>pkg/cache/</code> has no hit/miss/size instrumentation.</p></li>
+</ol>
+
+<h2>Troubleshooting</h2>
+
+<h3>No metrics in Grafana</h3>
+
+<pre><code># 1. Check PushGateway has data
+curl -s http://localhost:9091/metrics | grep flowbot
+
+# 2. Check Prometheus targets
+curl -s http://localhost:9090/api/v1/targets | jq &#39;.data.activeTargets[] | select(.job==&#34;pushgateway&#34;)&#39;
+
+# 3. Check Flowbot logs for push errors
+# Look for: &#34;Failed to push metrics&#34;
+</code></pre>
+
+<h3>No traces in Grafana</h3>
+
+<pre><code># 1. Check Tempo is receiving
+curl -s http://localhost:3200/ready
+
+# 2. Verify Flowbot tracing config
+# Set tracing.enabled: true in flowbot.yaml and restart
+
+# 3. Check for trace export errors in logs
+# Look for: &#34;Failed to export spans&#34;
+</code></pre>
+
+<h3>PushGateway shows stale metrics</h3>
+
+<p>PushGateway retains the last pushed value indefinitely. If Flowbot stops, the last value persists. Use <code>push_time_seconds</code> to detect staleness:</p>
+
+<pre><code># Alert if metrics are older than 60s
+(push_time_seconds{job=&#34;flowbot&#34;} - time()) &gt; 60
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

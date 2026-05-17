@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Pipeline Template Engine — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Pipeline Template Engine</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub active">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Pipeline Template Engine</h1>
+
+<p>The pipeline template engine provides template rendering for pipeline step parameters and workflow task parameters. It replaces the previous ad-hoc string-replacement logic with a unified, expressive syntax based on Go’s <code>text/template</code>.</p>
+
+<p>Source: <code>pkg/pipeline/template/</code></p>
+
+<h2>Design</h2>
+
+<h3>Why text/template</h3>
+
+<p>The old approach used <code>strings.ReplaceAll</code> to swap <code>{{event.id}}</code> and <code>{{steps.archive.url}}</code> with literal values. This had several limitations:</p>
+
+<ul>
+<li>No support for conditionals (<code>if</code>/<code>else</code>), loops (<code>range</code>), or transformations.</li>
+<li>No built-in utility functions (<code>join</code>, <code>split</code>, <code>default</code>, <code>json</code>, <code>len</code>).</li>
+<li>Silent fallback: unresolved placeholders were left verbatim in output, hiding configuration errors.</li>
+<li>Each new field required a new <code>ReplaceAll</code> call, making the code rigid.</li>
+</ul>
+
+<p>Go’s <code>text/template</code> was chosen because:</p>
+
+<ol>
+<li>It is a standard library package with zero dependencies.</li>
+<li>It does not HTML-escape output (no <code>html/template</code> needed – pipelines never generate HTML).</li>
+<li>It supports branching, iteration, pipelining, and custom functions.</li>
+<li>Pre-existing YAML pipeline definitions can be migrated transparently via a regex preprocessor.</li>
+</ol>
+
+<h3>Architecture</h3>
+
+<pre><code>YAML config (step params)
+    |
+    v
+RenderContext.RenderParams() / RenderString()
+    |
+    +--&gt; template.Engine.Render() / RenderString()
+             |
+             +--&gt; preprocessTemplate()  -- regex rewrites old syntax
+             +--&gt; text/template.Parse() -- compiles with FuncMap
+             +--&gt; Execute()             -- renders with TemplateData
+    |
+    v
+rendered map[string]any / string
+</code></pre>
+
+<h3>TemplateData</h3>
+
+<p>The data context exposed to templates has three namespaces:</p>
+
+<table>
+<thead>
+<tr>
+<th>Dot-path</th>
+<th>Type</th>
+<th>Source</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>.Event.*</code></td>
+<td><code>map[string]any</code></td>
+<td><code>DataEvent</code> fields + <code>Data</code> KV</td>
+</tr>
+
+<tr>
+<td><code>.Steps.*</code></td>
+<td><code>map[string]map[string]any</code></td>
+<td>Previous step results, by name</td>
+</tr>
+
+<tr>
+<td><code>.Env.*</code></td>
+<td><code>map[string]string</code></td>
+<td>Environment variables (optional)</td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>.Event</code> keys</strong> (populated by <code>RenderContext.templateData()</code>):</p>
+
+<pre><code>id               = EntityID          (alias: entity_id)
+event_id         = EventID
+event_type       = EventType
+source           = Source
+capability       = Capability
+operation        = Operation
+backend          = Backend
+app              = App
+entity_id        = EntityID
+idempotency_key  = IdempotencyKey
+uid              = UID
+topic            = Topic
++ any key from event.Data KV
+</code></pre>
+
+<p>When <code>event.Data</code> contains keys that overlap with top-level DataEvent fields, the Data values take precedence (they are copied first, then top-level fields overwrite them).</p>
+
+<h2>Syntax Reference</h2>
+
+<h3>Data Access</h3>
+
+<p>Basic dot-access on the data context:</p>
+
+<pre><code>{{.Event.url}}          # field url from event
+{{.Event.id}}           # entity ID
+{{.Steps.step1.url}}    # field url from step &#34;step1&#34;
+{{.Env.HOME}}           # environment variable
+</code></pre>
+
+<p>Index notation for keys that contain special characters:</p>
+
+<pre><code>{{index .Event &#34;some-key&#34;}}
+{{index .Steps &#34;step-1&#34; &#34;result-field&#34;}}
+</code></pre>
+
+<h3>Built-in Functions (12)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>event field</code></td>
+<td>Read a field from the event</td>
+<td><code>{{event &#34;url&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>step name field</code></td>
+<td>Read a field from a step result</td>
+<td><code>{{step &#34;archive&#34; &#34;url&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>join elems sep</code></td>
+<td>Join a slice into a string</td>
+<td><code>{{join .Event.tags &#34;,&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>split str sep</code></td>
+<td>Split a string into a slice</td>
+<td><code>{{index (split .Event.csv &#34;,&#34;) 0}}</code></td>
+</tr>
+
+<tr>
+<td><code>contains str substr</code></td>
+<td>Check if a substring is present</td>
+<td><code>{{if contains .Event.title &#34;ERROR&#34;}}alert{{end}}</code></td>
+</tr>
+
+<tr>
+<td><code>default def val</code></td>
+<td>Return <code>def</code> if <code>val</code> is nil or empty string</td>
+<td><code>{{default &#34;guest&#34; .Event.username}}</code></td>
+</tr>
+
+<tr>
+<td><code>json val</code></td>
+<td>Marshal a value to JSON</td>
+<td><code>{{json .Event.metadata}}</code></td>
+</tr>
+
+<tr>
+<td><code>len val</code></td>
+<td>Return length of string/slice/map (0 for nil)</td>
+<td><code>{{len .Event.tags}}</code></td>
+</tr>
+
+<tr>
+<td><code>jsonpath jsonStr path</code></td>
+<td>Extract string value from JSON via gjson path</td>
+<td><code>{{jsonpath (json .Event.data) &#34;items.0.id&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>jsonpathExists jsonStr path</code></td>
+<td>Check if a JSON path exists</td>
+<td><code>{{if jsonpathExists (json .Event.data) &#34;error&#34;}}...{{end}}</code></td>
+</tr>
+
+<tr>
+<td><code>jsonpathRaw jsonStr path</code></td>
+<td>Extract raw value from JSON (interface{})</td>
+<td><code>{{json (jsonpathRaw (json .Event.data) &#34;nested&#34;)}}</code></td>
+</tr>
+</tbody>
+</table>
+<p>These functions are registered into <code>text/template.FuncMap</code> and are available in any template expression.</p>
+
+<h3>JSON Path Extraction (gjson)</h3>
+
+<p>The three <code>jsonpath*</code> functions use <a href="https://github.com/tidwall/gjson" rel="nofollow">gjson</a> path syntax for extracting data from JSON strings. The path syntax supports:</p>
+
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Meaning</th>
+<th>Example path</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>field</code></td>
+<td>Top-level field</td>
+<td><code>url</code></td>
+</tr>
+
+<tr>
+<td><code>parent.child</code></td>
+<td>Nested field</td>
+<td><code>data.nested.key</code></td>
+</tr>
+
+<tr>
+<td><code>array.N</code></td>
+<td>Array index (0-based)</td>
+<td><code>items.0</code></td>
+</tr>
+
+<tr>
+<td><code>array.#</code></td>
+<td>Array length</td>
+<td><code>items.#</code></td>
+</tr>
+
+<tr>
+<td><code>array.#.field</code></td>
+<td>All array elements’ field</td>
+<td><code>items.#.name</code></td>
+</tr>
+
+<tr>
+<td><code>array.#(cond)#</code></td>
+<td>Filter array by condition</td>
+<td><code>users.#(age&gt;20)#</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Basic extraction:</strong></p>
+
+<pre><code>{{jsonpath (json .Event.data) &#34;nested.deep&#34;}}
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.id&#34;}}
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;items.1.name&#34;}}
+</code></pre>
+
+<p>When the source is already a JSON string (e.g., a step result from a capability invocation), use <code>jsonpath</code> directly:</p>
+
+<pre><code># Step &#34;api&#34; returned: {&#34;data&#34;: {&#34;items&#34;: [{&#34;id&#34;: &#34;x&#34;}, {&#34;id&#34;: &#34;y&#34;}]}}
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.items.1.id&#34;}}          → &#34;y&#34;
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.items.#&#34;}}             → &#34;2&#34;
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.items.#.id&#34;}}          → [&#34;x&#34;,&#34;y&#34;]
+</code></pre>
+
+<p><strong>Conditional extraction:</strong></p>
+
+<pre><code>{{if jsonpathExists (json .Event.data) &#34;error&#34;}}
+  Error: {{jsonpath (json .Event.data) &#34;error.message&#34;}}
+{{end}}
+</code></pre>
+
+<p><strong>Raw value access:</strong></p>
+
+<p><code>jsonpathRaw</code> returns the underlying Go value (<code>interface{}</code>), useful when you need to chain with other functions or iterate:</p>
+
+<pre><code>{{range jsonpathRaw (json .Event.data) &#34;items.#&#34;}}
+  {{json .}}    # each item as JSON
+{{end}}
+</code></pre>
+
+<p><strong>Filtered array queries:</strong></p>
+
+<p>gjson supports array filtering with <code>#(condition)#</code> syntax:</p>
+
+<pre><code>{{jsonpath (json .Event.data) &#34;users.#(age&gt;28).name&#34;}}
+</code></pre>
+
+<p>Operators supported in filters: <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>%</code> (mod), <code>%~</code> (regex match).</p>
+
+<p><strong>Composing with other functions:</strong></p>
+
+<pre><code>{{default &#34;unknown&#34; (jsonpath (json .Event.data) &#34;metadata.source&#34;)}}
+{{if contains (jsonpath (step &#34;log&#34; &#34;result&#34;) &#34;status&#34;) &#34;ok&#34;}}pass{{end}}
+{{printf &#34;ID: %s&#34; (jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.id&#34;)}}
+</code></pre>
+
+<h3>Conditionals</h3>
+
+<p>Use Go template control structures:</p>
+
+<pre><code>{{if .Event.url}}has-url{{else}}no-url{{end}}
+{{if eq .Event.status &#34;done&#34;}}completed{{else}}pending{{end}}
+{{if ne .Event.status &#34;failed&#34;}}ok{{end}}
+{{if and .Event.x .Event.y}}both{{end}}
+{{if or .Event.a .Event.b}}either{{end}}
+{{if not .Event.missing}}absent{{end}}
+{{if gt .Event.count 3.0}}high{{end}}
+{{with .Event.user}}{{.name}}{{end}}
+</code></pre>
+
+<p>Note on boolean evaluation:</p>
+
+<ul>
+<li>nil / zero-value / empty string → falsy</li>
+<li>non-empty string / non-zero number → truthy</li>
+</ul>
+
+<h3>Loops</h3>
+
+<pre><code>{{range .Event.items}}{{.}},{{end}}
+{{range $index, $value := .Event.items}}{{$index}}:{{$value}};{{end}}
+{{range .Event.items}}x{{else}}empty{{end}}
+</code></pre>
+
+<p>Function return values are valid <code>range</code> pipelines:</p>
+
+<pre><code>{{range split .Event.csv &#34;,&#34;}}{{.}}-{{end}}
+{{range split &#34;a,b,c&#34; &#34;,&#34;}}[{{.}}]{{end}}
+</code></pre>
+
+<h3>Pipelining and variables</h3>
+
+<pre><code>{{$v := step &#34;archive&#34; &#34;url&#34;}}{{if $v}}URL: {{$v}}{{end}}
+
+{{$parts := split .Event.csv &#34;,&#34;}}{{len $parts}} items: {{join $parts &#34;|&#34;}}
+</code></pre>
+
+<h3>Composing Functions</h3>
+
+<p>Functions can be chained with parentheses:</p>
+
+<pre><code>{{json (event &#34;metadata&#34;)}}
+{{contains (step &#34;log&#34; &#34;output&#34;) &#34;ERROR&#34;}}
+{{default &#34;none&#34; (step &#34;prev&#34; &#34;title&#34;)}}
+{{jsonpath (json .Event.data) &#34;nested.field&#34;}}
+{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;items.0.id&#34;}}
+</code></pre>
+
+<h3>Formatting</h3>
+
+<p>The <code>printf</code> built-in is always available:</p>
+
+<pre><code>{{printf &#34;id-%s&#34; .Event.id}}
+{{printf &#34;%02d&#34; .Event.count}}
+</code></pre>
+
+<h2>Backward Compatibility</h2>
+
+<p>Three regex-based preprocessors rewrite old syntax <strong>before</strong> template parsing.</p>
+
+<h3>1. Event fields: <code>{{event.x}}</code> → <code>{{event &#34;x&#34;}}</code></h3>
+
+<pre><code>Input:  {{event.url}}
+Output: {{event &#34;url&#34;}}
+</code></pre>
+
+<h3>2. Step references: <code>{{steps.s.field}}</code> → <code>{{step &#34;s&#34; &#34;field&#34;}}</code></h3>
+
+<pre><code>Input:  {{steps.archive.url}}
+Output: {{step &#34;archive&#34; &#34;url&#34;}}
+</code></pre>
+
+<h3>3. Legacy workflow references: <code>{{stepName.id}}</code> → <code>{{step &#34;stepName&#34; &#34;id&#34;}}</code></h3>
+
+<pre><code>Input:  {{myStep.id}}  or  {{myStep.result}}
+Output: {{step &#34;myStep&#34; &#34;id&#34;}}  or  {{step &#34;myStep&#34; &#34;result&#34;}}
+</code></pre>
+
+<p>Note: this regex only matches <code>.id</code> and <code>.result</code> suffixes, so <code>{{foo.bar}}</code> passes through unchanged.</p>
+
+<p>All three preprocessors run in order: <code>event.</code> → <code>steps.</code> → <code>stepName.</code> (id/result).</p>
+
+<h3>Compatibility table</h3>
+
+<table>
+<thead>
+<tr>
+<th>Old syntax (still works)</th>
+<th>New syntax (recommended)</th>
+<th>Go template equivalent</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>{{event.url}}</code></td>
+<td><code>{{event &#34;url&#34;}}</code></td>
+<td><code>{{.Event.url}}</code></td>
+</tr>
+
+<tr>
+<td><code>{{event.id}}</code></td>
+<td><code>{{event &#34;id&#34;}}</code></td>
+<td><code>{{.Event.id}}</code></td>
+</tr>
+
+<tr>
+<td><code>{{steps.archive.url}}</code></td>
+<td><code>{{step &#34;archive&#34; &#34;url&#34;}}</code></td>
+<td><code>{{index .Steps.archive &#34;url&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>{{step1.id}}</code></td>
+<td><code>{{step &#34;step1&#34; &#34;id&#34;}}</code></td>
+<td><code>{{index .Steps.step1 &#34;id&#34;}}</code></td>
+</tr>
+
+<tr>
+<td><code>{{step1.result}}</code></td>
+<td><code>{{step &#34;step1&#34; &#34;result&#34;}}</code></td>
+<td><code>{{index .Steps.step1 &#34;result&#34;}}</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>YAML Usage Notes</h2>
+
+<h3>Quoting in YAML</h3>
+
+<p>Go template delimiters <code>{{</code> and <code>}}</code> can confuse YAML parsers. Follow these rules:</p>
+
+<p><strong>Single-line templates with conditionals</strong>: wrap the value in quotes.</p>
+
+<pre><code>params:
+  action: &#39;{{if eq .Event.status &#34;done&#34;}}archive{{else}}skip{{end}}&#39;
+</code></pre>
+
+<p><strong>Multi-line templates</strong>: use YAML literal block scalar <code>|</code> or folded block scalar <code>&gt;</code>.</p>
+
+<pre><code>params:
+  message: |
+    {{if .Event.user}}
+    User: {{.Event.user}}
+    {{else}}
+    Anonymous
+    {{end}}
+</code></pre>
+
+<p><strong>Simple field references</strong>: no quoting needed.</p>
+
+<pre><code>params:
+  entity: &#34;{{event.id}}&#34; # ok
+  link: { { event.url } } # ok, but quoting is safer
+</code></pre>
+
+<h3>Escaping quotes inside templates</h3>
+
+<p>When using string literals inside template conditionals in YAML strings, escape double quotes:</p>
+
+<pre><code># Inside a YAML double-quoted string, escape Go template quotes
+action: &#34;{{if eq .Event.status \&#34;done\&#34;}}archive{{else}}skip{{end}}&#34;
+
+# Alternative: use YAML single quotes (no escaping needed, but YAML parser-dependent)
+action: &#39;{{if eq .Event.status &#34;done&#34;}}archive{{else}}skip{{end}}&#39;
+</code></pre>
+
+<h2>Error Handling</h2>
+
+<h3>Missing fields with <code>event</code> / <code>step</code> functions</h3>
+
+<p>The <code>event</code> and <code>step</code> functions return <code>&#34;&#34;</code> (empty string) for missing keys, matching the previous behavior:</p>
+
+<pre><code>{{event &#34;nonexistent&#34;}}  → &#34;&#34;  (empty string, no error)
+{{step &#34;x&#34; &#34;y&#34;}}         → &#34;&#34;  (empty string, no error)
+</code></pre>
+
+<h3>Missing fields with dot-access</h3>
+
+<p>Direct <code>.Event.field</code> access on a non-existent key renders the Go zero value:</p>
+
+<pre><code>{{.Event.nonexistent}}  → &#34;&lt;no value&gt;&#34;  (Go&#39;s nil representation)
+</code></pre>
+
+<p>Pipeline authors should prefer <code>{{event &#34;field&#34;}}</code> for safe rendering, or use <code>{{default &#34;fallback&#34; .Event.field}}</code> to provide a fallback.</p>
+
+<h3>Invalid template syntax</h3>
+
+<p>Syntax errors (unbalanced braces, malformed control structures) return an error from both <code>RenderString()</code> and <code>Render()</code>:</p>
+
+<pre><code>{{if .Event.x}}}        → error: &#34;template parse: unexpected }&#34;
+{{if missing end}}      → error: &#34;template parse: unexpected EOF&#34;
+</code></pre>
+
+<h2>Usage in Code</h2>
+
+<h3>Pipeline (RenderContext)</h3>
+
+<pre><code>import &#34;github.com/flowline-io/flowbot/pkg/pipeline/template&#34;
+
+rc := pipeline.NewRenderContext(event)
+rc.RecordStepResult(&#34;step1&#34;, map[string]any{&#34;id&#34;: &#34;abc&#34;, &#34;url&#34;: &#34;https://x.com&#34;})
+
+params := map[string]any{
+    &#34;entity&#34;:  &#34;{{event.id}}&#34;,
+    &#34;ref_url&#34;: &#34;{{steps.step1.url}}&#34;,
+}
+rendered, err := rc.RenderParams(params)
+// or single string:
+result, err := rc.RenderString(&#34;id={{event.id}} url={{event.url}}&#34;)
+</code></pre>
+
+<h3>Workflow (resolveParams)</h3>
+
+<p>The <code>resolveParams</code> function uses the same template engine internally:</p>
+
+<pre><code>params := types.KV{&#34;output&#34;: &#34;{{step1.result}}&#34;}
+results := map[string]string{&#34;step1&#34;: &#34;my-output&#34;}
+resolved, err := workflow.resolveParams(params, results)
+// resolved[&#34;output&#34;] → &#34;my-output&#34;
+</code></pre>
+
+<p>Workflow results are mapped: each <code>result</code> string is exposed as both <code>id</code> and <code>result</code> fields:</p>
+
+<pre><code>results[&#34;step1&#34;] = &#34;output-string&#34;
+→ Steps[&#34;step1&#34;][&#34;id&#34;]     = &#34;output-string&#34;
+→ Steps[&#34;step1&#34;][&#34;result&#34;]  = &#34;output-string&#34;
+</code></pre>
+
+<h3>Standalone engine</h3>
+
+<pre><code>e := template.New()
+data := &amp;template.TemplateData{
+    Event: map[string]any{&#34;url&#34;: &#34;https://example.com&#34;},
+    Steps: map[string]map[string]any{
+        &#34;archive&#34;: {&#34;id&#34;: &#34;a1&#34;},
+    },
+}
+
+s, err := e.RenderString(&#34;{{.Event.url}} -&gt; {{step \&#34;archive\&#34; \&#34;id\&#34;}}&#34;, data)
+// s = &#34;https://example.com -&gt; a1&#34;
+
+params, err := e.Render(map[string]any{
+    &#34;action&#34;: &#34;{{if .Event.url}}present{{end}}&#34;,
+}, data)
+// params[&#34;action&#34;] = &#34;present&#34;
+</code></pre>
+
+<h2>Testing</h2>
+
+<pre><code>go test ./pkg/pipeline/template/...
+</code></pre>
+
+<p>Test coverage includes: plain text passthrough, event fields, step fields, env fields, conditions (if/else/eq/ne/and/or/not/gt), loops (range/range-index/range-else), nested condition+loop, all 12 built-in functions (including jsonpath, jsonpathExists, jsonpathRaw for gjson-based JSON extraction), old syntax compatibility, error propagation, invalid templates, and nil/empty data.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

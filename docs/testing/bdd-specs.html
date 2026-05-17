@@ -1,0 +1,825 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BDD Acceptance Testing with Ginkgo — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>BDD Acceptance Testing with Ginkgo</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link active">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>BDD Acceptance Testing with Ginkgo</h1>
+
+<p>Flowbot uses Ginkgo v2 + Gomega for Behavior-Driven Development (BDD) at the integration and acceptance level. Unit tests retain testify with table-driven patterns. This document describes the infrastructure, conventions, and workflow.</p>
+
+<h2>Test Pyramid</h2>
+
+<pre><code>                         ┌───────────────────────────┐
+                         │  BDD Acceptance Tests     │
+                         │  Ginkgo + Gomega          │
+                         │  tests/specs/             │
+                         │  Requires Docker          │
+                         ├───────────────────────────┤
+                         │  Unit Tests               │
+                         │  testify table-driven     │
+                         │  pkg/** / *_test.go       │
+                         │  No external deps         │
+                         └───────────────────────────┘
+</code></pre>
+
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Framework</th>
+<th>Location</th>
+<th>Notes</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>BDD Acceptance</td>
+<td>Ginkgo + Gomega</td>
+<td><code>tests/specs/</code></td>
+<td>All integration/acceptance tests must use</td>
+</tr>
+
+<tr>
+<td>Unit</td>
+<td>testify table-driven</td>
+<td><code>pkg/**/</code>, <code>internal/**/</code>, <code>cmd/**/</code></td>
+<td>Never migrate – retained permanently</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Directory Structure</h2>
+
+<pre><code>tests/
+├── specs/                              # Ginkgo BDD tests
+│   ├── specs_suite_test.go             # Suite entry point (TestSpecs + RunSpecs)
+│   ├── lifecycle.go                    # SynchronizedBeforeSuite / AfterSuite + per-process DB isolation
+│   ├── fixtures.go                     # HTTP request helpers (MakeRequest, JSONRequest, ReadBody)
+│   ├── ability_spec_test.go            # Ability layer
+│   ├── auth_spec_test.go               # Authentication contexts, tokens, scopes
+│   ├── bookmark_spec_test.go           # Bookmark module
+│   ├── database_spec_test.go           # Core database model CRUD
+│   ├── database_ext_spec_test.go       # Extended database model CRUD
+│   ├── dev_spec_test.go                # Dev module
+│   ├── event_spec_test.go              # DataEvent publish, consume, idempotency
+│   ├── gitea_spec_test.go              # Gitea module
+│   ├── github_spec_test.go             # GitHub module
+│   ├── health_spec_test.go             # Health checks + smoke tests
+│   ├── homelab_spec_test.go            # Homelab scanner
+│   ├── hub_spec_test.go                # Hub management
+│   ├── kanban_spec_test.go             # Kanban module
+│   ├── notify_spec_test.go             # Notify module
+│   ├── pipeline_spec_test.go           # Pipeline engine
+│   ├── reader_spec_test.go             # Reader module
+│   ├── server_spec_test.go             # Server module
+│   ├── webhook_spec_test.go            # Webhook module
+│   └── workflow_spec_test.go           # Workflow module
+└── fixtures/                           # Shared test data files
+</code></pre>
+
+<p>All files under <code>tests/specs/</code> use <code>//go:build integration</code> to prevent compilation during standard unit test runs.</p>
+
+<h2>Infrastructure</h2>
+
+<h3>Parallel Database Isolation</h3>
+
+<p>Ginkgo’s <code>--procs=N</code> flag runs N independent test processes. To prevent data conflicts, each process operates on an isolated database namespace using <code>GinkgoParallelProcess()</code>.</p>
+
+<pre><code>                     ┌──────────────────────┐
+                     │  Process 1           │
+                     │  SBS process1        │  Start PostgreSQL + Redis containers
+                     │                      │  Serialize DSN -&gt; all processes
+                     └──────────┬───────────┘
+                                │
+          ┌─────────────────────┼─────────────────────┐
+          ▼                    ▼                    ▼
+   ┌───────────────┐   ┌───────────────┐   ┌───────────────┐
+   │  Process 1    │   │  Process 2    │   │  Process 3    │
+   │  DB:          │   │  DB:          │   │  DB:          │
+   │  flowbot      │   │  flowbot      │   │  flowbot      │
+   │  _test_1      │   │  _test_2      │   │  _test_3      │
+   │  Redis DB: 1  │   │  Redis DB: 2  │   │  Redis DB: 3  │
+   │  Run specs    │   │  Run specs    │   │  Run specs    │
+   └───────────────┘   └───────────────┘   └───────────────┘
+          │                     │                     │
+          └─────────────────────┼─────────────────────┘
+                                ▼
+                     ┌──────────────────────┐
+                     │  Process 1           │
+                     │  SAS process1        │  Wait all done
+                     │                      │  Terminate containers
+                     └──────────────────────┘
+</code></pre>
+
+<p><strong>Key mechanism</strong>:</p>
+
+<ol>
+<li><code>SynchronizedBeforeSuite</code> process 1 starts one PostgreSQL container and one Redis container.</li>
+<li>Container connection details are serialized and passed to all processes.</li>
+<li>Each process calls <code>GinkgoParallelProcess()</code> to get a unique ID (1, 2, 3, …).</li>
+<li>Each process:
+
+<ul>
+<li>Connects to the PostgreSQL container and runs <code>CREATE DATABASE flowbot_test_{ID}</code>.</li>
+<li>Creates an Ent client on that database and runs schema migrations.</li>
+<li>Connects to Redis using <code>DB: GinkgoParallelProcess()</code> for key-space isolation.</li>
+<li>Creates a Fiber app instance for HTTP testing.</li>
+</ul></li>
+<li>All processes run their assigned specs in parallel – zero data conflicts.</li>
+<li><code>SynchronizedAfterSuite</code> process 1 terminates containers after all processes complete.</li>
+</ol>
+
+<h3>Suite-Level Variables</h3>
+
+<p>The following variables are initialized by <code>lifecycle.go</code> and available to all spec files in the <code>specs</code> package:</p>
+
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>suiteCtx</code></td>
+<td><code>context.Context</code></td>
+<td>Context scoped to container lifecycle</td>
+</tr>
+
+<tr>
+<td><code>pgC</code></td>
+<td><code>*tcpostgres.PostgresContainer</code></td>
+<td>PostgreSQL testcontainer</td>
+</tr>
+
+<tr>
+<td><code>redisC</code></td>
+<td><code>testcontainers.Container</code></td>
+<td>Redis testcontainer</td>
+</tr>
+
+<tr>
+<td><code>App</code></td>
+<td><code>*fiber.App</code></td>
+<td>Configured Fiber HTTP app for testing</td>
+</tr>
+
+<tr>
+<td><code>DB</code></td>
+<td><code>*sql.DB</code></td>
+<td>Raw database connection</td>
+</tr>
+
+<tr>
+<td><code>EntClient</code></td>
+<td><code>*gen.Client</code></td>
+<td>Ent ORM client</td>
+</tr>
+
+<tr>
+<td><code>Redis</code></td>
+<td><code>*redis.Client</code></td>
+<td>Redis client</td>
+</tr>
+
+<tr>
+<td><code>PGDSN</code></td>
+<td><code>string</code></td>
+<td>Per-process database DSN</td>
+</tr>
+
+<tr>
+<td><code>RedisAddr</code></td>
+<td><code>string</code></td>
+<td>Redis address</td>
+</tr>
+</tbody>
+</table>
+
+<h3>SynchronizedBeforeSuite Lifecycle</h3>
+
+<pre><code>// Process 1: start containers, serialize config
+var _ = SynchronizedBeforeSuite(
+    func() []byte {
+        flog.Init(flog.Config{Level: &#34;info&#34;})
+        // Start PostgreSQL container
+        pgC, _ = tcpostgres.Run(ctx, pgImage,
+            tcpostgres.WithUsername(&#34;test&#34;),
+            tcpostgres.WithPassword(&#34;test&#34;),
+            testcontainers.WithWaitStrategy(...),
+        )
+        // Start Redis container
+        // ...
+        return sonic.Marshal(configBundle{BaseDSN: baseDSN, RedisAddr: redisAddr})
+    },
+
+    // All processes: parse config, create per-process database
+    func(data []byte) {
+        procID := GinkgoParallelProcess()
+        dbName := fmt.Sprintf(&#34;flowbot_test_%d&#34;, procID)
+        PGDSN = createPerProcessDatabase(cfg.BaseDSN, dbName)
+        DB, EntClient = setupEntClient(PGDSN)
+        runMigrations()
+        Redis = setupRedis(cfg.RedisAddr, procID)
+        App = setupTestApp()
+    },
+)
+</code></pre>
+
+<h3>createPerProcessDatabase</h3>
+
+<p>PostgreSQL requires connecting to an existing database to issue <code>CREATE DATABASE</code>. The base DSN from testcontainers points to the default database (typically <code>test</code>). The function connects via that DSN, executes <code>CREATE DATABASE</code>, and returns a new DSN targeting the per-process database.</p>
+
+<pre><code>func createPerProcessDatabase(baseDSN, dbName string) string {
+    adminDB, _ := sql.Open(&#34;pgx&#34;, baseDSN)
+    defer adminDB.Close()
+
+    adminDB.Exec(&#34;DROP DATABASE IF EXISTS &#34; + dbName)
+    adminDB.Exec(&#34;CREATE DATABASE &#34; + dbName)
+
+    u, _ := url.Parse(baseDSN)
+    u.Path = &#34;/&#34; + dbName
+    return u.String()
+}
+</code></pre>
+
+<h2>Writing Specs</h2>
+
+<h3>Spec Structure</h3>
+
+<p>Ginkgo specs use three node types to build a descriptive hierarchy:</p>
+
+<table>
+<thead>
+<tr>
+<th>Node Type</th>
+<th>Examples</th>
+<th>Purpose</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Container</td>
+<td><code>Describe</code>, <code>Context</code>, <code>When</code></td>
+<td>Organize specs hierarchically</td>
+</tr>
+
+<tr>
+<td>Setup</td>
+<td><code>BeforeEach</code>, <code>AfterEach</code>, <code>JustBeforeEach</code>, <code>DeferCleanup</code></td>
+<td>Set up and tear down spec state</td>
+</tr>
+
+<tr>
+<td>Subject</td>
+<td><code>It</code>, <code>Specify</code></td>
+<td>Make assertions about behavior</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Basic Pattern</h3>
+
+<pre><code>var _ = Describe(&#34;Bookmark Module&#34;, Label(&#34;module&#34;, &#34;bookmark&#34;), func() {
+    var bookmarkID string
+
+    BeforeEach(func() {
+        // Shared setup: cleanup, prepare test data
+    })
+
+    Describe(&#34;creating a bookmark&#34;, func() {
+        Context(&#34;with a valid URL&#34;, func() {
+            It(&#34;stores the bookmark and returns success&#34;, func() {
+                req := JSONRequest(&#34;POST&#34;, &#34;/service/bookmark/create&#34;,
+                    []byte(`{&#34;url&#34;:&#34;https://example.com&#34;}`))
+                resp, _ := App.Test(req)
+
+                Expect(resp.StatusCode).To(Equal(200))
+                Expect(ReadBody(resp)).To(ContainSubstring(&#34;success&#34;))
+            })
+        })
+
+        Context(&#34;with an empty URL&#34;, func() {
+            It(&#34;returns a validation error&#34;, func() {
+                req := JSONRequest(&#34;POST&#34;, &#34;/service/bookmark/create&#34;,
+                    []byte(`{&#34;url&#34;:&#34;&#34;}`))
+                resp, _ := App.Test(req)
+
+                Expect(resp.StatusCode).To(Equal(400))
+            })
+        })
+    })
+})
+</code></pre>
+
+<h3>Labels</h3>
+
+<p>Labels enable selective test execution. Use them to categorize specs:</p>
+
+<table>
+<thead>
+<tr>
+<th>Label</th>
+<th>Convention</th>
+<th>Usage</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>smoke</code></td>
+<td>Fast, high-value tests</td>
+<td><code>ginkgo --label-filter=&#34;smoke&#34;</code></td>
+</tr>
+
+<tr>
+<td><code>module:&lt;name&gt;</code></td>
+<td>Tests for a specific module</td>
+<td><code>ginkgo --label-filter=&#34;module/bookmark&#34;</code></td>
+</tr>
+
+<tr>
+<td><code>integration</code></td>
+<td>Requires external services</td>
+<td><code>ginkgo --label-filter=&#34;integration&#34;</code></td>
+</tr>
+</tbody>
+</table>
+
+<pre><code>var _ = Describe(&#34;Health&#34;, Label(&#34;health&#34;, &#34;smoke&#34;), func() { ... })
+</code></pre>
+
+<h3>DescribeTable (Table-Driven BDD)</h3>
+
+<p><code>DescribeTable</code> maps the table-driven pattern to Ginkgo’s BDD style. Entries are distributed across parallel processes when <code>--procs</code> is active.</p>
+
+<pre><code>DescribeTable(&#34;returns 200 for health endpoints&#34;,
+    func(endpoint string) {
+        req := MakeRequest(http.MethodGet, endpoint, nil)
+        resp, err := App.Test(req)
+        Expect(err).NotTo(HaveOccurred())
+        Expect(resp.StatusCode).To(Equal(http.StatusOK))
+    },
+    Entry(&#34;liveness endpoint&#34;, &#34;/livez&#34;),
+    Entry(&#34;readiness endpoint&#34;, &#34;/readyz&#34;),
+    Entry(&#34;startup endpoint&#34;, &#34;/startupz&#34;),
+)
+</code></pre>
+
+<h3>Assertions</h3>
+
+<p>In Ginkgo, <code>RegisterFailHandler(Fail)</code> connects Gomega to Ginkgo. When <code>Expect</code> fails, it <strong>immediately terminates</strong> the current <code>It</code> block (equivalent to <code>testify/require</code>, not <code>testify/assert</code>). No guard clauses are needed after <code>Expect(err).NotTo(HaveOccurred())</code>.</p>
+
+<table>
+<thead>
+<tr>
+<th>testify</th>
+<th>Gomega</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>require.NoError(t, err)</code></td>
+<td><code>Expect(err).NotTo(HaveOccurred())</code></td>
+</tr>
+
+<tr>
+<td><code>require.Equal(t, a, b)</code></td>
+<td><code>Expect(b).To(Equal(a))</code></td>
+</tr>
+
+<tr>
+<td><code>require.True(t, cond)</code></td>
+<td><code>Expect(cond).To(BeTrue())</code></td>
+</tr>
+
+<tr>
+<td><code>require.NotNil(t, v)</code></td>
+<td><code>Expect(v).NotTo(BeNil())</code></td>
+</tr>
+
+<tr>
+<td><code>assert.Equal(t, a, b)</code></td>
+<td><code>Expect(b).To(Equal(a))</code></td>
+</tr>
+
+<tr>
+<td><code>assert.Contains(t, s, sub)</code></td>
+<td><code>Expect(s).To(ContainSubstring(sub))</code></td>
+</tr>
+
+<tr>
+<td><code>s.Require().NoError(err)</code></td>
+<td><code>Expect(err).NotTo(HaveOccurred())</code></td>
+</tr>
+
+<tr>
+<td><code>s.Equal(a, b)</code></td>
+<td><code>Expect(b).To(Equal(a))</code></td>
+</tr>
+</tbody>
+</table>
+
+<h3>HTTP Testing</h3>
+
+<p>All HTTP tests use <code>App.Test(req)</code> on the shared <code>*fiber.App</code> instance – no local server is started. The <code>fixtures.go</code> helpers simplify request construction:</p>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Signature</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>MakeRequest</code></td>
+<td><code>(method, path string, body []byte) *http.Request</code></td>
+</tr>
+
+<tr>
+<td><code>JSONRequest</code></td>
+<td><code>(method, path string, body []byte) *http.Request</code></td>
+</tr>
+
+<tr>
+<td><code>ReadBody</code></td>
+<td><code>(resp *http.Response) []byte</code></td>
+</tr>
+</tbody>
+</table>
+<p>When a module or capability might not be registered in the test setup, use <code>Or(...)</code> to accept multiple status codes:</p>
+
+<pre><code>Expect(resp.StatusCode).To(Or(
+    Equal(http.StatusOK),
+    Equal(http.StatusBadRequest),
+    Equal(http.StatusUnauthorized),
+))
+</code></pre>
+
+<p>Or call <code>Skip(...)</code> when a prerequisite is missing:</p>
+
+<pre><code>if err != nil {
+    Skip(&#34;bookmark capability not registered: &#34; + err.Error())
+}
+</code></pre>
+
+<h3>Database Testing</h3>
+
+<p>Database specs use the shared <code>EntClient</code> directly. CRUD pattern: <strong>Create -&gt; Assert -&gt; Cleanup</strong>. Each test creates unique records using <code>types.Id()</code> for random suffixes.</p>
+
+<pre><code>It(&#34;creates a new user with valid data&#34;, func() {
+    u, err := EntClient.User.Create().
+        SetFlag(&#34;test-flag-&#34; + types.Id()).
+        SetName(&#34;Test User&#34;).
+        Save(ctx)
+    Expect(err).NotTo(HaveOccurred())
+    Expect(u.ID).NotTo(BeZero())
+
+    EntClient.User.DeleteOne(u).Exec(ctx)
+})
+</code></pre>
+
+<h2>Running Specs</h2>
+
+<h3>Task Commands</h3>
+
+<pre><code># Local parallel run (requires Docker)
+go tool task test:specs
+
+# CI run with flake retry and JUnit output
+go tool task test:specs:ci
+
+# Serial run for debugging
+go tool task test:specs:serial
+
+# Smoke tests only
+go tool ginkgo --label-filter=&#34;smoke&#34; --tags integration ./tests/specs/...
+
+# Specific module
+go tool ginkgo --label-filter=&#34;module/bookmark&#34; --tags integration ./tests/specs/...
+</code></pre>
+
+<h3>Taskfile Definitions</h3>
+
+<pre><code>test:specs:
+  desc: Run Ginkgo BDD acceptance tests (parallel, requires Docker)
+  cmds:
+    - go tool ginkgo --procs=4 -v --randomize-all --fail-fast --tags integration ./tests/specs/...
+
+test:specs:ci:
+  desc: Run BDD tests for CI with retry and JUnit output
+  cmds:
+    - go tool ginkgo --procs=4 --flake-attempts=2 --junit-report=specs-report.xml --tags integration ./tests/specs/...
+
+test:specs:serial:
+  desc: Run BDD tests serially for debugging
+  cmds:
+    - go tool ginkgo -v --trace --tags integration ./tests/specs/...
+</code></pre>
+
+<h3>go test Compatibility</h3>
+
+<p>Ginkgo suites are standard Go tests (entry point is <code>func TestSpecs(t *testing.T)</code>). Standard tooling works:</p>
+
+<pre><code># Standard go test (no parallel within package)
+go test -v -tags integration ./tests/specs/...
+
+# gotestsum
+go tool gotestsum -- -tags integration ./tests/specs/...
+
+# Coverage
+go test -tags integration -coverprofile=coverage.out ./tests/specs/...
+go tool cover -html=coverage.out
+</code></pre>
+
+<p><code>ginkgo</code> CLI is recommended over <code>go test</code> for its spec randomization, parallel process distribution, flake retry, and JUnit output.</p>
+
+<h2>CI Integration</h2>
+
+<p>The BDD step in <code>.github/workflows/testing.yml</code>:</p>
+
+<pre><code>- name: BDD Acceptance Tests
+  run: go tool task test:specs:ci
+
+- name: Upload BDD Report
+  uses: actions/upload-artifact@v4
+  if: always()
+  with:
+    name: specs-report
+    path: specs-report.xml
+</code></pre>
+
+<p><code>--flake-attempts=2</code> retries flaky specs once, reducing CI noise from transient container or network issues.</p>
+
+<h2>Migration Roadmap</h2>
+
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>Scope</th>
+<th>Status</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0</td>
+<td>Infrastructure: Ginkgo deps, SynchronizedBeforeSuite, CI, revive exemption</td>
+<td>Complete</td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>New modules: mandatory Ginkgo BDD spec; existing code untouched</td>
+<td>Ongoing</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>Existing integration tests: migrate from testify/suite to Ginkgo</td>
+<td>Complete</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>Unit tests: testify table-driven retained permanently</td>
+<td>Never</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Rules</h2>
+
+<ol>
+<li><strong>New modules must include BDD specs</strong> in <code>tests/specs/modules/&lt;name&gt;_spec_test.go</code>.</li>
+<li><strong>Existing unit tests are never migrated</strong> to Ginkgo. The testify table-driven pattern is the standard for unit tests.</li>
+<li><strong>Use Labels</strong> on every <code>Describe</code> container to enable targeted test execution.</li>
+<li><strong>BeforeEach for setup, It for assertions</strong>. Never assert in container nodes.</li>
+<li><strong>Declare in container nodes, initialize in setup nodes</strong> to prevent spec pollution.</li>
+<li><strong>Per-process database isolation</strong> is automatic. Do not hardcode database names in specs.</li>
+<li><strong>Use <code>GinkgoWriter.Printf</code></strong> for debug output instead of <code>fmt.Println</code> or <code>t.Log</code>.</li>
+<li><strong>DeferCleanup</strong> in BeforeEach for per-spec cleanup; SynchronizedAfterSuite for suite-level.</li>
+<li><strong>Build tag</strong>: All files in <code>tests/specs/</code> must include <code>//go:build integration</code>.</li>
+<li><strong>Use <code>sonic</code> for JSON</strong>, never <code>encoding/json</code>.</li>
+<li><strong>Use <code>types.Id()</code> for unique test values</strong>, never hardcoded strings.</li>
+<li><strong>Cleanup after each test</strong> – delete created database records in the test body.</li>
+</ol>
+
+<h2>Environment Variables</h2>
+
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>SKIP_INTEGRATION_TESTS</code></td>
+<td><code>false</code></td>
+<td>Set to <code>true</code> to skip all integration/BDD tests</td>
+</tr>
+
+<tr>
+<td><code>POSTGRES_IMAGE</code></td>
+<td><code>postgres:16-alpine</code></td>
+<td>PostgreSQL container image</td>
+</tr>
+
+<tr>
+<td><code>REDIS_IMAGE</code></td>
+<td><code>redis:7-alpine</code></td>
+<td>Redis container image</td>
+</tr>
+</tbody>
+</table>
+
+<h2>Tool Dependencies</h2>
+
+<p>The Ginkgo CLI is declared in <code>go.mod</code> via the <code>tool</code> directive:</p>
+
+<pre><code>tool (
+    github.com/onsi/ginkgo/v2/ginkgo
+)
+</code></pre>
+
+<p>This pins the Ginkgo CLI version to the project’s module graph. Use <code>go tool ginkgo</code> to invoke it – no separate <code>go install</code> required.</p>
+
+<pre><code>go tool ginkgo version
+Ginkgo Version 2.28.1
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

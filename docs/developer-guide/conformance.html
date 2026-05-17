@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Ability Adapter Conformance Tests — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Ability Adapter Conformance Tests</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub active">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1>Ability Adapter Conformance Tests</h1>
+
+<p>Standard compliance suite for ability adapters. Any new provider adapter must pass this suite to guarantee pagination and error handling conform to Flowbot standards.</p>
+
+<p>Source: <code>pkg/ability/conformance/</code></p>
+
+<h2>Overview</h2>
+
+<p>Each capability (bookmark, archive, reader, kanban) defines a <code>Service</code> interface in <code>pkg/ability/&lt;capability&gt;/interface.go</code>. Provider adapters implement this interface, translating provider-specific types into ability domain types. The conformance suite verifies every adapter correctly implements:</p>
+
+<ul>
+<li>Pagination structure (<code>ListResult[T]</code>, <code>PageInfo</code>, opaque cursors)</li>
+<li>Error wrapping (Flowbot sentinel errors via <code>types.WrapError</code> / <code>types.Errorf</code>)</li>
+<li>Input validation (empty IDs, nil queries, missing required fields)</li>
+<li>Context cancellation (canceled ctx maps to <code>types.ErrTimeout</code>)</li>
+<li>Not-implemented semantics (unsupported ops return <code>types.ErrNotImplemented</code>)</li>
+</ul>
+
+<h2>Architecture</h2>
+
+<pre><code>pkg/ability/conformance/
+├── conformance.go          # Shared types, context helpers, error assertion helpers
+├── pagination.go           # Pagination-specific assertions (cursor round-trip, PageInfo structure)
+├── bookmark.go             # RunBookmarkConformance — 33 subtests across 9 operations
+├── archive.go              # RunArchiveConformance — 7 subtests across 3 operations
+├── reader.go               # RunReaderConformance — 20 subtests across 7 operations
+├── kanban.go               # RunKanbanConformance — 27 subtests across 9 operations
+├── conformance_test.go     # Self-tests for the conformance framework
+└── pagination_test.go      # Self-tests for pagination helpers
+</code></pre>
+
+<p>Each adapter adds a <code>conformance_test.go</code> in its package:</p>
+
+<pre><code>pkg/ability/bookmark/karakeep/
+├── adapter.go              # Adapter implementation
+├── adapter_test.go         # Adapter-specific tests (type conversion, edge cases)
+└── conformance_test.go     # Calls conformance.RunBookmarkConformance
+</code></pre>
+
+<h2>Design</h2>
+
+<h3>Config-Based Factory Pattern</h3>
+
+<p>Each capability runner accepts a <code>Config</code> struct and a factory function. The factory translates <code>Config</code> fields into fake client behavior:</p>
+
+<pre><code>type BookmarkConfig struct {
+    ListItems      []*Bookmark    // Items returned by List
+    ListNextCursor string         // Next cursor from provider
+    ListErr        error          // Error from List
+    // ... per-operation fields
+}
+
+type BookmarkServiceFactory func(t *testing.T, cfg BookmarkConfig) Service
+</code></pre>
+
+<p>The runner creates subtests, each with a different <code>Config</code>. The adapter’s <code>conformance_test.go</code> implements the factory, mapping <code>Config</code> fields to its fake client:</p>
+
+<pre><code>conformance.RunBookmarkConformance(t, func(t *testing.T, cfg conformance.BookmarkConfig) bm.Service {
+    c := &amp;fakeClient{
+        listResp:  toProviderResponse(cfg),
+        listErr:   cfg.ListErr,
+        // ...
+    }
+    a := NewWithClient(c).(*Adapter)
+    a.cursorSecret = conformance.CursorSecret
+    return a
+})
+</code></pre>
+
+<p>This decouples the conformance runner from provider-specific types — the runner only knows about ability domain types.</p>
+
+<h3>Per-Capability Runners</h3>
+
+<p>Each runner function defines all test cases for its capability’s operations. Test cases follow a consistent pattern:</p>
+
+<table>
+<thead>
+<tr>
+<th>Dimension</th>
+<th>Operations Tested</th>
+<th>Verification</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Success</td>
+<td>All</td>
+<td>Non-nil result, correct item fields</td>
+</tr>
+
+<tr>
+<td>Pagination</td>
+<td>List, Search</td>
+<td><code>PageInfo</code> present, <code>HasMore</code> logic, <code>Items</code> never nil</td>
+</tr>
+
+<tr>
+<td>Timeout</td>
+<td>All</td>
+<td><code>errors.Is(err, types.ErrTimeout)</code></td>
+</tr>
+
+<tr>
+<td>Invalid input</td>
+<td>All</td>
+<td><code>errors.Is(err, types.ErrInvalidArgument)</code></td>
+</tr>
+
+<tr>
+<td>Provider error</td>
+<td>Mutations</td>
+<td><code>errors.Is(err, types.ErrProvider)</code></td>
+</tr>
+
+<tr>
+<td>Not implemented</td>
+<td>Per-backend</td>
+<td><code>errors.Is(err, types.ErrNotImplemented)</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>What the Suite Tests</h2>
+
+<h3>Pagination Conformance (every list/search operation)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Assertion</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Non-nil Items</td>
+<td><code>result.Items</code> is <code>[]*T{}</code> (empty slice, not nil)</td>
+</tr>
+
+<tr>
+<td>Non-nil Page</td>
+<td><code>result.Page</code> is always present</td>
+</tr>
+
+<tr>
+<td>Limit pass-through</td>
+<td>Non-zero limit preserved (or normalized by adapter)</td>
+</tr>
+
+<tr>
+<td>HasMore = true</td>
+<td>When provider returns a next cursor</td>
+</tr>
+
+<tr>
+<td>HasMore = false</td>
+<td>When provider returns no next cursor</td>
+</tr>
+
+<tr>
+<td>NextCursor encoding</td>
+<td>Cursor is HMAC-signed opaque string when HasMore is true</td>
+</tr>
+
+<tr>
+<td>Cursor decoding</td>
+<td>Incoming opaque cursor extracts provider cursor correctly</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Error Conformance (every operation)</h3>
+
+<table>
+<thead>
+<tr>
+<th>Sentinel Error</th>
+<th>When Expected</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>types.ErrTimeout</code></td>
+<td>Context is canceled before operation</td>
+</tr>
+
+<tr>
+<td><code>types.ErrProvider</code></td>
+<td>Provider client returns an error</td>
+</tr>
+
+<tr>
+<td><code>types.ErrInvalidArgument</code></td>
+<td>Empty ID, empty URL, nil tags, missing required fields</td>
+</tr>
+
+<tr>
+<td><code>types.ErrNotFound</code></td>
+<td>Entity does not exist (where applicable)</td>
+</tr>
+
+<tr>
+<td><code>types.ErrNotImplemented</code></td>
+<td>Operation not supported by this backend</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Input Validation (every operation)</h3>
+
+<ul>
+<li>Empty/missing IDs return <code>ErrInvalidArgument</code></li>
+<li>Empty URLs return <code>ErrInvalidArgument</code></li>
+<li>Nil query structs use safe defaults (no panic)</li>
+<li>Empty tag slices return <code>ErrInvalidArgument</code></li>
+</ul>
+
+<h3>Context Cancellation (every operation)</h3>
+
+<ul>
+<li>Canceled context before any provider call returns <code>ErrTimeout</code></li>
+<li>Wrap uses <code>types.WrapError(types.ErrTimeout, &#34;...&#34;, ctx.Err())</code></li>
+</ul>
+
+<h2>Adding a New Provider</h2>
+
+<h3>Step 1: Implement the Service Interface</h3>
+
+<p>Create an adapter in <code>pkg/ability/&lt;capability&gt;/&lt;provider&gt;/</code> implementing the capability’s <code>Service</code> interface.</p>
+
+<h3>Step 2: Create a Fake Client</h3>
+
+<p>In <code>adapter_test.go</code>, define a <code>fakeClient</code> struct implementing the adapter’s local <code>client</code> interface. Each method should have configurable response and error fields.</p>
+
+<h3>Step 3: Write Adapter-Specific Tests</h3>
+
+<p>In <code>adapter_test.go</code>, test adapter internals: type conversion functions, edge cases, boundary conditions.</p>
+
+<h3>Step 4: Wire Up the Conformance Suite</h3>
+
+<p>Create <code>conformance_test.go</code>:</p>
+
+<pre><code>package newprovider
+
+import (
+    &#34;testing&#34;
+    &#34;github.com/flowline-io/flowbot/pkg/ability/conformance&#34;
+    bm &#34;github.com/flowline-io/flowbot/pkg/ability/bookmark&#34;
+)
+
+func TestConformance(t *testing.T) {
+    conformance.RunBookmarkConformance(t, func(t *testing.T, cfg conformance.BookmarkConfig) bm.Service {
+        c := &amp;fakeClient{
+            listResp:  toProviderListResponse(cfg),
+            listErr:   cfg.ListErr,
+            // ... map every config field
+        }
+        a := NewWithClient(c).(*Adapter)
+        if cursorAdapter, ok := interface{}(a).(interface{ SetCursorSecret([]byte) }); ok {
+            cursorAdapter.SetCursorSecret(conformance.CursorSecret)
+        }
+        return a
+    })
+}
+</code></pre>
+
+<h3>Step 5: Run the Tests</h3>
+
+<pre><code># Run this adapter&#39;s conformance only
+go test -run TestConformance ./pkg/ability/bookmark/newprovider/
+
+# Run all ability tests
+go test ./pkg/ability/...
+
+# Run all tests
+go tool task test
+</code></pre>
+
+<h2>Cursor Secrets</h2>
+
+<p>Adapters using cursor-based pagination must expose a way to set the cursor secret for testing. The conformance suite provides <code>conformance.CursorSecret</code> and <code>conformance.TestTime()</code> for deterministic cursor encoding.</p>
+
+<p>If the adapter has a <code>SetCursorSecret([]byte)</code> method:</p>
+
+<pre><code>a.SetCursorSecret(conformance.CursorSecret)
+</code></pre>
+
+<p>If the adapter exposes a <code>now</code> field for time injection (deterministic cursor expiry):</p>
+
+<pre><code>a.now = conformance.TestTime
+</code></pre>
+
+<h2>Assertion Helpers</h2>
+
+<p>The conformance package exports reusable assertion helpers:</p>
+
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Purpose</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><code>RequireListResult[T](t, result, limit, hasMore)</code></td>
+<td>Verifies <code>ListResult</code> structure</td>
+</tr>
+
+<tr>
+<td><code>RequireTimeoutError(t, err)</code></td>
+<td>Asserts <code>errors.Is(err, types.ErrTimeout)</code></td>
+</tr>
+
+<tr>
+<td><code>RequireProviderError(t, err)</code></td>
+<td>Asserts <code>errors.Is(err, types.ErrProvider)</code></td>
+</tr>
+
+<tr>
+<td><code>RequireInvalidArgError(t, err)</code></td>
+<td>Asserts <code>errors.Is(err, types.ErrInvalidArgument)</code></td>
+</tr>
+
+<tr>
+<td><code>RequireNotFoundError(t, err)</code></td>
+<td>Asserts <code>errors.Is(err, types.ErrNotFound)</code></td>
+</tr>
+
+<tr>
+<td><code>RequireNotImplementedError(t, err)</code></td>
+<td>Asserts <code>errors.Is(err, types.ErrNotImplemented)</code></td>
+</tr>
+
+<tr>
+<td><code>AssertCursorRoundTrip(t, secret, payload)</code></td>
+<td>Verifies cursor encode → decode</td>
+</tr>
+
+<tr>
+<td><code>AssertPageInfoIsComplete(t, page, limit)</code></td>
+<td>Verifies all <code>PageInfo</code> fields</td>
+</tr>
+
+<tr>
+<td><code>CanceledContext()</code></td>
+<td>Returns an already-canceled <code>context.Context</code></td>
+</tr>
+</tbody>
+</table>
+
+<h2>Coverage Matrix</h2>
+
+<table>
+<thead>
+<tr>
+<th>Adapter</th>
+<th>Capability</th>
+<th>Conformance Tests</th>
+<th>Adapter-Specific Tests</th>
+<th>Total</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>karakeep</td>
+<td>bookmark</td>
+<td>33</td>
+<td>2</td>
+<td>35</td>
+</tr>
+
+<tr>
+<td>archivebox</td>
+<td>archive</td>
+<td>7</td>
+<td>1</td>
+<td>8</td>
+</tr>
+
+<tr>
+<td>miniflux</td>
+<td>reader</td>
+<td>20</td>
+<td>6</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>kanboard</td>
+<td>kanban</td>
+<td>27</td>
+<td>7</td>
+<td>34</td>
+</tr>
+
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td><strong>87</strong></td>
+<td><strong>16</strong></td>
+<td><strong>103</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Plus 12 self-tests for the conformance framework itself.</p>
+
+<h2>Extending the Suite</h2>
+
+<p>To add conformance coverage for a new capability:</p>
+
+<ol>
+<li>Define <code>&lt;capability&gt;Config</code> and <code>&lt;Capability&gt;ServiceFactory</code> types in a new <code>pkg/ability/conformance/&lt;capability&gt;.go</code></li>
+<li>Implement <code>Run&lt;Capability&gt;Conformance</code> with subtests covering all operations</li>
+<li>Wire up existing adapters by adding <code>conformance_test.go</code> in each adapter package</li>
+<li>Add new subtests if the capability has unique semantics</li>
+</ol>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
