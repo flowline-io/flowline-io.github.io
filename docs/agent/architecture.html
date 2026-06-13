@@ -1,0 +1,653 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agent Engine Architecture — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Agent Engine Architecture</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub active">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/homelab-bookmark/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Bookmark</a></li>
+			
+			<li><a href="../../docs/skills/homelab-kanban/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Kanban</a></li>
+			
+			<li><a href="../../docs/skills/homelab-reader/SKILL.html" class="docs-nav-link docs-nav-sub">Flowbot Reader</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="agent-engine-architecture">Agent Engine Architecture</h1>
+<p>Reference implementation: <a href="https://github.com/earendil-works/pi-agent" rel="nofollow">pi-agent-core</a> (TypeScript). Flowbot&#39;s Go port lives in <code>pkg/agent/</code> with langchaingo at the LLM boundary only.</p>
+<h2 id="position-in-flowbot">Position in Flowbot</h2>
+<pre><code>Layer 3 — Business Logic
+├── internal/modules/     # HTTP modules, cron, webhooks
+├── pkg/workflow/       # DAG workflow runtime
+├── pkg/pipeline/       # Event-driven pipelines
+└── pkg/agent/          # Agent loop and LLM (pkg/agent/llm)
+</code></pre>
+<p>Modules that need one-shot classification or summarization import <code>pkg/agent/llm</code>. Callers that need tool loops, branching sessions, or streaming lifecycle events use the full <code>pkg/agent</code> runtime.</p>
+<h2 id="three-layer-design">Three-Layer Design</h2>
+<p>The runtime separates concerns the same way pi-agent-core does:</p>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│  Harness (pkg/agent/harness)                            │
+│  Session persistence, tool registry, lifecycle hooks    │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│  Agent (pkg/agent/agent.go)                             │
+│  Stateful wrapper: queues, subscribe, abort             │
+└──────────────────────────┬──────────────────────────────┘
+                           │
+┌──────────────────────────▼──────────────────────────────┐
+│  Loop (pkg/agent/loop.go, loop_inner.go)                │
+│  Stateless Observe-Think-Act cycle                        │
+└───────────────────────────────────────────────────────────┘
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Responsibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Loop</strong></td>
+<td>Send context to LLM, parse tool calls, execute tools, append results, repeat until done</td>
+</tr>
+<tr>
+<td><strong>Agent</strong></td>
+<td>Hold <code>Context</code>, steering/follow-up queues, <code>Subscribe()</code> handlers, cancellation</td>
+</tr>
+<tr>
+<td><strong>Harness</strong></td>
+<td>Wire session <code>Storage</code>, register tools, bridge <code>pkg/agent/hooks</code> into loop <code>Config</code>, gate concurrent runs</td>
+</tr>
+</tbody>
+</table>
+<h2 id="observe-think-act-loop">Observe-Think-Act Loop</h2>
+<pre><code>flowchart TB
+  subgraph outer [Outer loop]
+    FollowUp[Drain follow-up queue]
+  end
+
+  subgraph inner [Inner loop]
+    Inject[Inject pending / steering messages]
+    Think[Stream assistant response]
+    Parse[Parse tool calls]
+    Act[Execute tools parallel or sequential]
+    Hooks[PrepareNextTurn / ShouldStopAfterTurn]
+  end
+
+  Start([Prompt or Continue]) --&gt; Inject
+  Inject --&gt; Think
+  Think --&gt; Parse
+  Parse --&gt;|tool calls| Act
+  Act --&gt; Hooks
+  Hooks --&gt;|more tools needed| Inject
+  Hooks --&gt;|no tools| FollowUp
+  FollowUp --&gt;|has follow-up| Inject
+  FollowUp --&gt;|done| End([agent_end])
+  Parse --&gt;|no tools| FollowUp
+</code></pre>
+<h3 id="loop-controls">Loop controls</h3>
+<table>
+<thead>
+<tr>
+<th>Control</th>
+<th>Config / behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Max steps</strong></td>
+<td><code>Config.MaxSteps</code> (default 50) — prevents runaway self-iteration</td>
+</tr>
+<tr>
+<td><strong>Cancellation</strong></td>
+<td><code>context.Context</code> — aborts LLM streaming and tool execution</td>
+</tr>
+<tr>
+<td><strong>Tool batch mode</strong></td>
+<td><code>ToolExecutionParallel</code> (default) or <code>ToolExecutionSequential</code></td>
+</tr>
+<tr>
+<td><strong>Steering</strong></td>
+<td><code>Agent.Steer()</code> — inject messages between inner-loop turns</td>
+</tr>
+<tr>
+<td><strong>Follow-up</strong></td>
+<td><code>Agent.FollowUp()</code> — inject after inner loop completes</td>
+</tr>
+</tbody>
+</table>
+<h2 id="message-pipeline">Message Pipeline</h2>
+<p>Agent messages are <strong>not</strong> sent directly to the LLM. Two conversion stages mirror pi-agent-core:</p>
+<pre><code>[]msg.AgentMessage
+    → TransformContext (optional hook)
+    → []msg.AgentMessage
+    → ConvertToLLM (default: transform.DefaultConvertToLLM)
+    → []llms.MessageContent
+    → langchaingo GenerateContent
+</code></pre>
+<p>Custom message types (<code>CustomMessage</code>, <code>BranchSummaryMessage</code>, <code>CompactionSummaryMessage</code>) are filtered or converted to user-visible text before the provider call. UI-only custom messages use <code>DisplayOnly</code> or <code>ExcludeFromContext</code>.</p>
+<p>Shared types live in <code>pkg/agent/msg/</code> to avoid import cycles between <code>agent</code>, <code>tool</code>, <code>transform</code>, and <code>event</code>.</p>
+<h2 id="tool-system">Tool System</h2>
+<pre><code>tool.Registry
+  ├── Register(Tool)           # name must be unique
+  ├── SetActive([]string)     # allowlist; empty = all registered
+  └── ActiveTools()            # → []llms.Tool via tool.BuildLLMTools
+
+tool.ExecuteBatch
+  ├── prepareCall (sequential) # validate args, BeforeToolCall hook
+  ├── execute (parallel/seq) # Tool.Execute(ctx, id, args, onUpdate)
+  └── afterToolCall hook       # patch result, terminate hint
+</code></pre>
+<p>On failure, the executor appends a <code>ToolResultMessage</code> with <code>IsError: true</code> so the model can self-correct. Missing tools produce an error result referencing <code>msg.ErrToolNotFound</code>.</p>
+<p>Reference tool: <code>pkg/agent/example/echo/</code>.</p>
+<h2 id="session-tree">Session Tree</h2>
+<p>Sessions are <strong>append-only trees</strong>, not linear chat arrays. Each node has <code>ID</code>, <code>ParentID</code>, and a typed entry:</p>
+<table>
+<thead>
+<tr>
+<th>Entry type</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>message</code></td>
+<td>User / assistant / tool result</td>
+</tr>
+<tr>
+<td><code>model_change</code></td>
+<td>Record model switch</td>
+</tr>
+<tr>
+<td><code>active_tools_change</code></td>
+<td>Record tool allowlist</td>
+</tr>
+<tr>
+<td><code>branch_summary</code></td>
+<td>Context after rollback to a branch</td>
+</tr>
+<tr>
+<td><code>compaction</code></td>
+<td>Summarized history; rebuilt via <code>BuildContext</code> compaction boundaries</td>
+</tr>
+</tbody>
+</table>
+<pre><code>root ──► user msg ──► assistant ──► tool result ──► leaf
+  │
+  └──► (MoveTo + summary) ──► branch_summary ──► new user msg ──► leaf&#39;
+</code></pre>
+<ul>
+<li><strong><code>session.Storage</code></strong> — persistence interface; core never writes files directly</li>
+<li><strong><code>session.MemoryStorage</code></strong> — in-memory implementation for tests</li>
+<li><strong><code>session.SerializeSession</code> / <code>DeserializeSession</code></strong> — JSONL marshal helpers (sonic)</li>
+</ul>
+<p><code>session.BuildContext(path)</code> reconstructs <code>[]msg.AgentMessage</code> and model/tool state from a branch path, honoring compaction boundaries via <code>first_kept_entry_id</code>.</p>
+<h2 id="context-management">Context Management</h2>
+<p>Long-running sessions are kept within model limits by <code>pkg/agent/ctxmgr</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctxmgr.Manager</code></td>
+<td>Threshold checks, compaction, branch summarization, agent state reload</td>
+</tr>
+<tr>
+<td><code>ctxmgr.ShouldCompact</code></td>
+<td>Triggers when <code>tokens &gt; contextWindow - reserveTokens</code></td>
+</tr>
+<tr>
+<td><code>ctxmgr.RunCompaction</code></td>
+<td>LLM summary of discarded history; persists <code>EntryCompaction</code></td>
+</tr>
+<tr>
+<td><code>ctxmgr.IsContextOverflowErr</code></td>
+<td>Detects provider overflow errors for one-shot retry</td>
+</tr>
+</tbody>
+</table>
+<p>Harness integration (<code>harness.Options.ContextManager</code>):</p>
+<ul>
+<li><strong>Before run</strong>: <code>EnsureWithinBudget</code> compacts when over threshold</li>
+<li><strong>After overflow</strong>: compact + retry the prompt once</li>
+<li><strong>MoveTo</strong>: auto branch summarization when summary is empty</li>
+</ul>
+<p>Configuration:</p>
+<ul>
+<li>Per-model context limits in the built-in catalog at <code>pkg/agent/model/catalog.go</code></li>
+<li>Unknown models fall back to <code>model.DefaultContextWindow</code> (128000)</li>
+<li><code>chat_agent.compaction</code> for <code>enabled</code>, <code>reserve_tokens</code>, <code>keep_recent_tokens</code></li>
+</ul>
+<h2 id="dual-model-routing">Dual-Model Routing</h2>
+<p><code>model.Router</code> selects between a fast <strong>chat</strong> model and a capable <strong>tool</strong> model:</p>
+<pre><code>router := model.NewRouter(&#34;gpt-4o-mini&#34;, &#34;gpt-4o&#34;)
+router.Select(afterToolExecution bool)
+</code></pre>
+<p>When <code>Config.ChatModel</code> and <code>Config.ToolModel</code> are both set and differ, the loop installs a default <code>PrepareNextTurn</code> hook that applies the router after each turn (tool execution flips to <code>ToolModel</code>).</p>
+<p>YAML configuration for the chat assistant:</p>
+<pre><code>chat_agent:
+  chat_model: &#34;gpt-4o-mini&#34;
+  tool_model: &#34;gpt-4o&#34;
+</code></pre>
+<p>The chat agent is enabled when <code>chat_model</code> is non-empty. Dual routing is enabled when <code>tool_model</code> is set; both models must be registered in <code>models[]</code> with the same provider (v1). Compaction continues to use the chat model. Runtime <code>Harness.SetModel()</code> does not participate in router save-points in v1.</p>
+<p>Callers can override routing entirely via <code>Config.PrepareNextTurn</code>.</p>
+<h2 id="event-stream">Event Stream</h2>
+<p>Low-level lifecycle events (<code>pkg/agent/event</code>):</p>
+<pre><code>agent_start → turn_start → message_start/end
+           → tool_execution_start/update/end
+           → turn_end → agent_end
+</code></pre>
+<p><code>event.Stream</code> exposes a buffered channel plus <code>Subscribe()</code> handlers invoked sequentially (settlement semantics aligned with pi-agent-core). Use <code>Agent.Subscribe()</code> for read-only progress UI; use typed hooks when you need to mutate loop behavior.</p>
+<h2 id="hooks-pkgagenthooks">Hooks (<code>pkg/agent/hooks</code>)</h2>
+<p>Typed extension points aligned with <a href="https://github.com/earendil-works/pi-agent" rel="nofollow">pi-agent</a> harness hooks. Handlers register on a per-run <code>hooks.Registry</code>; the harness bridges loop-affecting hooks into <code>msg.Config</code> before each <code>Prompt</code>.</p>
+<pre><code>flowchart LR
+  subgraph product [Product layer e.g. chatagent]
+    Reg[&#34;hooks.NewRegistry()&#34;]
+    Register[&#34;RegisterHooks / On*&#34;]
+  end
+
+  subgraph harness [Harness Prompt]
+    Start[&#34;EmitBeforeAgentStart&#34;]
+    Bridge[&#34;BridgeConfig(ctx, reg, routed)&#34;]
+    Apply[&#34;Agent.ApplyConfig&#34;]
+  end
+
+  subgraph loop [Loop]
+    TC[TransformContext]
+    BTC[BeforeToolCall]
+    ATC[AfterToolCall]
+  end
+
+  Register --&gt; Reg
+  Reg --&gt; Start
+  Start --&gt; Bridge
+  Bridge --&gt; Apply
+  Apply --&gt; TC
+  Apply --&gt; BTC
+  Apply --&gt; ATC
+</code></pre>
+<h3 id="bridge-sequence-each-harnessprompt">Bridge sequence (each <code>Harness.Prompt</code>)</h3>
+<ol>
+<li><code>EmitBeforeAgentStart</code> — may replace <code>messages</code> / <code>systemPrompt</code>; <code>Cancel</code> → <code>hooks.ErrRunCancelled</code></li>
+<li><code>prepareContext</code> — compaction when <code>ContextManager</code> is set</li>
+<li><code>model.ApplyDefaultRouter(loopBaseCfg)</code> — dual-model <code>PrepareNextTurn</code> (idempotent; snapshot taken at harness <code>New</code>)</li>
+<li><code>hooks.BridgeConfig(ctx, reg, routed)</code> — compose hook handlers onto loop callbacks (<strong>only when <code>HasLoopHandlers()</code></strong>)</li>
+<li><code>Agent.ApplyConfig</code> — merge hook fields; preserve steering/follow-up queue drains</li>
+</ol>
+<p><code>Observe</code> handlers do <strong>not</strong> enter <code>BridgeConfig</code>; they receive harness notifications only (<code>save_point</code>, <code>context_usage</code>, etc.).</p>
+<h3 id="event-types-and-reducers">Event types and reducers</h3>
+<table>
+<thead>
+<tr>
+<th>Constant</th>
+<th>Registrar</th>
+<th>When</th>
+<th>Reducer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>before_agent_start</code></td>
+<td><code>OnBeforeAgentStart</code></td>
+<td>Before loop starts</td>
+<td>Chain <code>systemPrompt</code>; replace <code>messages</code>; <code>Cancel</code> aborts</td>
+</tr>
+<tr>
+<td><code>context</code></td>
+<td><code>OnContext</code></td>
+<td>Before each LLM call</td>
+<td>Chain message list replacements</td>
+</tr>
+<tr>
+<td><code>tool_call</code></td>
+<td><code>OnToolCall</code></td>
+<td>Before tool execute</td>
+<td>First <code>Block</code> wins</td>
+</tr>
+<tr>
+<td><code>tool_result</code></td>
+<td><code>OnToolResult</code></td>
+<td>After tool execute</td>
+<td>Chain <code>Parts</code> / <code>IsError</code>; <code>Terminate</code> ends loop</td>
+</tr>
+<tr>
+<td><code>save_point</code>, <code>context_usage</code>, <code>context_compacted</code>, <code>model_update</code>, <code>tools_update</code></td>
+<td><code>Observe</code> / <code>OnObservation</code></td>
+<td>Harness lifecycle</td>
+<td>Read-only; errors logged, run continues</td>
+</tr>
+</tbody>
+</table>
+<p>Loop-level <code>Config</code> fields (<code>TransformContext</code>, <code>BeforeToolCall</code>, …) remain available for tests and direct <code>RunLoop</code> callers. Harness hook handlers are composed <strong>after</strong> any existing <code>Config</code> callbacks (<code>Chain*</code> in <code>hooks/compose.go</code>).</p>
+<h3 id="errors">Errors</h3>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>hooks.ErrRunCancelled</code></td>
+<td><code>before_agent_start</code> returned <code>Cancel: true</code></td>
+</tr>
+<tr>
+<td><code>agent.ErrAborted</code></td>
+<td>Harness busy, user <code>Abort()</code>, or context cancelled mid-run</td>
+</tr>
+</tbody>
+</table>
+<h3 id="chat-agent-wiring">Chat agent wiring</h3>
+<p><code>internal/server/chatagent</code> creates one <code>hooks.Registry</code> per run, calls <code>RegisterHooks</code> for observational logging (<code>context_usage</code>, <code>save_point</code>), and passes <code>harness.Options.Hooks</code>. See <a href="./developer-guide.html#typed-hooks-pkgagenthooks" rel="nofollow">Developer Guide — Typed Hooks</a>.</p>
+<h2 id="llm-layer">LLM Layer</h2>
+<p><code>pkg/agent/llm</code> wraps langchaingo only:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>factory.go</code></td>
+<td>Map <code>config.Model</code> → OpenAI / Anthropic / Gemini langchaingo clients</td>
+</tr>
+<tr>
+<td><code>stream.go</code></td>
+<td><code>StreamAssistant()</code> — streaming + tool call assembly</td>
+</tr>
+<tr>
+<td><code>fake.go</code></td>
+<td>Scriptable <code>llms.Model</code> for unit tests and BDD</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Not used:</strong> langchaingo <code>agents.Executor</code>, chains, or memory modules.</p>
+<h2 id="package-dependency-graph">Package Dependency Graph</h2>
+<pre><code>flowchart LR
+  subgraph consumers [Future callers]
+    App[Server / CLI / Module]
+  end
+
+  subgraph agentPkg [pkg/agent]
+    Harness
+    Agent
+    Loop
+  end
+
+  subgraph sub [Subpackages]
+    msg[msg]
+    result[result]
+    env[env]
+    event[event]
+    hooks[hooks]
+    tool[tool]
+    transform[transform]
+    session[session]
+    ctxmgr[ctxmgr]
+    model[model]
+    llm[llm]
+  end
+
+  subgraph external [External]
+    LangchainGo[langchaingo llms.Model]
+    Storage[session.Storage impl]
+  end
+
+  App --&gt; Harness
+  App --&gt; Agent
+  Harness --&gt; hooks
+  Harness --&gt; Agent
+  hooks --&gt; msg
+  Agent --&gt; Loop
+  Loop --&gt; tool
+  Loop --&gt; transform
+  Loop --&gt; llm
+  Loop --&gt; event
+  Loop --&gt; model
+  tool --&gt; msg
+  transform --&gt; msg
+  session --&gt; msg
+  Harness --&gt; session
+  llm --&gt; LangchainGo
+  session --&gt; Storage
+</code></pre>
+<p><code>msg</code> is the shared leaf package; no subpackage imports the root <code>agent</code> package.</p>
+<h2 id="error-flow">Error Flow</h2>
+<p>Expected failures during long-running agent execution use a discriminated Result model (aligned with pi-agent):</p>
+<pre><code>flowchart TD
+  subgraph lowLevel [Low level Result no panic]
+    Env[&#34;env.ExecutionEnv&#34;]
+    CtxMgr[&#34;ctxmgr compaction&#34;]
+    Parse[&#34;session JSONL parse&#34;]
+  end
+
+  subgraph boundary [Boundary adapt to error]
+    HarnessAPI[&#34;harness public API&#34;]
+    SessionAPI[&#34;session public API&#34;]
+  end
+
+  subgraph loopLayer [Loop inline recovery]
+    ToolExec[&#34;tool.Execute IsError&#34;]
+  end
+
+  Env --&gt; HarnessAPI
+  CtxMgr --&gt; HarnessAPI
+  Parse --&gt; SessionAPI
+  ToolExec --&gt; LoopContinue[&#34;continue turn&#34;]
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Mechanism</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>result</code>, <code>env</code>, <code>ctxmgr</code></td>
+<td><code>result.Result[T,E]</code> with typed codes</td>
+</tr>
+<tr>
+<td><code>harness</code>, <code>session</code> API</td>
+<td>Go <code>error</code>; <code>HarnessError</code> at boundary</td>
+</tr>
+<tr>
+<td>Tools</td>
+<td><code>ToolResultMessage.IsError</code></td>
+</tr>
+<tr>
+<td>Loop</td>
+<td>Fatal <code>error</code> aborts run</td>
+</tr>
+</tbody>
+</table>
+<h2 id="design-rules">Design Rules</h2>
+<ol>
+<li><strong>Loop is stateless</strong> — test with <code>RunLoop</code> + <code>FakeModel</code> without <code>Agent</code> or <code>Harness</code></li>
+<li><strong>Core does not touch the filesystem</strong> — JSONL helpers only; callers provide <code>Storage</code></li>
+<li><strong>Modules import <code>pkg/agent/llm</code> only</strong> — for single-shot LLM tasks; other <code>pkg/agent</code> packages stay core-only until wired to server</li>
+<li><strong>Serialization</strong> — sonic for JSON/JSONL and tool argument parsing</li>
+<li><strong>Errors</strong> — domain errors in <code>msg</code>: <code>ErrMaxSteps</code>, <code>ErrAborted</code>, <code>ErrToolNotFound</code>, <code>ErrEmptyContext</code>, <code>ErrInvalidContinue</code>; hook cancel via <code>hooks.ErrRunCancelled</code></li>
+<li><strong>Naming</strong> — do not confuse with instruct agent protocol or YAML <code>chat_agent</code> config</li>
+</ol>
+<h2 id="related-documentation">Related Documentation</h2>
+<ul>
+<li><a href="./developer-guide.html" rel="nofollow">Developer Guide</a> — API examples and extension points</li>
+<li><a href="../../pkg/agent/AGENTS.html" rel="nofollow">pkg/agent/AGENTS.md</a> — maintainer checklist</li>
+<li><a href="../architecture/" rel="nofollow">Architecture diagrams</a> — system-wide PlantUML</li>
+<li><a href="../testing/tdd-specs.html" rel="nofollow">TDD specs</a> — unit test conventions</li>
+<li><a href="../testing/bdd-specs.html" rel="nofollow">BDD specs</a> — <code>tests/specs/agent_spec_test.go</code></li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
