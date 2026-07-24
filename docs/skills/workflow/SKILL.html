@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workflow — Flowbot</title>
+<meta name="description" content="Manage Flowbot workflows via flowbot workflow: apply YAML definitions to the database, list/get/export/delete, run asynchronously, and inspect runs. Use when the user mentions workflows, workflow YAML, workflow runs, cron/webhook workflow triggers." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../../index.html#overview">Overview</a></li>
+<li><a href="../../../index.html#problem">Problem</a></li>
+<li><a href="../../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../../index.html#workflow">Workflow</a></li>
+<li><a href="../../../design.html">Design</a></li>
+<li><a href="../../../api.html">API</a></li>
+<li><a href="../../../tutorials.html">Tutorials</a></li>
+<li><a href="../../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Workflow</h1>
+<p class="docs-hero-desc">Manage Flowbot workflows via flowbot workflow: apply YAML definitions to the database, list/get/export/delete, run asynchronously, and inspect runs. Use when the user mentions workflows, workflow YAML, workflow runs, cron/webhook workflow triggers.</p>
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub active">Workflow</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="workflow">Workflow</h1>
+<p>Use <code>flowbot workflow</code> for platform workflow definitions stored in the database.<br>
+YAML is an exchange format for <code>apply</code> / <code>export</code> only — the server does not run from local files.<br>
+Prefer the workflows below; load <a href="references/schema.html" rel="nofollow">references/schema.md</a> for the full YAML definition,<br>
+<a href="references/cli.html" rel="nofollow">references/cli.md</a> for flags,<br>
+<a href="references/steps.html" rel="nofollow">references/steps.md</a> for task action types, inputs/outputs, and usage, and<br>
+<a href="references/capabilities.html" rel="nofollow">references/capabilities.md</a> (index) and <code>references/capabilities/&lt;type&gt;.md</code> for every <code>capability:&lt;type&gt;.&lt;op&gt;</code> param list.<br>
+<strong>Never invent</strong> a <code>capability:&lt;type&gt;</code> that is absent from the capabilities index.<br>
+Teaching examples (load via read_skill with path):</p>
+<ul>
+<li><a href="examples/echo_mapper.yaml" rel="nofollow">examples/echo_mapper.yaml</a></li>
+<li><a href="examples/parallel_example.yaml" rel="nofollow">examples/parallel_example.yaml</a></li>
+<li><a href="examples/save_and_track.yaml" rel="nofollow">examples/save_and_track.yaml</a></li>
+</ul>
+<h2 id="setup">Setup</h2>
+<ol>
+<li>Ensure CLI auth: <code>flowbot login</code></li>
+<li>Set server via <code>FLOWBOT_SERVER_URL</code> or <code>--server-url</code>; optional <code>--profile</code>, <code>--debug</code> / <code>-d</code></li>
+<li>Token scopes: <code>workflow:read</code> for list/get/export/runs; <code>workflow:run</code> for apply/delete/run (run also satisfies read)</li>
+<li>Prefer <code>-o json</code> when parsing results programmatically</li>
+</ol>
+<h2 id="step-types">Step types</h2>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>capability:</code></td>
+<td>Invoke a Flowbot capability operation (provider or CapCore)</td>
+</tr>
+<tr>
+<td><code>docker:</code></td>
+<td>Run a container image via the Docker runtime on the workflow runner</td>
+</tr>
+<tr>
+<td><code>shell:</code></td>
+<td>Run a shell command on the workflow runner host</td>
+</tr>
+<tr>
+<td><code>machine:</code></td>
+<td>Intended for a named remote machine via SSH runtime</td>
+</tr>
+<tr>
+<td><code>mapper:</code></td>
+<td>Inline data transform: render params and marshal to JSON (no external runtime)</td>
+</tr>
+<tr>
+<td><code>free-form / echo</code></td>
+<td>Actions without a known prefix fall through to shell-style run; bare echo is a special type name</td>
+</tr>
+</tbody>
+</table>
+<p>Load <a href="references/steps.html" rel="nofollow">references/steps.md</a> for per-type inputs/outputs, usage, templates, and <code>conn</code>/<code>retry</code>.<br>
+Load <a href="references/schema.html" rel="nofollow">references/schema.md</a> before writing any workflow YAML.<br>
+Load <a href="references/capabilities.html" rel="nofollow">references/capabilities.md</a> for the capability index; <strong>must</strong> open <code>references/capabilities/&lt;type&gt;.md</code> before emitting that type&#39;s actions.</p>
+<h2 id="templates">Templates</h2>
+<p>Task <code>params</code> use Go <code>text/template</code> delimiters <code>{{ }}</code> (same engine as pipelines).</p>
+<p><strong>Variables available in workflows:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Access</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run inputs</td>
+<td><code>{{input &#34;url&#34;}}</code> / <code>{{input.url}}</code> / <code>{{.Input.url}}</code></td>
+<td><code>workflow run --input</code> (keys = declared <code>inputs</code>)</td>
+</tr>
+<tr>
+<td>Prior steps</td>
+<td><code>{{step &#34;id&#34; &#34;result&#34;}}</code> / <code>{{.Steps.id.result}}</code></td>
+<td>Completed task outputs (<code>result</code> and <code>id</code> hold the same payload)</td>
+</tr>
+</tbody>
+</table>
+<p>Not set for workflows: <code>event</code> / <code>.Event</code>, <code>env</code> / <code>.Env</code>. Helpers: <code>jsonpath</code>, <code>default</code>, <code>json</code>, <code>join</code>, <code>if</code>/<code>else</code>. Full list: <a href="references/steps.html#templates" rel="nofollow">references/steps.md</a>.</p>
+<h2 id="workflows">Workflows</h2>
+<h3 id="write-or-edit-a-workflow-yaml">Write or edit a workflow YAML</h3>
+<p>When the user needs a new or updated workflow definition:</p>
+<ol>
+<li>Load references/schema.md and copy the skeleton (name, enabled, triggers, pipeline, tasks, inputs).</li>
+<li>For each capability: action, open references/capabilities/.md first; never invent types missing from the capabilities index.</li>
+<li>Use examples/echo_mapper.yaml, examples/save_and_track.yaml, or examples/parallel_example.yaml as starting points.</li>
+<li>Declare inputs for every {{input.*}} key; use jsonpath for prior capability results (see capabilities.md Common data paths).</li>
+<li><code>flowbot workflow apply --file path/to/workflow.yaml</code></li>
+<li><code>flowbot workflow get &lt;name&gt;</code></li>
+<li>Optional: flowbot workflow run  --input &#39;{...}&#39; then flowbot workflow runs .</li>
+</ol>
+<h3 id="apply-a-definition-from-yaml">Apply a definition from YAML</h3>
+<p>When the user already has a workflow YAML file to create or replace:</p>
+<ol>
+<li>Validate against references/schema.md: name, pipeline, tasks, triggers, and inputs for any {{input.*}} used in params.</li>
+<li><code>flowbot workflow apply --file path/to/workflow.yaml</code></li>
+<li><code>flowbot workflow get &lt;name&gt;</code></li>
+</ol>
+<h3 id="list-and-inspect">List and inspect</h3>
+<p>When the user asks what workflows exist or what a workflow contains:</p>
+<ol>
+<li><code>flowbot workflow list</code></li>
+<li><code>flowbot workflow get &lt;name&gt;</code></li>
+<li>Optional: flowbot workflow export  -o file.yaml to round-trip YAML.</li>
+</ol>
+<h3 id="run-a-workflow">Run a workflow</h3>
+<p>When the user wants to execute a stored workflow:</p>
+<ol>
+<li>Build input JSON matching declared inputs (required fields must be present).</li>
+<li><code>flowbot workflow run &lt;name&gt; --input &#39;{&#34;url&#34;:&#34;...&#34;,&#34;title&#34;:&#34;...&#34;}&#39;</code></li>
+<li>Note the returned run_id (runs are asynchronous).</li>
+<li><code>flowbot workflow runs &lt;name&gt;</code></li>
+</ol>
+<h3 id="delete">Delete</h3>
+<p>When the user wants to remove a definition (run history is kept):</p>
+<ol>
+<li><code>flowbot workflow delete &lt;name&gt;</code></li>
+</ol>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<table>
+<thead>
+<tr>
+<th>Error</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>not logged in</td>
+<td><code>flowbot login</code></td>
+</tr>
+<tr>
+<td>server URL is required</td>
+<td>set <code>FLOWBOT_SERVER_URL</code> or pass <code>--server-url</code></td>
+</tr>
+<tr>
+<td>insufficient scope</td>
+<td>token needs <code>workflow:read</code> and/or <code>workflow:run</code></td>
+</tr>
+<tr>
+<td>workflow name is required / not found</td>
+<td>apply first; check <code>list</code></td>
+</tr>
+<tr>
+<td>input validation failed</td>
+<td>supply all required <code>inputs</code> with correct types</td>
+</tr>
+<tr>
+<td>webhook rejected</td>
+<td>workflow must be <code>enabled</code>; trigger needs <code>auth.token</code> or <code>auth.hmac_secret</code></td>
+</tr>
+</tbody>
+</table>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../../design.html">Design</a>
+<a href="../../../api.html">API</a>
+<a href="../../../tutorials.html">Tutorials</a>
+<a href="../../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../../js/main.js"></script>
+</body>
+</html>

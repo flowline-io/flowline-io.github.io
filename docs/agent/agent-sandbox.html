@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agent Sandbox Image — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Agent Sandbox Image</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub active">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="agent-sandbox-image">Agent Sandbox Image</h1>
+<p><code>flowbot-agent-sandbox</code> is a Docker base image for <strong>Cloud Agent ephemeral containers</strong>. The orchestrator mounts a workspace, injects commands, and tears the container down when the agent run finishes. The image pre-installs git and common language toolchains so agents start ready to clone, build, and test code.</p>
+<p>This image is <strong>not</strong> the Flowbot server container. See <a href="../developer-guide/deployment.html" rel="nofollow">Deployment</a> for the main <code>flowbot</code> service image built from <code>deployments/Dockerfile</code>.</p>
+<h2 id="how-this-differs-from-other-sandboxes">How this differs from other sandboxes</h2>
+<table>
+<thead>
+<tr>
+<th>Mechanism</th>
+<th>Scope</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agent sandbox image</strong> (this document)</td>
+<td>Ephemeral Docker container</td>
+<td>Cloud Agent runtime environment</td>
+</tr>
+<tr>
+<td><strong>Flowbot server image</strong> (<code>deployments/Dockerfile</code>)</td>
+<td>Long-running service</td>
+<td>Run the Flowbot hub on port 6060</td>
+</tr>
+<tr>
+<td><strong>Chat agent workspace</strong> (<code>chat_agent.workspace</code>)</td>
+<td>Host directory path</td>
+<td>File-system sandbox for DM chat agent tools</td>
+</tr>
+</tbody>
+</table>
+<p>The agent sandbox image follows the same principle as <a href="https://cursor.com/docs/cloud-agent/setup" rel="nofollow noopener" target="_blank">Cursor Cloud Agent Dockerfiles</a>: <strong>do not COPY the project into the image</strong>. The orchestrator checks out or mounts sources at runtime under <code>/workspace</code>.</p>
+<h2 id="image-variants">Image variants</h2>
+<p>The Dockerfile defines a <code>cli-builder</code> stage plus two runtime stages:</p>
+<table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>GHCR tag examples</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cli-builder</code></td>
+<td>(build only)</td>
+<td>Downloads the <code>flowbot</code> CLI from GitHub releases</td>
+</tr>
+<tr>
+<td><code>base</code></td>
+<td><code>1.0.0</code>, <code>latest</code></td>
+<td>General coding agents: git, Go, Node, Python, shell tools, <code>flowbot</code> CLI</td>
+</tr>
+<tr>
+<td><code>playwright</code></td>
+<td><code>playwright-1.0.0</code>, <code>playwright</code></td>
+<td>Browser automation or E2E tasks needing Chromium</td>
+</tr>
+</tbody>
+</table>
+<p>The Playwright variant adds roughly 400 MB (Chromium + system libraries). Pull it only when needed.</p>
+<p>Registry: <code>ghcr.io/flowline-io/flowbot-agent-sandbox</code></p>
+<h2 id="pre-installed-toolchain">Pre-installed toolchain</h2>
+<p>Versions are pinned in <a href="../../deployments/agent-sandbox/Dockerfile" rel="nofollow"><code>deployments/agent-sandbox/Dockerfile</code></a> build args and upgraded by releasing a new <code>sandbox-v*</code> tag.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Version / source</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Base OS</td>
+<td>Ubuntu 24.04</td>
+<td>Required for Playwright and browser/computer-use tooling</td>
+</tr>
+<tr>
+<td>git</td>
+<td>distro package</td>
+<td>Required for Cloud Agent clone workflows</td>
+</tr>
+<tr>
+<td>sudo</td>
+<td>NOPASSWD for <code>agent</code></td>
+<td>Privileged setup steps when orchestrator needs them</td>
+</tr>
+<tr>
+<td>Go</td>
+<td>1.26.5 (official tarball)</td>
+<td>Matches <a href="../../go.mod" rel="nofollow"><code>go.mod</code></a></td>
+</tr>
+<tr>
+<td>Node.js</td>
+<td>22.x LTS (NodeSource)</td>
+<td>Matches CI <code>node-version: lts/*</code></td>
+</tr>
+<tr>
+<td>oxfmt / oxlint</td>
+<td>npm global</td>
+<td>Matches Flowbot JS lint/format tooling</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>3.x (distro)</td>
+<td><code>python</code> symlinked to <code>python3</code>; pip and venv included</td>
+</tr>
+<tr>
+<td>Shell / CLI</td>
+<td>bash, jq, ripgrep, curl, wget, openssh-client, build-essential</td>
+<td>Aligned with Flowbot server runtime packages</td>
+</tr>
+<tr>
+<td><code>flowbot</code> CLI</td>
+<td>GitHub release (<code>CLI_VERSION</code>, default <code>latest</code>)</td>
+<td>Installed as <code>/usr/local/bin/flowbot</code> from asset <code>flowbot-cli_linux_amd64</code>; checksum verified. This is the <strong>CLI client</strong> (second process vs host Flowbot server), not the server binary from <code>deployments/Dockerfile</code>.</td>
+</tr>
+<tr>
+<td><code>dcg</code></td>
+<td>GitHub release (<code>DCG_VERSION</code>, default <code>v0.6.7</code>)</td>
+<td>Installed as <code>/usr/local/bin/dcg</code> (linux musl amd64) with SHA256 verify; config at <code>/etc/dcg/config.toml</code> (same as <a href="../../pkg/agent/dcg/config.toml" rel="nofollow"><code>pkg/agent/dcg/config.toml</code></a>). <strong>Parity only</strong> — Flowbot&#39;s Always-on DCG gate for <code>run_terminal</code> / <code>run_code</code> runs on the <strong>host</strong> before sandbox exec; the image does not re-check.</td>
+</tr>
+</tbody>
+</table>
+<p>Credential files materialized by the chat agent sandbox runner are chowned to uid/gid <code>1000</code> (the image <code>agent</code> user) when possible; otherwise they are mode <code>0644</code> so the container can still read them when the host process cannot chown.</p>
+<h2 id="destructive-command-guard-dcg">Destructive Command Guard (dcg)</h2>
+<p>Flowbot chat agent Always-on protection for <code>run_terminal</code> / <code>run_code</code> uses <a href="https://github.com/Dicklesworthstone/destructive_command_guard" rel="nofollow noopener" target="_blank">dcg</a> on the <strong>host</strong> (<code>dcg --robot test</code> via <code>pkg/agent/dcg</code>), before permission ask and before sandbox exec:</p>
+<ul>
+<li>Install <code>dcg</code> on the Flowbot server <code>PATH</code> (required; missing binary → startup warning, first shell/code tool call fails closed).</li>
+<li>Policy is embedded from <a href="../../pkg/agent/dcg/config.toml" rel="nofollow"><code>pkg/agent/dcg/config.toml</code></a> (default cores + windows default packs + <code>remote</code> / <code>database</code> / <code>containers</code> / <code>system</code> / <code>platform</code>).</li>
+<li><code>DCG_BYPASS</code> is stripped from the dcg child process only; agents have no bypass path.</li>
+<li>The sandbox image ships <code>dcg</code> + the same toml for <strong>operational parity</strong> only — Flowbot does not run a second check inside the container.</li>
+</ul>
+<h2 id="runtime-contract">Runtime contract</h2>
+<p>Ephemeral containers using this image should follow these conventions:</p>
+<ol>
+<li><strong>Workspace</strong> — Mount the agent working copy at <code>/workspace</code> (default <code>WORKDIR</code>).</li>
+<li><strong>User</strong> — Run as <code>agent</code> (uid/gid 1000) unless root is explicitly required.</li>
+<li><strong>Command</strong> — The image has <strong>no ENTRYPOINT and no CMD</strong>. The orchestrator supplies the process (e.g. shell, test runner, agent wrapper).</li>
+<li><strong>No baked-in repo</strong> — Do not rely on files copied at build time; clone or bind-mount at runtime.</li>
+<li><strong>Lifecycle</strong> — Use <code>--rm</code> (or equivalent) so containers are destroyed after each agent run.</li>
+<li><strong>Flowbot CLI credentials</strong> — Chat agent sandbox injects credentials from <code>chat_agent.sandbox.server_url</code> / <code>access_token</code> at runtime (temporary config mount + <code>FLOWBOT_*</code> env). Do not bake tokens into the image. Do not mount a human operator&#39;s host <code>~/.config/flowbot</code> in production.</li>
+</ol>
+<p>Example:</p>
+<pre><code>docker run --rm \
+  -u agent \
+  -v &#34;$(pwd):/workspace&#34; \
+  -w /workspace \
+  ghcr.io/flowline-io/flowbot-agent-sandbox:1.0.0 \
+  bash -lc &#39;go test ./...&#39;
+</code></pre>
+<p>Manual CLI against a host server (debug only):</p>
+<pre><code>docker run --rm \
+  -u agent \
+  -e FLOWBOT_SERVER_URL=http://host.docker.internal:6060 \
+  -e FLOWBOT_TOKEN=your-access-token \
+  --add-host=host.docker.internal:host-gateway \
+  -v &#34;$(pwd):/workspace&#34; \
+  -w /workspace \
+  ghcr.io/flowline-io/flowbot-agent-sandbox:1.0.0 \
+  bash -lc &#39;flowbot bookmark list&#39;
+</code></pre>
+<p>Older published CLI builds ignore <code>FLOWBOT_TOKEN</code> and only read <code>~/.config/flowbot/token</code>. Prefer mounting a materialized config directory (what Flowbot&#39;s sandbox runner does) until a CLI release with env support is baked into the sandbox image.</p>
+<p>Playwright example:</p>
+<pre><code>docker run --rm \
+  -u agent \
+  -v &#34;$(pwd):/workspace&#34; \
+  -w /workspace \
+  ghcr.io/flowline-io/flowbot-agent-sandbox:playwright-1.0.0 \
+  bash -lc &#39;npx playwright test&#39;
+</code></pre>
+<h2 id="registry-and-tags">Registry and tags</h2>
+<table>
+<thead>
+<tr>
+<th>Git tag</th>
+<th>Base image tags</th>
+<th>Playwright image tags</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sandbox-v1.0.0</code></td>
+<td><code>1.0.0</code>, <code>1.0</code>, <code>sandbox-v1.0.0</code>, <code>latest</code></td>
+<td><code>playwright-1.0.0</code>, <code>playwright-1.0</code>, <code>playwright-sandbox-v1.0.0</code>, <code>playwright</code></td>
+</tr>
+<tr>
+<td><code>workflow_dispatch</code> + suffix <code>dev-abc</code></td>
+<td><code>dev-abc</code></td>
+<td><code>playwright-dev-abc</code></td>
+</tr>
+<tr>
+<td><code>workflow_dispatch</code> (no suffix)</td>
+<td><code>dev-&lt;sha&gt;</code></td>
+<td><code>playwright-dev-&lt;sha&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="versioning">Versioning</h2>
+<p>Sandbox releases use <strong><code>sandbox-v*</code></strong> git tags, independent of Flowbot server releases (<code>v*</code>).</p>
+<p>Release steps:</p>
+<ol>
+<li>Merge Dockerfile or workflow changes to <code>main</code>.</li>
+<li>Tag: <code>git tag sandbox-v1.0.0 &amp;&amp; git push origin sandbox-v1.0.0</code></li>
+<li>GitHub Actions workflow <a href="../../.github/workflows/docker-agent-sandbox.yml" rel="nofollow"><code>docker-agent-sandbox.yml</code></a> builds and pushes both variants to GHCR.</li>
+</ol>
+<p>Manual builds (development):</p>
+<ol>
+<li>Open <strong>Actions → Docker Agent Sandbox → Run workflow</strong>.</li>
+<li>Optionally set <strong>tag suffix</strong> (e.g. <code>dev-abc1234</code>).</li>
+</ol>
+<h2 id="build-locally">Build locally</h2>
+<pre><code># Slim base variant (CLI from latest GitHub release tag; context is repo root for dcg config COPY)
+docker build -f deployments/agent-sandbox/Dockerfile --target base \
+  -t flowbot-agent-sandbox:local .
+
+# Pin CLI to a release tag
+docker build -f deployments/agent-sandbox/Dockerfile --target base \
+  --build-arg CLI_VERSION=v0.40 \
+  -t flowbot-agent-sandbox:local .
+
+# Playwright variant
+docker build -f deployments/agent-sandbox/Dockerfile --target playwright \
+  -t flowbot-agent-sandbox:playwright-local .
+
+# Smoke test
+docker run --rm flowbot-agent-sandbox:local bash -lc \
+  &#39;git --version &amp;&amp; go version &amp;&amp; node --version &amp;&amp; python3 --version &amp;&amp; flowbot version &amp;&amp; dcg --version &amp;&amp; test -f /etc/dcg/config.toml&#39;
+</code></pre>
+<h2 id="cicd">CI/CD</h2>
+<table>
+<thead>
+<tr>
+<th>Workflow</th>
+<th>Trigger</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../.github/workflows/docker-agent-sandbox.yml" rel="nofollow"><code>docker-agent-sandbox.yml</code></a></td>
+<td>Push tag <code>sandbox-v*</code>; manual <code>workflow_dispatch</code></td>
+<td>Pushes both <code>base</code> and <code>playwright</code> targets to GHCR</td>
+</tr>
+</tbody>
+</table>
+<p>Each matrix job runs a post-build smoke test (<code>git</code>, <code>go</code>, <code>node</code>, <code>python3</code>, <code>flowbot version</code>; plus <code>playwright --version</code> for the Playwright variant).</p>
+<h2 id="orchestrator-integration">Orchestrator integration</h2>
+<p>Cloud Agent orchestrators should reference a pinned semver tag in production, for example:</p>
+<ul>
+<li>Default coding tasks: <code>ghcr.io/flowline-io/flowbot-agent-sandbox:1.0.0</code></li>
+<li>Browser / E2E tasks: <code>ghcr.io/flowline-io/flowbot-agent-sandbox:playwright-1.0.0</code></li>
+</ul>
+<h3 id="chat-agent-cli-credentials-chat-agentsandbox">Chat agent CLI credentials (<code>chat_agent.sandbox</code>)</h3>
+<p>When Flowbot runs shell/code tools in Docker sandbox mode, configure:</p>
+<pre><code>chat_agent:
+  sandbox:
+    enabled: true
+    image: ghcr.io/flowline-io/flowbot-agent-sandbox:latest
+    server_url: &#34;http://host.docker.internal:6060&#34;
+    access_token: &#34;&lt;hub-access-token&gt;&#34;
+</code></pre>
+<p>Behavior:</p>
+<ol>
+<li>If <code>access_token</code> is non-empty, each Exec materializes a temporary host directory with <code>token</code> + <code>server_url</code> (mode <code>0600</code>), bind-mounts it read-only at <code>/home/agent/.config/flowbot</code>, and sets <code>FLOWBOT_TOKEN</code> / <code>FLOWBOT_SERVER_URL</code>.</li>
+<li>The temp directory is outside the agent workspace and removed after the container exits.</li>
+<li>If <code>server_url</code> host is <code>host.docker.internal</code>, the runner adds <code>ExtraHosts: host.docker.internal:host-gateway</code>.</li>
+<li>Empty <code>access_token</code> skips credential injection (CLI calls fail with not logged in).</li>
+</ol>
+<p>Network options for <code>server_url</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Approach</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>http://host.docker.internal:6060</code> + host-gateway</td>
+<td>Default; Docker Desktop and Linux with host-gateway</td>
+</tr>
+<tr>
+<td><code>network: host</code> + <code>http://127.0.0.1:6060</code></td>
+<td>Linux same-host</td>
+</tr>
+<tr>
+<td>Shared Docker network + service DNS</td>
+<td>Flowbot and sandbox on the same user-defined network</td>
+</tr>
+</tbody>
+</table>
+<p>Release note: <code>FLOWBOT_TOKEN</code> requires a CLI build that supports it. Until the sandbox image pulls that release, the mounted config files keep current published CLIs working.</p>
+<p>Future Flowbot configuration for Cloud Agent runtime image selection will point at these GHCR coordinates.</p>
+<h2 id="extending-the-image">Extending the image</h2>
+<p>Fork or extend <a href="../../deployments/agent-sandbox/Dockerfile" rel="nofollow"><code>deployments/agent-sandbox/Dockerfile</code></a> when you need extra system packages or compiler versions. Keep stages separate so slim agents are not forced to pay for Playwright.</p>
+<p>The Playwright stage installs <strong>Chromium only</strong> to limit image size. Add <code>firefox</code> or <code>webkit</code> in a custom stage if your orchestrator requires them.</p>
+<h2 id="limitations">Limitations</h2>
+<p>The sandbox image intentionally does <strong>not</strong> include:</p>
+<ul>
+<li>Docker-in-Docker (large, requires privileged mode; Flowbot workflow Docker executor is separate)</li>
+<li>PostgreSQL or Redis (provide via orchestrator sidecars or host services)</li>
+<li>The Flowbot server binary (only the <code>flowbot</code> CLI client is pre-installed; point it at a server with <code>FLOWBOT_SERVER_URL</code> / mounted config)</li>
+<li>Pre-baked login tokens (inject at runtime via <code>chat_agent.sandbox.access_token</code> or manual Env/mount; never bake into the image)</li>
+</ul>
+<h2 id="related-documentation">Related documentation</h2>
+<ul>
+<li><a href="./" rel="nofollow">Agent Engine</a> — <code>pkg/agent/</code> runtime</li>
+<li><a href="../developer-guide/deployment.html" rel="nofollow">Deployment</a> — Flowbot server and CI/CD overview</li>
+<li><a href="./agent-sandbox.puml" rel="nofollow">Architecture diagram</a> — CI → GHCR → ephemeral run flow</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

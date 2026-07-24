@@ -1,0 +1,657 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agent Engine Developer Guide — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Agent Engine Developer Guide</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub active">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="agent-engine-developer-guide">Agent Engine Developer Guide</h1>
+<p>How to use and extend <code>pkg/agent/</code> for multi-turn LLM runs with tools.</p>
+<h2 id="configuration">Configuration</h2>
+<p><code>agent.Config</code> (alias of <code>msg.Config</code>) controls a single loop invocation:</p>
+<pre><code>cfg := agent.DefaultConfig()
+cfg.ModelName = &#34;gpt-4o&#34;
+cfg.ChatModel = &#34;gpt-4o-mini&#34;   // optional dual-model
+cfg.ToolModel = &#34;gpt-4o&#34;
+cfg.MaxSteps = 30
+cfg.Temperature = 0.7
+cfg.ToolExecution = agent.ToolExecutionParallel
+cfg.SteeringMode = agent.QueueAll
+cfg.FollowUpMode = agent.QueueAll
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TransformContext</code></td>
+<td>Prune or enrich messages before LLM conversion</td>
+</tr>
+<tr>
+<td><code>ConvertToLLM</code></td>
+<td>Defaults to <code>transform.DefaultConvertToLLM</code></td>
+</tr>
+<tr>
+<td><code>PrepareNextTurn</code></td>
+<td>Refresh model/context between turns</td>
+</tr>
+<tr>
+<td><code>ShouldStopAfterTurn</code></td>
+<td>Early exit after a completed turn</td>
+</tr>
+<tr>
+<td><code>BeforeToolCall</code> / <code>AfterToolCall</code></td>
+<td>Tool interception hooks</td>
+</tr>
+<tr>
+<td><code>GetSteeringMessages</code> / <code>GetFollowUpMessages</code></td>
+<td>Set automatically on <code>Agent</code> via queues</td>
+</tr>
+</tbody>
+</table>
+<h3 id="dual-model-routing-chat-agent">Dual-model routing (chat agent)</h3>
+<p>Configure in <code>flowbot.yaml</code>:</p>
+<pre><code>chat_agent:
+  chat_model: &#34;gpt-4o-mini&#34;   # non-empty enables the chat agent
+  tool_model: &#34;gpt-4o&#34;        # enables dual-model routing when set
+</code></pre>
+<p>When <code>tool_model</code> is set, the loop uses <code>chat_model</code> for the first LLM call and switches to <code>tool_model</code> after tool execution. Both models must be registered under <code>models[]</code> and use the same provider (v1).</p>
+<p>For programmatic harness use, pass <code>harness.Options.Router</code>; chat agent sets <code>cfg.ChatModel</code> / <code>cfg.ToolModel</code> directly instead.</p>
+<h2 id="stateless-loop">Stateless Loop</h2>
+<p>Use when you manage context yourself and do not need queues or subscriptions:</p>
+<pre><code>stream := agentevent.NewStream(32)
+messages, err := agent.RunLoop(ctx,
+    []agent.AgentMessage{agent.NewUserMessage(&#34;summarize logs&#34;)},
+    &amp;agent.Context{SystemPrompt: &#34;You are a homelab assistant.&#34;},
+    cfg,
+    agent.LoopDeps{Model: llmModel, Registry: registry},
+    stream,
+)
+</code></pre>
+<p>Continue from an existing context (last message must be user or tool result):</p>
+<pre><code>messages, err := agent.RunLoopContinue(ctx, agentCtx, cfg, deps, stream)
+</code></pre>
+<h2 id="stateful-agent">Stateful Agent</h2>
+<pre><code>ag := agent.NewAgent(agent.Options{
+    Model:    llmModel,
+    Registry: registry,
+    Config:   cfg,
+    InitialState: &amp;agent.Context{
+        SystemPrompt: &#34;Follow AGENTS.md conventions.&#34;,
+    },
+})
+
+ag.Subscribe(func(ev agentevent.Event) error {
+    if ev.Type == agentevent.TypeToolExecutionStart {
+        // render progress
+    }
+    return nil
+})
+
+stream, _ := ag.Prompt(ctx, agent.NewUserMessage(&#34;check disk usage&#34;))
+result, _ := stream.Await(ctx)
+
+ag.Steer(agent.NewUserMessage(&#34;also check memory&#34;))
+ag.Abort() // cancel in-flight run
+</code></pre>
+<h2 id="implementing-a-tool">Implementing a Tool</h2>
+<pre><code>type MyTool struct{}
+
+func (MyTool) Name() string        { return &#34;disk_usage&#34; }
+func (MyTool) Description() string { return &#34;Returns disk usage for a mount point&#34; }
+func (MyTool) Parameters() map[string]any {
+    return map[string]any{
+        &#34;type&#34;: &#34;object&#34;,
+        &#34;properties&#34;: map[string]any{
+            &#34;path&#34;: map[string]any{&#34;type&#34;: &#34;string&#34;, &#34;description&#34;: &#34;Mount path&#34;},
+        },
+        &#34;required&#34;: []string{&#34;path&#34;},
+    }
+}
+
+func (MyTool) Execute(ctx context.Context, id string, args map[string]any, onUpdate tool.UpdateHandler) (msg.ToolResultMessage, error) {
+    _ = onUpdate(&#34;reading stats...&#34;)
+    return msg.ToolResultMessage{
+        ToolCallID: id,
+        Name:       &#34;disk_usage&#34;,
+        Parts:      []msg.ContentPart{msg.TextPart{Text: &#34;72% used&#34;}},
+    }, nil
+}
+</code></pre>
+<p>Register and optionally restrict:</p>
+<pre><code>reg := tool.NewRegistry()
+_ = reg.Register(MyTool{})
+reg.SetActive([]string{&#34;disk_usage&#34;}) // review mode: read-only tools only
+</code></pre>
+<p>See reference: <a href="../../pkg/agent/example/echo/echo.go" rel="nofollow">pkg/agent/example/echo/</a>.</p>
+<h2 id="persistent-memory-fact-memory--session-summaries">Persistent memory (fact memory + session summaries)</h2>
+<p>Memory is <strong>agent-produced</strong> and orthogonal to <strong>Knowledge</strong> (user-authored docs). Short-term conversation context remains the session tree + compaction (unchanged).</p>
+<h3 id="fact-memory-memory-set--memory-get--memory-list--memory-delete">Fact memory (<code>memory_set</code> / <code>memory_get</code> / <code>memory_list</code> / <code>memory_delete</code>)</h3>
+<p>Facts are keyed rows in Postgres (<code>agent_memory_facts</code>), isolated by <code>memory_scope</code>:</p>
+<ul>
+<li>Interactive chat: all sessions share scope <code>default</code></li>
+<li>Pipeline <code>agent.run</code>: pipeline name (auto-injected as <code>memory_scope</code>)</li>
+<li>Scheduled tasks: task flag</li>
+</ul>
+<p>Pinned facts (plus recent facts under a budget of ~30 rows / 4k chars) are injected into the system prompt as <code>&lt;memory_facts&gt;</code>. Prompt cache keys include a facts fingerprint.</p>
+<p>Permissions (key <code>memory</code>):</p>
+<ul>
+<li>Interactive: <code>read</code>/<code>list</code> allow; <code>write</code> (set/delete) asks for approval</li>
+<li>Pipeline / scheduled: write allowed when the tools are enabled (no confirm gate)</li>
+<li>Plan mode: get/list/search only; set/delete blocked</li>
+</ul>
+<p>Interactive chat registers the memory tools by default. Pipeline <code>agent.run</code> and scheduled tasks must include the tools in the step <strong>Tools</strong> allowlist. The Pipeline editor shows <strong>Memory Facts</strong> when an <code>agent.run</code> step includes <code>memory_set</code> (or related memory tools).</p>
+<h3 id="session-summaries-search-session-summaries">Session summaries (<code>search_session_summaries</code>)</h3>
+<p>When a chat session is archived, Flowbot asynchronously generates a searchable summary (<code>agent_session_summaries</code>). Retrieval uses case-insensitive substring match (ContainsFold), not <code>tsvector</code>. Summaries are never auto-injected into the prompt. Unarchive keeps existing summaries; re-archive refreshes them.</p>
+<p>Web admin:</p>
+<ul>
+<li><code>/service/web/agent-memory</code> — browse/edit/pin/delete facts by scope (create via <code>memory_set</code>)</li>
+<li><code>/service/web/agent-session-summaries</code> — browse/search/retry summaries</li>
+</ul>
+<h2 id="session-persistence">Session Persistence</h2>
+<p>Implement <code>session.Storage</code> for your backend (PostgreSQL, file, etc.):</p>
+<pre><code>type Storage interface {
+    Append(ctx context.Context, entry session.TreeEntry) error
+    GetBranch(ctx context.Context, leafID string) ([]session.TreeEntry, error)
+    GetLeafID(ctx context.Context) (string, error)
+    SetLeafID(ctx context.Context, id string) error
+}
+</code></pre>
+<p>Usage:</p>
+<pre><code>store := session.NewMemoryStorage()
+sess := session.New(store)
+
+_ = sess.Append(ctx, session.TreeEntry{
+    ID: &#34;1&#34;, Type: session.EntryMessage, Message: agent.NewUserMessage(&#34;hi&#34;),
+})
+
+branch, _ := sess.GetBranch(ctx, &#34;&#34;)
+built := session.BuildContext(branch)
+agentCtx := session.ToAgentContext(built, &#34;system prompt here&#34;)
+</code></pre>
+<p>Branch rollback:</p>
+<pre><code>_ = sess.MoveTo(ctx, &#34;previous-entry-id&#34;, &#34;Summary of abandoned branch...&#34;)
+</code></pre>
+<p>With <code>harness.Options.ContextManager</code> set, <code>Harness.MoveTo</code> generates branch summaries automatically when the summary argument is empty.</p>
+<h2 id="context-management">Context Management</h2>
+<p>Wire compaction through the harness for production chat flows:</p>
+<pre><code>ctxMgr := ctxmgr.New(ctxmgr.Options{
+    Model:         llmModel,
+    ModelName:     &#34;gpt-4o&#34;,
+    ContextWindow: config.ChatAgentContextWindow(),
+    Settings:      ctxmgr.SettingsFromConfig(config.App.ChatAgent.Compaction),
+    SystemPrompt:  systemPrompt,
+})
+</code></pre>
+<p>Register models in <code>flowbot.yaml</code> and add catalog entries in <code>pkg/agent/model/catalog.go</code> for accurate context limits. Unknown model names use the default 128000-token budget.</p>
+<p>Configure compaction thresholds in <code>flowbot.yaml</code>:</p>
+<pre><code>chat_agent:
+  chat_model: &#34;gpt-4o&#34;
+  compaction:
+    enabled: true
+    reserve_tokens: 16384
+    keep_recent_tokens: 20000
+</code></pre>
+<p>JSONL export (caller writes bytes to disk or DB):</p>
+<pre><code>data, _ := session.SerializeSession(entries)
+entries, _ := session.DeserializeSession(data)
+</code></pre>
+<h2 id="harness">Harness</h2>
+<p>Higher-level orchestration with session persistence and hook bridging:</p>
+<pre><code>h := harness.New(harness.Options{
+    AgentOptions: agent.Options{Model: llmModel, Registry: registry},
+    Session:      sess,
+    Router:       model.NewRouter(&#34;gpt-4o-mini&#34;, &#34;gpt-4o&#34;),
+    SystemPrompt: &#34;You are Flowbot.&#34;,
+    ModelName:    &#34;gpt-4o-mini&#34;,
+    Hooks:        reg, // optional; see Typed Hooks below
+})
+
+_ = h.RegisterTool(echo.Tool{})
+stream, _ := h.Prompt(ctx, agent.NewUserMessage(&#34;echo test&#34;))
+</code></pre>
+<p><code>Harness.WaitIdle(ctx)</code> blocks until the run finishes persisting session entries. <code>Harness.Hooks()</code> returns the registry for late registration (prefer registering before the first <code>Prompt</code>).</p>
+<h2 id="typed-hooks-pkgagenthooks">Typed Hooks (<code>pkg/agent/hooks</code>)</h2>
+<p>Process-local extension points (aligned with pi-agent harness hooks). One <code>hooks.Registry</code> per harness run; register handlers before <code>Prompt</code>.</p>
+<pre><code>import (
+    &#34;context&#34;
+
+    &#34;github.com/flowline-io/flowbot/pkg/agent/hooks&#34;
+)
+
+reg := hooks.NewRegistry()
+
+// Mutable: runs before loop; bridged outside loop Config
+hooks.OnBeforeAgentStart(reg, func(ctx context.Context, ev hooks.BeforeAgentStartEvent) (*hooks.BeforeAgentStartResult, error) {
+    prompt := ev.SystemPrompt + &#34;\nExtra instructions.&#34;
+    return &amp;hooks.BeforeAgentStartResult{SystemPrompt: &amp;prompt}, nil
+})
+
+// Mutable: each LLM request; composed into Config.TransformContext
+hooks.OnContext(reg, func(ctx context.Context, ev hooks.ContextEvent) (*hooks.ContextResult, error) {
+    return &amp;hooks.ContextResult{Messages: ev.Messages}, nil
+})
+
+// Mutable: tool gate; composed into Config.BeforeToolCall
+hooks.OnToolCall(reg, func(ctx context.Context, ev hooks.ToolCallEvent) (*hooks.ToolCallResult, error) {
+    if ev.ToolCall.Name == &#34;dangerous&#34; {
+        return &amp;hooks.ToolCallResult{Block: true, Reason: &#34;not allowed&#34;}, nil
+    }
+    return nil, nil
+})
+
+// Mutable: patch tool output; Terminate stops the inner loop
+hooks.OnToolResult(reg, func(ctx context.Context, ev hooks.ToolResultEvent) (*hooks.ToolResultResult, error) {
+    return nil, nil
+})
+
+// Read-only: harness lifecycle notifications
+hooks.Observe(reg, func(ctx context.Context, ev hooks.ObservationEvent) error {
+    // ev.Type: hooks.EventSavePoint, EventContextUsage, EventModelUpdate, ...
+    return nil
+})
+</code></pre>
+<p>Pass the registry into harness:</p>
+<pre><code>h := harness.New(harness.Options{Hooks: reg, /* ... */})
+</code></pre>
+<h3 id="registrar-reference">Registrar reference</h3>
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Event constant</th>
+<th>Result type</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OnBeforeAgentStart</code></td>
+<td><code>EventBeforeAgentStart</code></td>
+<td><code>BeforeAgentStartResult</code></td>
+<td>Replace prompts; <code>Cancel</code> → <code>hooks.ErrRunCancelled</code></td>
+</tr>
+<tr>
+<td><code>OnContext</code></td>
+<td><code>EventContext</code></td>
+<td><code>ContextResult</code></td>
+<td>Replace message list before LLM</td>
+</tr>
+<tr>
+<td><code>OnToolCall</code></td>
+<td><code>EventToolCall</code></td>
+<td><code>ToolCallResult</code></td>
+<td><code>Block</code> skips tool execution</td>
+</tr>
+<tr>
+<td><code>OnToolResult</code></td>
+<td><code>EventToolResult</code></td>
+<td><code>ToolResultResult</code></td>
+<td>Patch <code>Parts</code> / <code>IsError</code>; <code>Terminate</code> ends run</td>
+</tr>
+<tr>
+<td><code>Observe</code></td>
+<td>(various)</td>
+<td>—</td>
+<td>No loop impact</td>
+</tr>
+<tr>
+<td><code>OnObservation</code></td>
+<td>filter by type</td>
+<td>—</td>
+<td>Convenience wrapper over <code>Observe</code></td>
+</tr>
+</tbody>
+</table>
+<p>Handlers receive the same <code>context.Context</code> passed to <code>Harness.Prompt</code> (respects cancellation during bridged loop hooks).</p>
+<h3 id="direct-loop-use-without-harness">Direct loop use (without harness)</h3>
+<p>For tests or custom callers, bridge manually:</p>
+<pre><code>routed := model.ApplyDefaultRouter(cfg)
+cfg = hooks.BridgeConfig(ctx, reg, routed)
+</code></pre>
+<p>Or set <code>Config.TransformContext</code> / <code>BeforeToolCall</code> / <code>AfterToolCall</code> directly on <code>agent.Config</code> without a registry.</p>
+<h3 id="chat-agent-integration">Chat agent integration</h3>
+<p><code>internal/server/chatagent</code> wires observational hooks per session run:</p>
+<pre><code>reg := hooks.NewRegistry()
+RegisterHooks(reg, ChatHookDeps{SessionID: req.SessionID})
+harness.New(harness.Options{Hooks: reg, /* ... */})
+</code></pre>
+<p><code>RegisterHooks</code> logs <code>context_usage</code> and <code>save_point</code> at debug level. Add product hooks by extending <code>RegisterHooks</code> or registering on <code>reg</code> before <code>harness.New</code>.</p>
+<h2 id="llm-provider-setup">LLM Provider Setup</h2>
+<p>Map flowbot YAML models to langchaingo:</p>
+<pre><code>model, name, err := agentllm.NewModel(ctx, &#34;gpt-4o&#34;) // model name from config.models
+</code></pre>
+<p>Supported providers (via <code>pkg/agent/llm</code> provider constants): OpenAI, OpenAI-compatible, Anthropic, Gemini.</p>
+<p>For tests, use <code>agentllm.NewFakeModel</code> with scripted <code>ResponseScript</code> entries (text and/or tool calls).</p>
+<h2 id="multimodal-input">Multimodal Input</h2>
+<p>User turns use <code>msg.MediaPart</code> (<code>Kind</code> = <code>image|audio|video</code>) plus optional <code>TextPart</code>. Chatagent persists only <code>file_id</code> + mime + kind; temporary signed URLs or bytes are filled at convert time.</p>
+<pre><code>parts := transform.ProcessAttachments([]transform.Attachment{
+    {MIMEType: &#34;image/png&#34;, FileID: &#34;fid&#34;, Kind: msg.MediaKindImage},
+})
+msg := agent.NewUserMessageWithParts(parts...)
+</code></pre>
+<p><code>ConvertToLLM</code> is provider-aware:</p>
+<ul>
+<li>Providers that accept remote image URLs receive a short-lived signed URL (<code>llms.ImageURLPart</code>).</li>
+<li>Providers that only accept bytes (e.g. Anthropic via langchaingo) hydrate from media storage (<code>llms.BinaryPart</code>).</li>
+<li>Non-image kinds must not be sent as <code>ImageURLPart</code>; without catalog <code>ModalityAudioIn</code> / <code>ModalityVideoIn</code>, chatagent Rejects before the loop.</li>
+</ul>
+<p>Chat product flow: <code>POST /chatagent/sessions/:id/media</code> then <code>POST …/messages</code> with <code>{text, attachments}</code>.</p>
+<h2 id="testing">Testing</h2>
+<h3 id="unit-tests-table-driven-testify">Unit tests (table-driven, testify)</h3>
+<p>Location: <code>pkg/agent/**/*_test.go</code>. Minimum three cases per table per <a href="../testing/tdd-specs.html" rel="nofollow">TDD spec</a>.</p>
+<pre><code>go test ./pkg/agent/...
+</code></pre>
+<p>Use <code>agentllm.NewFakeModel</code> — never call real APIs in unit tests.</p>
+<h3 id="bdd-acceptance">BDD acceptance</h3>
+<p>Location: <a href="../../tests/specs/agent_spec_test.go" rel="nofollow">tests/specs/agent_spec_test.go</a> — full prompt → tool → response flow with fake model (no Docker LLM required).</p>
+<pre><code>go tool task test:specs
+</code></pre>
+<h2 id="extension-checklist">Extension Checklist</h2>
+<p>When adding features to <code>pkg/agent/</code>:</p>
+<ol>
+<li>Shared types go in <code>pkg/agent/msg/</code> if multiple subpackages need them</li>
+<li>Avoid import cycles: subpackages must not import root <code>agent</code></li>
+<li>langchaingo stays inside <code>pkg/agent/llm/</code></li>
+<li>Database or file I/O stays outside core — use interfaces (<code>session.Storage</code>)</li>
+<li>Update <a href="./architecture.html" rel="nofollow">architecture.md</a> and <a href="../../pkg/agent/AGENTS.html" rel="nofollow">pkg/agent/AGENTS.md</a></li>
+<li>Product hooks: use <code>pkg/agent/hooks</code> registrars on a per-run <code>Registry</code></li>
+<li>Add table-driven tests (≥3 cases) and BDD coverage when behavior is user-visible</li>
+</ol>
+<h2 id="error-handling-result-pattern">Error Handling (Result Pattern)</h2>
+<p>Flowbot mirrors pi-agent&#39;s layered error model:</p>
+<ol>
+<li><strong>Low-level</strong> (<code>pkg/agent/result</code>, <code>env</code>, <code>ctxmgr</code>, JSONL parse): return <code>result.Result[T,E]</code> with stable typed codes (<code>compaction</code>, <code>timeout</code>, <code>not_found</code>, …). Callers must branch on <code>IsOk()</code> — do not ignore failures.</li>
+<li><strong>Boundary</strong> (<code>harness</code>, <code>session</code> public methods): adapt Result to Go <code>error</code> via <code>result.GetOrError</code> or <code>normalizeHarnessError</code>.</li>
+<li><strong>Tool layer</strong>: expected runtime failures become <code>ToolResultMessage{IsError: true}</code>; <code>Execute</code> returns <code>(result, nil)</code>.</li>
+<li><strong>Loop layer</strong>: LLM, hook, and transport failures abort the run; tool errors do not.</li>
+</ol>
+<pre><code>compactResult := ctxmgr.RunCompaction(ctx, model, name, prep)
+if !compactResult.IsOk() {
+    return result.GetOrError(compactResult)
+}
+</code></pre>
+<p>Use <code>result.CodeOf(err)</code> or <code>errors.As</code> at HTTP/chat integration boundaries instead of string matching.</p>
+<h2 id="future-integration-points">Future Integration Points</h2>
+<p>Not implemented in the core library (planned for upper layers):</p>
+<ul>
+<li>Provider payload hooks (<code>before_provider_request</code>) — reserved in <code>hooks/events.go</code>, not yet implemented</li>
+<li>Session compact/tree hooks (<code>session_before_compact</code>) — second phase; requires ctxmgr callback wiring</li>
+</ul>
+<p>Already wired in product layers:</p>
+<ul>
+<li>REST/SSE chat agent in <code>internal/server</code> (<code>/chatagent/*</code>)</li>
+<li>Pipeline <code>agent_run</code> steps (<code>capability: core</code>, <code>operation: agent_run</code>) with template-rendered <code>prompt</code> and ephemeral sessions</li>
+<li><code>chat_agent</code> YAML → <code>agent.Config</code> (models, retry, sensors, sandbox)</li>
+<li>Compaction via <code>pkg/agent/ctxmgr</code> and <code>harness.Options.ContextManager</code></li>
+<li>LLM retry, agent metrics/OTel, path sensors, progress artifact, opt-in sandbox</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workflow task steps reference — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../../../index.html#overview">Overview</a></li>
+<li><a href="../../../../index.html#problem">Problem</a></li>
+<li><a href="../../../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../../../index.html#workflow">Workflow</a></li>
+<li><a href="../../../../design.html">Design</a></li>
+<li><a href="../../../../api.html">API</a></li>
+<li><a href="../../../../tutorials.html">Tutorials</a></li>
+<li><a href="../../../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Workflow task steps reference</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub active">Workflow task steps reference</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="workflow-task-steps-reference">Workflow task steps reference</h1>
+<p>Load this file when authoring or editing workflow YAML tasks. Teaching examples:</p>
+<ul>
+<li><a href="../examples/echo_mapper.yaml" rel="nofollow">examples/echo_mapper.yaml</a></li>
+<li><a href="../examples/parallel_example.yaml" rel="nofollow">examples/parallel_example.yaml</a></li>
+<li><a href="../examples/save_and_track.yaml" rel="nofollow">examples/save_and_track.yaml</a></li>
+</ul>
+<p>For every <code>capability:&lt;type&gt;.&lt;op&gt;</code> param table, start at <a href="capabilities.html" rel="nofollow">capabilities.md</a> and open <code>capabilities/&lt;type&gt;.md</code> <strong>before</strong> writing that action. Do not invent types missing from the index.</p>
+<p>Top-level definition fields and triggers: <a href="schema.html" rel="nofollow">schema.md</a>.</p>
+<h2 id="shared-task-fields">Shared task fields</h2>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Required</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>yes</td>
+<td>Unique within the workflow</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>yes</td>
+<td>See action types below</td>
+</tr>
+<tr>
+<td><code>describe</code></td>
+<td>no</td>
+<td>Human-readable label</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>no</td>
+<td>Template-rendered before execution; declare matching top-level <code>inputs</code> when using <code>{{input.*}}</code></td>
+</tr>
+<tr>
+<td><code>conn</code></td>
+<td>no</td>
+<td>Upstream task ids (DAG edges; required for parallel scheduling)</td>
+</tr>
+<tr>
+<td><code>vars</code></td>
+<td>no</td>
+<td>Optional string list (advanced; usually omit)</td>
+</tr>
+<tr>
+<td><code>retry</code></td>
+<td>no</td>
+<td>Same shape as pipeline retry (<code>max_attempts</code>, <code>delay</code>, <code>backoff</code>, <code>max_delay</code>, <code>jitter</code>); workflows retry all errors</td>
+</tr>
+</tbody>
+</table>
+<p>With <code>max_concurrency &gt; 1</code>, <code>conn</code> drives parallel DAG scheduling. Otherwise order follows <code>pipeline</code>.</p>
+<h2 id="templates">Templates</h2>
+<p>Workflow task <code>params</code> (string values) are rendered with Go <code>text/template</code> before the step runs.<br>
+Delimiters are <code>{{</code> and <code>}}</code>. Missing keys via helpers return empty string; invalid template syntax errors.</p>
+<h3 id="available-variables">Available variables</h3>
+<p>Root context is <code>TemplateData</code>: <code>.Input</code>, <code>.Steps</code>, <code>.Event</code>, <code>.Env</code>. Workflows only populate the first two.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Populated in workflow?</th>
+<th>How to read</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Input</code></td>
+<td>yes</td>
+<td><code>{{input &#34;name&#34;}}</code>, <code>{{input.name}}</code>, <code>{{.Input.name}}</code></td>
+<td>Run payload from <code>workflow run --input</code> / API; keys match declared top-level <code>inputs[].name</code> (plus defaults applied by validation)</td>
+</tr>
+<tr>
+<td><code>Steps</code></td>
+<td>yes</td>
+<td><code>{{step &#34;task_id&#34; &#34;result&#34;}}</code>, <code>{{step &#34;task_id&#34; &#34;id&#34;}}</code>, <code>{{.Steps.task_id.result}}</code></td>
+<td>Outputs of <strong>already completed</strong> tasks only. Workflow stores the same string under both <code>result</code> and <code>id</code></td>
+</tr>
+<tr>
+<td><code>Event</code></td>
+<td>no</td>
+<td><code>{{event &#34;field&#34;}}</code> / <code>{{.Event.field}}</code></td>
+<td>Empty in workflows (pipeline DataEvent only). Do not rely on it</td>
+</tr>
+<tr>
+<td><code>Env</code></td>
+<td>no</td>
+<td><code>{{.Env.HOME}}</code></td>
+<td>Empty in workflows. Do not rely on it</td>
+</tr>
+</tbody>
+</table>
+<p><code>{{input.name}}</code> is sugar for <code>{{input &#34;name&#34;}}</code>.</p>
+<h3 id="helper-functions">Helper functions</h3>
+<p>Data accessors: <code>input</code>, <code>step</code>, <code>event</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Helper</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jsonpath</code></td>
+<td><code>{{jsonpath (step &#34;api&#34; &#34;result&#34;) &#34;data.id&#34;}}</code></td>
+</tr>
+<tr>
+<td><code>jsonpathExists</code></td>
+<td><code>{{if jsonpathExists (step &#34;api&#34; &#34;result&#34;) &#34;error&#34;}}bad{{end}}</code></td>
+</tr>
+<tr>
+<td><code>jsonpathRaw</code></td>
+<td><code>{{json (jsonpathRaw (step &#34;api&#34; &#34;result&#34;) &#34;items&#34;)}}</code></td>
+</tr>
+<tr>
+<td><code>default</code></td>
+<td><code>{{default &#34;guest&#34; (input &#34;user&#34;)}}</code></td>
+</tr>
+<tr>
+<td><code>json</code></td>
+<td><code>{{json (input &#34;meta&#34;)}}</code></td>
+</tr>
+<tr>
+<td><code>len</code></td>
+<td><code>{{len (input &#34;tags&#34;)}}</code></td>
+</tr>
+<tr>
+<td><code>join</code> / <code>split</code></td>
+<td><code>{{join (split (input &#34;tags&#34;) &#34;,&#34;) &#34;;&#34;)}}</code></td>
+</tr>
+<tr>
+<td><code>contains</code></td>
+<td><code>{{if contains (input &#34;title&#34;) &#34;ERROR&#34;}}alert{{end}}</code></td>
+</tr>
+<tr>
+<td><code>if</code> / <code>else</code></td>
+<td><code>{{if (input &#34;url&#34;)}}has{{else}}missing{{end}}</code></td>
+</tr>
+</tbody>
+</table>
+<p>YAML tip: when an expression contains quotes, wrap the param value in single quotes:</p>
+<pre><code>params:
+  description: &#39;Bookmark: {{step &#34;save_bookmark&#34; &#34;result&#34;}}&#39;
+  url: &#34;{{input.url}}&#34;
+</code></pre>
+<h2 id="action-types">Action types</h2>
+<h3 id="capability-capability">Capability (<code>capability:</code>)</h3>
+<p>Invoke a Flowbot capability operation (provider or CapCore)</p>
+<p><strong>Action form:</strong> <code>capability:&lt;type&gt;.&lt;operation&gt;</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action:</strong> <code>&lt;type&gt;</code> is the hub capability ID (provider ID, or <code>core</code>). <code>&lt;operation&gt;</code> is the op name after the last dot (e.g. <code>karakeep.create</code>, <code>core.notify_send</code>).</li>
+<li><strong>Params:</strong> template-rendered KV passed to <code>capability.Invoke</code>. Per-operation required/optional keys: load <a href="capabilities/" rel="nofollow">capabilities/.md</a> via the <a href="capabilities.html" rel="nofollow">capabilities.md</a> index.</li>
+</ul>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>JSON string of <code>InvokeResult</code>: <code>{&#34;capability&#34;,&#34;operation&#34;,&#34;data&#34;,&#34;text&#34;,&#34;page&#34;,...}</code>.</p>
+<ul>
+<li>Domain payload is usually under <code>data</code> (object, array, or scalar). Optional <code>text</code> is a short human summary. List ops may include <code>page</code>.</li>
+<li>CapCore shapes (examples): <code>notify_send</code> → <code>data.sent</code>; <code>agent_run</code> → <code>data.reply</code>; <code>kv_get</code> → <code>data</code> is the stored value; <code>http_request</code> → <code>data.status</code>/<code>data.body</code>; <code>run_*</code> → <code>data.output</code>/<code>data.exit_code</code>. Full per-op notes: <a href="capabilities/core.html" rel="nofollow">capabilities/core.md</a>.</li>
+</ul>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Read a field: <code>{{jsonpath (step &#34;save&#34; &#34;result&#34;) &#34;data.url&#34;}}</code></li>
+<li>Check a key exists: <code>{{if jsonpathExists (step &#34;save&#34; &#34;result&#34;) &#34;data.id&#34;}}...{{end}}</code></li>
+<li>Pass whole JSON into another param (rare): <code>{{step &#34;save&#34; &#34;result&#34;}}</code> (string). Prefer jsonpath for structured data.</li>
+<li>Authoring checklist: load <a href="capabilities/" rel="nofollow">capabilities/.md</a> first, copy required params, then chain with jsonpath.</li>
+<li>Never invent capability types or ops; only use the <a href="capabilities.html" rel="nofollow">capabilities.md</a> index.</li>
+<li>Pre-CapCore notify/agent/clip types were removed; use <code>capability:core.*</code> (see docs/developer-guide/capcore-migration.md).</li>
+</ul>
+<p><strong>Notes:</strong> Do not invent param keys or types; capabilities/.md is generated from OpDef.Input. Workflow wiring only forwards params — mounts/env/timeouts are not set at the workflow layer.</p>
+<pre><code>  - id: save_bookmark
+    action: capability:karakeep.create
+    params:
+      url: &#34;{{input.url}}&#34;
+  - id: notify_saved
+    action: capability:core.notify_send
+    params:
+      template_id: bookmark.saved
+      channels: [&#34;slack&#34;]
+      payload:
+        url: &#34;{{input.url}}&#34;
+        bookmark: &#39;{{jsonpath (step &#34;save_bookmark&#34; &#34;result&#34;) &#34;data&#34;}}&#39;
+</code></pre>
+<h3 id="docker-docker">Docker (<code>docker:</code>)</h3>
+<p>Run a container image via the Docker runtime on the workflow runner</p>
+<p><strong>Action form:</strong> <code>docker:&lt;image&gt;</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action details:</strong> image reference after the prefix (e.g. <code>alpine:3.20</code> in <code>docker:alpine:3.20</code>).</li>
+<li><strong>Params:</strong>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Required</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmd</code></td>
+<td>string or string list</td>
+<td>no</td>
+<td>Container command; overrides the image default CMD</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p>Workflow does <strong>not</strong> map mounts, env, or timeout from YAML params.</p>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>Plain text <strong>stdout</strong> from the container (not JSON). Trailing newlines are kept as returned by the runtime.</p>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Echo into a later step: <code>message: &#39;{{step &#34;run_tool&#34; &#34;result&#34;}}&#39;</code></li>
+<li>Do not use <code>jsonpath</code> unless the container itself prints JSON; then <code>{{jsonpath (step &#34;run_tool&#34; &#34;result&#34;) &#34;field&#34;}}</code> works on that string.</li>
+</ul>
+<p><strong>Notes:</strong> Requires Docker available to the server executor.</p>
+<pre><code>  - id: run_tool
+    action: docker:alpine:3.20
+    params:
+      cmd: [&#34;echo&#34;, &#34;hello&#34;]
+  - id: use_stdout
+    action: &#34;mapper:&#34;
+    params:
+      from_docker: &#39;{{step &#34;run_tool&#34; &#34;result&#34;}}&#39;
+</code></pre>
+<h3 id="shell-shell">Shell (<code>shell:</code>)</h3>
+<p>Run a shell command on the workflow runner host</p>
+<p><strong>Action form:</strong> <code>shell:&lt;command&gt;</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action details:</strong> default command after the prefix (e.g. <code>echo hello</code>).</li>
+<li><strong>Params:</strong>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Required</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmd</code></td>
+<td>string</td>
+<td>no</td>
+<td>Replaces the command from the action details when set</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>Plain text <strong>stdout</strong> from the process (not JSON).</p>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Prefer an explicit <code>shell:</code> prefix over free-form actions.</li>
+<li>Chain stdout: <code>{{step &#34;echo_host&#34; &#34;result&#34;}}</code>. Use jsonpath only if stdout is JSON.</li>
+</ul>
+<p><strong>Notes:</strong> Runs on the Flowbot host (or sandbox configuration of the shell runtime), not inside an arbitrary container unless the command itself uses docker.</p>
+<pre><code>  - id: echo_host
+    action: shell:echo hello
+    params:
+      cmd: &#34;echo from params&#34;
+  - id: capture
+    action: &#34;mapper:&#34;
+    params:
+      out: &#39;{{step &#34;echo_host&#34; &#34;result&#34;}}&#39;
+</code></pre>
+<h3 id="machine-ssh-machine">Machine (SSH) (<code>machine:</code>)</h3>
+<p>Intended for a named remote machine via SSH runtime</p>
+<p><strong>Action form:</strong> <code>machine:&lt;name&gt;</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action details:</strong> machine name (e.g. <code>vm1</code>).</li>
+<li><strong>Params:</strong> typically empty; remote target is meant to come from the machine name.</li>
+</ul>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>If routed correctly, remote command stdout as text. <strong>Current workflow routing:</strong> <code>DetermineRuntimeType</code> does not select the machine engine — <code>machine:&lt;name&gt;</code> is treated like a shell command whose run string is the machine name. Prefer <code>shell:</code> / <code>docker:</code> until SSH routing is fixed.</p>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Do not rely on <code>machine:</code> in new workflows.</li>
+<li>Use <code>shell:</code> with an explicit ssh command, or <code>docker:</code>, when remote execution is required.</li>
+</ul>
+<p><strong>Notes:</strong> Documented for completeness; avoid in production YAML until workflow selects runtime.Machine.</p>
+<pre><code>  - id: remote_check
+    action: machine:vm1
+</code></pre>
+<h3 id="mapper-mapper">Mapper (<code>mapper:</code>)</h3>
+<p>Inline data transform: render params and marshal to JSON (no external runtime)</p>
+<p><strong>Action form:</strong> <code>mapper:</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action:</strong> must be quoted in YAML: <code>action: &#34;mapper:&#34;</code> (trailing colon is otherwise invalid YAML).</li>
+<li><strong>Params:</strong> any KV; string values support templates (<code>{{input.*}}</code>, <code>{{step ...}}</code>). Non-string values are kept as structured data in the output object.</li>
+</ul>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>JSON <strong>object</strong> string of the fully rendered params, e.g. <code>{&#34;message&#34;:&#34;hi&#34;,&#34;tag&#34;:&#34;demo&#34;}</code>. There is no <code>data</code> wrapper — fields are top-level.</p>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Read a field: <code>{{jsonpath (step &#34;build_payload&#34; &#34;result&#34;) &#34;message&#34;}}</code></li>
+<li>Use as a pure reshape step between capability/shell steps.</li>
+<li>See examples/echo_mapper.yaml.</li>
+</ul>
+<p><strong>Notes:</strong> Does not call executor runtimes; failures are template or JSON marshal errors only.</p>
+<pre><code>  - id: build_payload
+    action: &#34;mapper:&#34;
+    params:
+      message: &#34;{{input.message}}&#34;
+      tag: &#34;{{input.tag}}&#34;
+      source: cli-example
+  - id: read_message
+    action: &#34;mapper:&#34;
+    params:
+      echoed: &#39;{{jsonpath (step &#34;build_payload&#34; &#34;result&#34;) &#34;message&#34;}}&#39;
+</code></pre>
+<h3 id="free-form-and-echo-free-form--echo">Free-form and echo (<code>free-form / echo</code>)</h3>
+<p>Actions without a known prefix fall through to shell-style run; bare echo is a special type name</p>
+<p><strong>Action form:</strong> <code>&lt;command&gt; or echo</code></p>
+<p><strong>Inputs:</strong></p>
+<ul>
+<li><strong>Action:</strong> bare <code>echo</code> or any string without a known prefix (<code>capability:</code>/<code>docker:</code>/<code>shell:</code>/<code>machine:</code>/<code>mapper:</code>).</li>
+<li><strong>Params:</strong> optional <code>cmd</code> (string), same override behavior as shell when treated as a shell run.</li>
+</ul>
+<p><strong>Outputs (<code>{{step &#34;id&#34; &#34;result&#34;}}</code>):</strong></p>
+<p>Plain text stdout (same as shell).</p>
+<p><strong>Usage:</strong></p>
+<ul>
+<li>Prefer <code>shell:</code>, <code>docker:</code>, <code>capability:</code>, or <code>mapper:</code> in new YAML.</li>
+<li>Avoid free-form for new workflows; keep only for legacy definitions.</li>
+</ul>
+<p><strong>Notes:</strong> A bare echo action parses as type echo with empty details; free-form strings become the run command.</p>
+<pre><code>  - id: legacy_echo
+    action: echo
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../../../design.html">Design</a>
+<a href="../../../../api.html">API</a>
+<a href="../../../../tutorials.html">Tutorials</a>
+<a href="../../../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../../../js/main.js"></script>
+</body>
+</html>

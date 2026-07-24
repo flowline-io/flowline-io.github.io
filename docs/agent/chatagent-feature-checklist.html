@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Chat Agent Feature Checklist — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Chat Agent Feature Checklist</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub active">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="chat-agent-feature-checklist">Chat Agent Feature Checklist</h1>
+<p>Frozen acceptance boundary for chatagent product orchestration and Web UI remediation (C+T3).<br>
+Regression and PRs are judged against this list plus the linked tests. If behavior exists in code but is missing here, update this document before changing code.</p>
+<p>Related engine docs: <a href="./" rel="nofollow">README</a>, <a href="./architecture.html" rel="nofollow">Architecture</a>. Maintainer guides: <code>internal/server/chatagent/AGENTS.md</code>, <code>pkg/agent/AGENTS.md</code>.</p>
+<h2 id="dual-channel-sse-protocol">Dual-channel SSE protocol</h2>
+<p>Both channels use <code>chatagent.StreamEvent</code> JSON (<code>type</code> discriminator) from <code>internal/server/chatagent/protocol.go</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Message send (primary turn stream)</th>
+<th>Live event subscribe</th>
+<th>Subscribe filter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>REST</td>
+<td><code>POST /chatagent/sessions/:id/messages</code> — full SSE (<code>delta</code> / <code>thinking</code> / <code>tool</code> / … / <code>done</code>)</td>
+<td><code>GET /chatagent/sessions/:id/events</code></td>
+<td><code>confirm</code>, <code>confirm_resolved</code>, <code>canceled</code>, <code>mode_change</code>, <code>run_complete</code></td>
+</tr>
+<tr>
+<td>Web</td>
+<td><code>POST /service/web/agents/:id/messages</code> — turn execution; UI may use fetch/SSE depending on handler</td>
+<td><code>GET /service/web/agents/:id/events</code></td>
+<td><strong>Same subset</strong> (<code>chatagent_web_stream.go</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Event <strong>shape</strong> (<code>StreamEvent</code>) is shared. Both <code>/events</code> subscribers use the same type filter (not full deltas). Primary turn tokens come from the messages/send path (REST <code>StreamAPIRun</code>), not from <code>/events</code>.</p>
+<hr>
+<h2 id="1-platform-dm-chat">1. Platform DM chat</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P-01</td>
+<td>Bind/create chat session for platform DM and run agent turn</td>
+<td><code>internal/server/chatagent_handler.go</code> → <code>Service.Run</code></td>
+<td>Closed session rejected; disabled agent</td>
+<td><code>chatagent</code> service/handler unit tests</td>
+</tr>
+<tr>
+<td>P-02</td>
+<td>Slack: stream placeholder + <code>SlackStreamSink</code> updates</td>
+<td>Slack platform only</td>
+<td>Placeholder send failure → non-streaming fallback</td>
+<td><code>slack_sink_test.go</code>, handler stream tests</td>
+</tr>
+<tr>
+<td>P-03</td>
+<td>Non-Slack: single reply after run completes</td>
+<td>Other platforms</td>
+<td>Persist assistant message failure surfaces user-visible error</td>
+<td>handler tests</td>
+</tr>
+<tr>
+<td>P-04</td>
+<td>Persist assistant message to store</td>
+<td>After successful <code>Run</code></td>
+<td>DB error</td>
+<td>handler tests</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-rest-api-chatagent">2. REST API (<code>/chatagent/*</code>)</h2>
+<p>Auth: <code>ScopeChatAgentChat</code>. Owner checks on session-scoped routes.</p>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R-01</td>
+<td>Agent info</td>
+<td><code>GET /chatagent/info</code></td>
+<td>Disabled → 503</td>
+<td><code>chatagent_http_test.go</code>, BDD chat HTTP</td>
+</tr>
+<tr>
+<td>R-02</td>
+<td>List / create / close sessions</td>
+<td><code>GET|POST /chatagent/sessions</code>, <code>DELETE …/:id</code></td>
+<td>Closed → not found for owner ops</td>
+<td>unit + <code>chat_agent_chat_spec_test.go</code></td>
+</tr>
+<tr>
+<td>R-03</td>
+<td>List messages / plans / todos</td>
+<td><code>GET …/messages</code>, <code>GET …/plans</code>, <code>GET …/todos</code></td>
+<td>Empty history; user rows may include <code>attachments[]</code></td>
+<td>unit HTTP tests</td>
+</tr>
+<tr>
+<td>R-04</td>
+<td>Send message (full SSE stream)</td>
+<td><code>POST …/messages</code> JSON <code>{text, attachments?}</code></td>
+<td>Empty text <strong>and</strong> no attachments → 400; run in flight 409; max 8 attachments; MIME allowlist; model missing modality → 400</td>
+<td><code>chat_agent_chat_spec_test.go</code>, multimodal unit tests</td>
+</tr>
+<tr>
+<td>R-04a</td>
+<td>Upload session media</td>
+<td><code>POST …/media</code> multipart</td>
+<td>Strict MIME allowlist; binds <code>(session_id, owner)</code>; requires media public base when FS signing needed</td>
+<td>media upload tests</td>
+</tr>
+<tr>
+<td>R-04b</td>
+<td>Modality gate</td>
+<td>Before run</td>
+<td>Audio/video Reject until catalog marks <code>ModalityAudioIn</code>/<code>ModalityVideoIn</code>; unknown models allow image only</td>
+<td>modality reject tests</td>
+</tr>
+<tr>
+<td>R-05</td>
+<td>Subscribe session events</td>
+<td><code>GET …/events</code></td>
+<td>Client disconnect; buffered hub</td>
+<td><code>session_events_test.go</code></td>
+</tr>
+<tr>
+<td>R-06</td>
+<td>Confirm / cancel run</td>
+<td><code>POST …/confirm</code>, <code>POST …/cancel</code></td>
+<td>Unknown confirm 404; already resolved 409</td>
+<td>confirm unit + BDD plan mode</td>
+</tr>
+<tr>
+<td>R-07</td>
+<td>Session mode get/set</td>
+<td><code>GET|PUT …/mode</code></td>
+<td>Plan vs normal</td>
+<td><code>chat_agent_chat_spec_test.go</code>, plan mode tests</td>
+</tr>
+<tr>
+<td>R-08</td>
+<td>Clear session permission grants</td>
+<td><code>DELETE …/permission-grants</code></td>
+<td></td>
+<td>permission session tests</td>
+</tr>
+<tr>
+<td>R-09</td>
+<td>Permissions get/put/delete</td>
+<td><code>GET|PUT|DELETE /chatagent/permissions</code></td>
+<td>Invalid config</td>
+<td>HTTP + permission tests</td>
+</tr>
+<tr>
+<td>R-10</td>
+<td>Context usage / compact</td>
+<td><code>GET …/context</code>, <code>POST …/compact</code></td>
+<td>Compaction no-op</td>
+<td>context_usage tests, agents page context</td>
+</tr>
+<tr>
+<td>R-11</td>
+<td>Export session</td>
+<td><code>GET …/export</code></td>
+<td></td>
+<td>export tests</td>
+</tr>
+<tr>
+<td>R-12</td>
+<td>Resolve resource URI</td>
+<td><code>GET /chatagent/resources</code></td>
+<td><code>plan://</code>, <code>file://</code></td>
+<td><code>chat_agent_spec_test.go</code> resources It</td>
+</tr>
+<tr>
+<td>R-13</td>
+<td>Scheduled tasks CRUD + runs</td>
+<td><code>/chatagent/scheduled-tasks…</code></td>
+<td>One-shot complete; cancel</td>
+<td><code>scheduled_api_test.go</code>, <code>chat_agent_scheduled_task_spec_test.go</code></td>
+</tr>
+<tr>
+<td>R-14</td>
+<td>Session model / thinking settings</td>
+<td><code>GET|PUT …/settings</code>; create body <code>model</code> / <code>thinking_level</code>; <code>AgentInfo.selectable_models</code></td>
+<td>Unknown model / invalid level → 400; empty fields → runtime yaml/<code>default</code></td>
+<td><code>settings_test.go</code>, <code>chatagent_http_test.go</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-web-chat-ui-servicewebagents">3. Web chat UI (<code>/service/web/agents/*</code>)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>W-01</td>
+<td>Agents home: composer + session list</td>
+<td><code>GET /service/web/agents</code></td>
+<td>Unauthenticated → login</td>
+<td><code>agents_page_spec_test.go</code></td>
+</tr>
+<tr>
+<td>W-01a</td>
+<td>Session list: auto title, last-message preview, day groups, pin/archive, status filters</td>
+<td><code>GET /service/web/agents/list?filter=</code>; <code>POST|DELETE …/:id/pin|archive</code></td>
+<td>Default hides archived; running / needs_approval from runtime gates</td>
+<td><code>agents_webservice_test.go</code>, helpers/day-group unit tests</td>
+</tr>
+<tr>
+<td>W-02</td>
+<td>Create session (+ optional pending prompt)</td>
+<td><code>POST /service/web/agents</code></td>
+<td><code>?prompt=</code> / sessionStorage pending key</td>
+<td>agents page + JS pending prompt</td>
+</tr>
+<tr>
+<td>W-03</td>
+<td>Chat page hydrate history</td>
+<td><code>GET /service/web/agents/:id</code></td>
+<td>Closed session</td>
+<td>agents page</td>
+</tr>
+<tr>
+<td>W-04</td>
+<td>Send message / cancel / confirm</td>
+<td>Web posts under <code>/agents/:id/…</code></td>
+<td>Approval once/always/reject; reopen page replays pending confirm; <code>run_complete</code> reloads history; empty text OK when attachments present</td>
+<td>chat BDD helpers; unit confirm; pending SSR</td>
+</tr>
+<tr>
+<td>W-04a</td>
+<td>Composer media (upload + paste image)</td>
+<td>Two-step: upload media then send with <code>file_id</code>s</td>
+<td>MIME allowlist; max 8; modality Reject / missing <code>public_base_url</code> surfaced in UI</td>
+<td><code>chatagent-chat.js</code> + media unit/HTTP tests</td>
+</tr>
+<tr>
+<td>W-05</td>
+<td>Context ring + popover</td>
+<td><code>GET …/context</code> + JS</td>
+<td>Token window zero</td>
+<td><code>agents_page_spec_test.go</code> context It</td>
+</tr>
+<tr>
+<td>W-06</td>
+<td>Streaming markdown + tool cards + thinking + todo panel</td>
+<td><code>public/js/chatagent-*.js</code></td>
+<td>Open code fence delay; tool upsert; tool/thinking collapse; codeblock chrome; jump-to-bottom</td>
+<td>chat BDD stream done; <code>chatagent_message_test.go</code></td>
+</tr>
+<tr>
+<td>W-07</td>
+<td>Close session</td>
+<td><code>DELETE /service/web/agents/:id</code></td>
+<td></td>
+<td>agents page</td>
+</tr>
+<tr>
+<td>W-08</td>
+<td>Model + thinking controls</td>
+<td>Composer + thread settings bar; <code>GET|PUT …/settings</code></td>
+<td>localStorage defaults; empty DB falls back to yaml chat_model</td>
+<td>agents page + <code>chatagent-chat.js</code></td>
+</tr>
+<tr>
+<td>W-09</td>
+<td>Approval flow UX</td>
+<td>Nav/Home pending-approval badge; docked session approval bar; Allow once / Always allow matching copy</td>
+<td>Badge count from runtime gates; always button only when pattern suggested</td>
+<td><code>session_activity_test.go</code>, helpers/home/message unit tests; <code>GET /service/web/approval-badge</code></td>
+</tr>
+<tr>
+<td>W-09a</td>
+<td>Background attention for approval</td>
+<td>Tab title <code>● Needs approval</code> while confirm pending; desktop <code>Notification</code> when tab is hidden (permission via user gesture)</td>
+<td>Permission denied/default is silent; focus tab on notification click; clear title on resolve</td>
+<td><code>public/js/app.js</code>, <code>public/js/chatagent-approval.js</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-permissions-ui">4. Permissions UI</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q-01</td>
+<td>Permissions page render</td>
+<td><code>GET /service/web/chatagent-permissions</code></td>
+<td></td>
+<td><code>chatagent_permissions_webservice_test.go</code></td>
+</tr>
+<tr>
+<td>Q-02</td>
+<td>Save form / JSON / reset</td>
+<td><code>POST …</code>, <code>POST …/reset</code></td>
+<td>Field validation errors</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Q-03</td>
+<td>REST permissions parity</td>
+<td><code>/chatagent/permissions</code></td>
+<td>Defaults when empty</td>
+<td>BDD permissions It</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-skills--memory--subagents--scheduled-web-admin">5. Skills / Memory / Subagents / Scheduled (Web admin)</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A-01</td>
+<td>Skills CRUD + files + zip import + enable/disable</td>
+<td><code>/service/web/agent-skills…</code></td>
+<td>Enable/disable; Import zip</td>
+<td>agent skills webservice tests / pages</td>
+</tr>
+<tr>
+<td>A-02</td>
+<td>Memory facts list/upsert/delete</td>
+<td><code>/service/web/agent-memory…</code></td>
+<td>Scope isolation; pin</td>
+<td>memory webservice tests</td>
+</tr>
+<tr>
+<td>A-02b</td>
+<td>Session summaries browse/search/retry</td>
+<td><code>/service/web/agent-session-summaries…</code></td>
+<td>Archive-only generation</td>
+<td>session summary tests</td>
+</tr>
+<tr>
+<td>A-03</td>
+<td>Subagents CRUD + tasks</td>
+<td><code>/service/web/agent-subagents…</code></td>
+<td>Seed defaults on enable</td>
+<td>subagent specs/tests</td>
+</tr>
+<tr>
+<td>A-04</td>
+<td>Scheduled tasks list/detail/state</td>
+<td><code>/service/web/agent-scheduled-tasks…</code></td>
+<td>Pause/resume</td>
+<td><code>agent_scheduled_tasks_page_spec_test.go</code></td>
+</tr>
+<tr>
+<td>A-05</td>
+<td>Session inspect UI</td>
+<td><code>/service/web/agent-sessions…</code></td>
+<td>Entry payload, events, confirm, todos</td>
+<td><code>agent_sessions_page_spec_test.go</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-orchestration-capabilities">6. Orchestration capabilities</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behavior</th>
+<th>Entry</th>
+<th>Edge cases</th>
+<th>Tests</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>O-01</td>
+<td>Interactive <code>Service.Run</code> / <code>RunAPI</code></td>
+<td><code>service.go</code></td>
+<td>Session lock; harness pool reuse</td>
+<td><code>service_test.go</code>, BDD</td>
+</tr>
+<tr>
+<td>O-02</td>
+<td>Plan mode blocks writes until confirm/normal</td>
+<td>mode + permission hooks</td>
+<td>Return to normal allows write</td>
+<td><code>chat_agent_spec_test.go</code> plan It</td>
+</tr>
+<tr>
+<td>O-03</td>
+<td>Confirm gate (once / always / reject)</td>
+<td><code>confirm.go</code></td>
+<td>Pattern suggest</td>
+<td>confirm tests + BDD</td>
+</tr>
+<tr>
+<td>O-04</td>
+<td>Harness pool TTL / config hash refresh</td>
+<td><code>harness_pool.go</code></td>
+<td>Evict on close/abort</td>
+<td>harness-related tests</td>
+</tr>
+<tr>
+<td>O-05</td>
+<td>Session title generation</td>
+<td><code>title.go</code></td>
+<td>LLM disabled for tests; media-only turns use <code>[image]</code>/<code>[audio]</code>/<code>[video]</code> placeholders</td>
+<td><code>title_test.go</code>, BDD title wait helpers</td>
+</tr>
+<tr>
+<td>O-05a</td>
+<td>Multimodal user turns</td>
+<td><code>RunRequest.Attachments</code> → <code>MediaPart</code> (file_id); provider-aware URL or Binary hydrate</td>
+<td>Session-scoped ownership; re-sign/hydrate per run; tool-model strip media parts</td>
+<td>transform + service multimodal tests</td>
+</tr>
+<tr>
+<td>O-06</td>
+<td>Manual + automatic compaction</td>
+<td><code>CompactSession</code>, ctxmgr</td>
+<td></td>
+<td>compaction / context tests</td>
+</tr>
+<tr>
+<td>O-08</td>
+<td>Pipeline agent step (ephemeral)</td>
+<td><code>pipeline_run.go</code> / <code>RunPipelineAgent</code></td>
+<td>Tools/skills allowlist; memory default off</td>
+<td><code>pipeline_run_test.go</code>, <code>ephemeral_run_test.go</code></td>
+</tr>
+<tr>
+<td>O-09</td>
+<td>Scheduled autonomous run + delivery</td>
+<td><code>scheduled_run.go</code>, scheduler</td>
+<td>Isolated session; permission policy</td>
+<td><code>chat_agent_scheduled_task_spec_test.go</code>, scheduled_* tests</td>
+</tr>
+<tr>
+<td>O-10</td>
+<td>Skills tool / memory tool / delegate_subagent tool / todo tools</td>
+<td>registry + tools</td>
+<td>Allowlists for subagents</td>
+<td>skills/memory/subagent/todo tests</td>
+</tr>
+<tr>
+<td>O-11</td>
+<td>Sensors / progress / usage recording</td>
+<td>sensors, progress, usage_record</td>
+<td></td>
+<td>unit tests</td>
+</tr>
+<tr>
+<td>O-12</td>
+<td>Prompt cache</td>
+<td><code>prompt_cache.go</code></td>
+<td>Invalidation on config change</td>
+<td><code>prompt_cache_test.go</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-out-of-scope--non-goals-for-this-remediation">7. Out of scope / non-goals for this remediation</h2>
+<ul>
+<li>Rewriting <code>pkg/agent</code> loop/harness core</li>
+<li>Merging <code>/chatagent</code> and <code>/service/web/agents</code> route prefixes</li>
+<li>Desktop instruct protocol (<code>pkg/types/agent.go</code> / <code>internal/server/agent.go</code>)</li>
+<li>New product features beyond cleanup</li>
+</ul>
+<hr>
+<h2 id="qa-self-test-manual">QA self-test (manual)</h2>
+<p>Use after each vertical slice and before freeze sign-off.</p>
+<ol>
+<li>Platform: send one DM (Slack if available) — streaming or final reply, message persisted.</li>
+<li>Web: create session from <code>/service/web/agents</code>, send a turn, see SSE done and history hydrate.</li>
+<li>Approval: trigger a gated tool — Allow once; repeat with Always allow matching; Deny path. Confirm Nav/Home badge count and docked approval bar. With the tab in background, confirm tab title shows <code>● Needs approval</code> and (if Notification permission granted) a desktop notification; resolve clears the title.</li>
+<li>Plan mode: set plan → blocked write → switch normal → write works.</li>
+<li>Compact: call compact on a long session; context ring updates.</li>
+<li>Scheduled: create one-shot task, wait for completed + run row.</li>
+<li>Skills: toggle/enable a skill and confirm agent can <code>read_skill</code>.</li>
+<li>Knowledge: create a markdown doc in Agent Knowledge; confirm agent can <code>search_knowledge</code> then <code>get_knowledge</code> by path.</li>
+<li>Memory: fact CRUD via UI or <code>memory_*</code> tools; session summaries via archive + search tool.</li>
+<li>Subagent: run a delegate_subagent tool delegation; progress/tool events appear.</li>
+<li>Permissions: save form, reset to defaults; session grants clear; Knowledge key defaults to allow.</li>
+<li>Export: download/export session JSONL or documented format.</li>
+<li>Title: first user message eventually updates session title (or test-disabled path).</li>
+<li>REST smoke: <code>POST /chatagent/sessions/:id/messages</code> SSE reaches <code>done</code>; <code>GET …/events</code> receives hub events when a run publishes.</li>
+<li>Multimodal: upload an image via <code>POST …/media</code>, send with attachments (optional empty text) on a vision-capable model; history shows attachment; audio/video on unmarked models returns 400.</li>
+</ol>
+<hr>
+<h2 id="appendix-a--schedule--stream-duplication-audit-ws-b">Appendix A — Schedule / stream duplication audit (WS-B)</h2>
+<p>See <a href="./chatagent-remediation-audit.html#appendix-a--schedule--stream-duplication" rel="nofollow">chatagent-remediation-audit.md</a>.</p>
+<h2 id="appendix-b--chatagent--pkgagent-boundary-audit-ws-c">Appendix B — <code>chatagent</code> ↔ <code>pkg/agent</code> boundary audit (WS-C)</h2>
+<p>See <a href="./chatagent-remediation-audit.html#appendix-b--chatagent--pkgagent-boundary" rel="nofollow">chatagent-remediation-audit.md</a>.</p>
+<p>Maintainer guides: <code>internal/server/chatagent/AGENTS.md</code>, <code>internal/modules/web/AGENTS.md</code> (chatagent JS guardrails).</p>
+<h2 id="warranty-note">Warranty note</h2>
+<p>Regressions introduced directly by this remediation are in scope for fix within two weeks of checklist freeze. Checklist gaps discovered later require updating this document before code changes.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

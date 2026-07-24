@@ -1,0 +1,594 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Workflow Engine — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Workflow Engine</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub active">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="workflow-engine">Workflow Engine</h1>
+<p>YAML-defined workflow execution with retry, DAG validation, and persistent state.</p>
+<p>Source: <code>pkg/workflow/</code></p>
+<h2 id="overview">Overview</h2>
+<p>Workflow definitions are stored in the database. YAML is an exchange format for<br>
+<code>apply</code> / <code>export</code> only — the server does not execute local file paths. The runner<br>
+supports capability, Docker, shell, machine, and mapper actions, Go template params,<br>
+and DAG validation.</p>
+<pre><code>flowbot workflow apply --file wf.yaml
+        │
+        ▼
+ParseYAML → ApplyDefinition (DB) → ReloadTriggers (cron/webhook)
+        │
+POST /service/workflow/run { &#34;name&#34;, &#34;input&#34; }
+        │
+        ▼
+StartRunAsync → ValidateInputs → CreateRun → Execute (goroutine)
+        │
+        ▼
+GET /service/workflow/runs/:name  (inspect status)
+</code></pre>
+<h2 id="yaml-schema">YAML Schema</h2>
+<p>Workflow files are standalone YAML documents:</p>
+<pre><code>name: save_and_track
+describe: &#34;Save a URL as a bookmark, archive it, and create a kanban task&#34;
+enabled: true                          # false disables cron/webhook triggers
+resumable: true                        # enable state persistence
+
+inputs:                                # declared run inputs (validated on run)
+  - name: url
+    type: string
+    required: true
+  - name: title
+    type: string
+    required: true
+
+pipeline:                              # ordered list of task IDs
+  - save_bookmark
+  - archive_url
+  - create_task
+
+tasks:
+  - id: save_bookmark
+    action: capability:karakeep.create   # action format: &lt;type&gt;:&lt;details&gt;
+    describe: &#34;Save the URL as a bookmark&#34;
+    params:                              # template-rendered input
+      url: &#34;{{input.url}}&#34;
+      title: &#34;{{input.title}}&#34;
+    vars:                                # declared variables (reserved)
+      - url
+    conn:                                # DAG dependency edges (for validation)
+      - archive_url
+    retry:                               # task-level retry (optional)
+      max_attempts: 3
+      delay: 2s
+      backoff: exponential
+      max_delay: 30s
+      jitter: true
+
+  - id: archive_url
+    action: capability:archive.add
+    describe: &#34;Archive the URL in ArchiveBox&#34;
+    params:
+      url: &#34;{{input.url}}&#34;
+    retry:
+      max_attempts: 5
+      delay: 1s
+      backoff: linear
+      max_delay: 60s
+
+  - id: create_task
+    action: capability:kanboard.create_task
+    describe: &#34;Create a follow-up task&#34;
+    params:
+      title: &#34;Read: {{input.title}}&#34;
+      description: &#34;Bookmark reference: {{step &#34;save_bookmark&#34; &#34;result&#34;}}&#34;
+      tags:
+        - reading
+        - bookmark
+</code></pre>
+<h3 id="top-level-fields">Top-Level Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique workflow identifier</td>
+</tr>
+<tr>
+<td><code>describe</code></td>
+<td>string</td>
+<td>No</td>
+<td>Human-readable description</td>
+</tr>
+<tr>
+<td><code>enabled</code></td>
+<td>bool</td>
+<td>No</td>
+<td>Default true; false disables cron/webhook</td>
+</tr>
+<tr>
+<td><code>resumable</code></td>
+<td>bool</td>
+<td>No</td>
+<td>Enable checkpoint persistence (default: false)</td>
+</tr>
+<tr>
+<td><code>max_concurrency</code></td>
+<td>int</td>
+<td>No</td>
+<td>&gt;1 enables parallel DAG execution</td>
+</tr>
+<tr>
+<td><code>inputs</code></td>
+<td>[]Input</td>
+<td>No</td>
+<td>Declared run inputs for validation/forms</td>
+</tr>
+<tr>
+<td><code>triggers</code></td>
+<td>[]Trigger</td>
+<td>No</td>
+<td>Trigger configurations (cron, manual, webhook)</td>
+</tr>
+<tr>
+<td><code>pipeline</code></td>
+<td>[]string</td>
+<td>Yes</td>
+<td>Ordered list of task IDs to execute</td>
+</tr>
+<tr>
+<td><code>tasks</code></td>
+<td>[]Task</td>
+<td>Yes</td>
+<td>Task definitions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="task-fields">Task Fields</h3>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>string</td>
+<td>Yes</td>
+<td>Unique task identifier</td>
+</tr>
+<tr>
+<td><code>action</code></td>
+<td>string</td>
+<td>Yes</td>
+<td><code>capability:&lt;type&gt;.&lt;op&gt;</code>, <code>docker:&lt;image&gt;</code>, <code>shell:&lt;cmd&gt;</code>, <code>machine:&lt;name&gt;</code>, <code>mapper:</code></td>
+</tr>
+<tr>
+<td><code>describe</code></td>
+<td>string</td>
+<td>No</td>
+<td>Human-readable description</td>
+</tr>
+<tr>
+<td><code>params</code></td>
+<td>KV</td>
+<td>No</td>
+<td>Input parameters (template-rendered)</td>
+</tr>
+<tr>
+<td><code>vars</code></td>
+<td>[]string</td>
+<td>No</td>
+<td>Declared variable names (reserved)</td>
+</tr>
+<tr>
+<td><code>conn</code></td>
+<td>[]string</td>
+<td>No</td>
+<td>DAG dependency edges (validated for cycles; used for parallel scheduling)</td>
+</tr>
+<tr>
+<td><code>retry</code></td>
+<td>RetryConfig</td>
+<td>No</td>
+<td>Retry strategy (see below)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="action-types">Action Types</h2>
+<table>
+<thead>
+<tr>
+<th>Prefix</th>
+<th>Runtime</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>capability:</code></td>
+<td>Capability</td>
+<td><code>capability:karakeep.create</code></td>
+</tr>
+<tr>
+<td><code>docker:</code></td>
+<td>Docker container</td>
+<td><code>docker:nginx:latest</code></td>
+</tr>
+<tr>
+<td><code>shell:</code></td>
+<td>Shell command</td>
+<td><code>shell:echo hello</code></td>
+</tr>
+<tr>
+<td><code>machine:</code></td>
+<td>Remote SSH</td>
+<td><code>machine:vm1</code></td>
+</tr>
+<tr>
+<td><code>mapper:</code></td>
+<td>Inline data transform</td>
+<td><code>mapper:</code></td>
+</tr>
+<tr>
+<td>Free-form</td>
+<td>Shell fallback</td>
+<td><code>custom-action</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mapper-step-mapper">Mapper Step (<code>mapper:</code>)</h3>
+<p>The mapper step provides a lightweight data transformation node within the workflow. It takes template-rendered parameters and serializes them to a JSON string, making it suitable for converting output formats between steps. Unlike other action types, mapper is handled inline in the workflow runner -- no external runtime or process is involved.</p>
+<p>Mapper steps are resolved before the normal task execution path. When a task&#39;s action starts with <code>mapper:</code>, the runner:</p>
+<ol>
+<li>Resolves template expressions in the step&#39;s <code>params</code> against previous step results.</li>
+<li>Marshals the resolved params to a JSON string.</li>
+<li>Stores the JSON as the step result for downstream consumption.</li>
+<li>Skips the engine/runtime dispatch entirely.</li>
+</ol>
+<p>In YAML, quote the action because a trailing colon is otherwise invalid: <code>action: &#34;mapper:&#34;</code>.</p>
+<h2 id="retry-strategy">Retry Strategy</h2>
+<p>See <a href="pipeline.html#retry-strategy" rel="nofollow">Pipeline Retry</a> for the full <code>retry</code> field schema. The workflow engine uses the same <code>types.RetryConfig</code> converted via <code>ToBackoffConfig()</code> and executed with <code>backoff.Do()</code>.</p>
+<p>Key difference: the workflow engine retries ALL errors (no <code>retry_on</code> filtering), since workflow tasks don&#39;t typically return <code>types.Error</code>.</p>
+<h2 id="parameter-resolution">Parameter Resolution</h2>
+<p>Task <code>params</code> are rendered through the template engine before execution. The data context for each step includes:</p>
+<ul>
+<li>Results from all previously completed steps (mapped as <code>{{step &#34;id&#34; &#34;result&#34;}}</code>)</li>
+<li>Input variables passed to the workflow entry point (<code>{{input.*}}</code>)</li>
+</ul>
+<p>See <a href="pipeline-template.html" rel="nofollow">Pipeline Template Engine</a> for the full template syntax.</p>
+<h2 id="dag-validation">DAG Validation</h2>
+<p>The <code>conn</code> field declares dependency edges between tasks. Before execution, <code>ValidateDAG()</code> performs a DFS cycle check. With <code>max_concurrency &gt; 1</code>, <code>conn</code> also drives parallel scheduling; otherwise execution order follows <code>pipeline</code>.</p>
+<h2 id="invocation">Invocation</h2>
+<h3 id="cli">CLI</h3>
+<pre><code>flowbot workflow apply --file docs/examples/workflows/save_and_track.yaml
+flowbot workflow run save_and_track --input &#39;{&#34;url&#34;:&#34;https://example.com&#34;,&#34;title&#34;:&#34;Example&#34;}&#39;
+flowbot workflow runs save_and_track
+</code></pre>
+<p>Scopes: <code>workflow:read</code> (list/get/export/runs), <code>workflow:run</code> (apply/delete/run).</p>
+<h3 id="from-http">From HTTP</h3>
+<pre><code>POST /service/workflow/apply
+{&#34;yaml&#34;: &#34;...&#34;}
+
+POST /service/workflow/run
+{&#34;name&#34;: &#34;save_and_track&#34;, &#34;input&#34;: {&#34;url&#34;: &#34;...&#34;, &#34;title&#34;: &#34;...&#34;}}
+→ 202 {&#34;status&#34;:&#34;ok&#34;,&#34;data&#34;:{&#34;run_id&#34;:123}}
+
+GET /service/workflow/list
+GET /service/workflow/get/:name
+GET /service/workflow/export/:name
+DELETE /service/workflow/delete/:name
+GET /service/workflow/runs/:name
+</code></pre>
+<p>Webhook triggers are served at <code>/webhook/workflow/{path}</code> with the same token/HMAC auth fields as pipeline webhooks.</p>
+<h3 id="web-ui">Web UI</h3>
+<p>Open <strong>Automate → Workflows</strong> (<code>/service/web/workflows</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Page</th>
+<th>Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>List</td>
+<td>Name, status, triggers, task count, <strong>Last Run</strong>; Enable/Disable; open Runs</td>
+</tr>
+<tr>
+<td>Detail</td>
+<td>Overview tab: Inputs, Triggers (Enable/Disable), Execution DAG, Run now, Recent runs; YAML tab: exported definition text</td>
+</tr>
+<tr>
+<td>Runs</td>
+<td>Expandable run rows with step Input/Output/Error; polling pauses while a run is expanded</td>
+</tr>
+</tbody>
+</table>
+<p>DAG badge <strong>Parallel DAG</strong> appears only when <code>max_concurrency &gt; 1</code>. Conn graphs with <code>max_concurrency ≤ 1</code> still show topology but are labeled <strong>Sequential</strong>.</p>
+<h3 id="from-code">From Code</h3>
+<pre><code>runID, err := svc.StartRunAsync(ctx, &#34;save_and_track&#34;, &#34;manual&#34;, types.KV{
+    &#34;url&#34;: &#34;https://example.com&#34;,
+    &#34;title&#34;: &#34;Example&#34;,
+})
+</code></pre>
+<h2 id="testing">Testing</h2>
+<pre><code>go test ./pkg/workflow/...   # Unit tests for parsing, DAG, params, runner, service
+</code></pre>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

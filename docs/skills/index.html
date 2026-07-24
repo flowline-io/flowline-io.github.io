@@ -1,0 +1,574 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Skills — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html#overview">Overview</a></li>
+<li><a href="../../index.html#problem">Problem</a></li>
+<li><a href="../../index.html#capabilities">Capabilities</a></li>
+<li><a href="../../index.html#workflow">Workflow</a></li>
+<li><a href="../../design.html">Design</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Tutorials</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Skills</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link active">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="skills">Skills</h1>
+<p>Flowbot ships with AI assistant skills that teach Claude Code, opencode, and<br>
+other AI coding assistants how to use the <code>flowbot</code> CLI for daily tasks. Most<br>
+skills correspond to a Flowbot capability: the skill <strong>name equals the<br>
+capability ID</strong> (<code>hub.CapabilityType</code> / provider ID). Platform skills (for<br>
+example <code>workflow</code>) are also generated and documented below. The skill body<br>
+describes the CLI command tree (CLI domain names may differ from the capability<br>
+ID, e.g. <code>karakeep</code> → <code>flowbot bookmark</code>).</p>
+<p>Skills follow the SKILL.md convention. The AI assistant loads the skill&#39;s<br>
+frontmatter (name + description) at startup, and only pulls the full SKILL.md<br>
+body when the user&#39;s request matches the description. Additional files in the<br>
+skill directory (for example <code>reference.md</code> or <code>scripts/run.sh</code>) can be loaded<br>
+via <code>read_skill</code> with the <code>path</code> argument.</p>
+<h2 id="available-skills">Available Skills</h2>
+<table>
+<thead>
+<tr>
+<th>Skill (Cap ID)</th>
+<th>CLI root</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>karakeep</code></td>
+<td><code>bookmark</code></td>
+<td>Create, search, and archive bookmarks / saved links</td>
+</tr>
+<tr>
+<td><code>kanboard</code></td>
+<td><code>kanban</code></td>
+<td>Manage kanban boards, tasks, and subtasks</td>
+</tr>
+<tr>
+<td><code>miniflux</code></td>
+<td><code>reader</code></td>
+<td>Subscribe to RSS/Atom feeds, read entries, mark status</td>
+</tr>
+<tr>
+<td><code>memos</code></td>
+<td><code>memo</code></td>
+<td>Create, list, update, and delete memos</td>
+</tr>
+<tr>
+<td><code>trilium</code></td>
+<td><code>trilium</code></td>
+<td>Create, list, search, update, and delete trilium notes</td>
+</tr>
+<tr>
+<td><code>fireflyiii</code></td>
+<td><code>fireflyiii</code></td>
+<td>Create transactions and check Firefly III health</td>
+</tr>
+<tr>
+<td><code>transmission</code></td>
+<td><code>transmission</code></td>
+<td>Add, list, stop, and remove Transmission torrents</td>
+</tr>
+<tr>
+<td><code>nocodb</code></td>
+<td><code>nocodb</code></td>
+<td>Discover bases/tables and CRUD NocoDB records</td>
+</tr>
+<tr>
+<td><code>devops</code></td>
+<td><code>devops</code></td>
+<td>Query beszel, uptimekuma, traefik, grafana, wakapi, dozzle</td>
+</tr>
+<tr>
+<td><code>gitea</code></td>
+<td><code>forge</code></td>
+<td>Inspect forge repos, issues, diffs, and files</td>
+</tr>
+<tr>
+<td><code>github</code></td>
+<td><code>github</code></td>
+<td>Inspect GitHub repos, issues, notifications, releases</td>
+</tr>
+</tbody>
+</table>
+<h3 id="platform-skills-not-capability-ids">Platform skills (not capability IDs)</h3>
+<p>Also generated by <code>go tool task skills</code> (see <code>platformSpecs</code> / <code>platformWorkflowSpec</code><br>
+in <code>cmd/composer/action/skills</code>). Do not hand-edit the output;<br>
+change the Go sources / <code>testdata/workflow/*.yaml</code> and regenerate.</p>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>CLI root</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>workflow</code></td>
+<td><code>workflow</code></td>
+<td>Apply/export DB-backed workflows, run, inspect runs; task step types</td>
+</tr>
+</tbody>
+</table>
+<p>Each skill file is in the corresponding subdirectory:</p>
+<pre><code>docs/skills/
+├── karakeep/
+│   ├── SKILL.md
+│   └── references/cli.md
+├── … (other capability skills)
+├── workflow/
+│   ├── SKILL.md
+│   ├── examples/          # teaching YAMLs (copied from generator testdata)
+│   └── references/
+│       ├── cli.md
+│       └── steps.md       # task action types, params, templates
+└── README.md          (you are here)
+</code></pre>
+<p>Capabilities without a CLI tree (<code>notify</code>, <code>agent</code>, <code>example</code>) are<br>
+not generated as skills. The <code>devops</code> skill is the multi-provider aggregator Cap ID.</p>
+<h2 id="how-skills-work-with-ai-assistants">How Skills Work with AI Assistants</h2>
+<ol>
+<li>
+<p>An AI assistant (Claude Code, opencode, etc.) reads <code>available_skills</code> at<br>
+startup, which includes every skill&#39;s <strong>name</strong> and <strong>description</strong> from the<br>
+SKILL.md YAML frontmatter.</p>
+</li>
+<li>
+<p>When the user sends a message that matches a skill&#39;s description (e.g.<br>
+&#34;save this URL to my bookmarks&#34;), the assistant loads the full SKILL.md body<br>
+into its context.</p>
+</li>
+<li>
+<p>The SKILL.md body contains:</p>
+<ul>
+<li>Setup (login, server URL, output format)</li>
+<li>Common workflows (multi-step recipes)</li>
+<li>Troubleshooting</li>
+<li>A link to <code>references/cli.md</code> for the full command tree (loaded on demand)</li>
+<li>For <code>workflow</code>: a step-type quick reference plus <code>references/steps.md</code> and<br>
+<code>examples/*.yaml</code> for authoring task YAML</li>
+</ul>
+</li>
+<li>
+<p>The assistant follows the instructions in the skill to compose the correct<br>
+<code>flowbot</code> CLI commands and handle errors.</p>
+</li>
+</ol>
+<h3 id="enabling-skills-in-your-environment">Enabling Skills in Your Environment</h3>
+<p>Skills files are already generated in <code>docs/skills/</code>. To use them with your AI<br>
+assistant, configure the tool to scan this directory.</p>
+<p><strong>opencode</strong>: Add a <code>--skill-dir</code> or equivalent path pointing to this directory.</p>
+<p><strong>Claude Code</strong>: Place the skill directories under your global skills path.<br>
+For example, to make them available project-wide:</p>
+<pre><code># Symlink Flowbot skills into your project&#39;s .claude/skills/
+mkdir -p .claude/skills/
+ln -sf &#34;$(pwd)/docs/skills/karakeep&#34; .claude/skills/karakeep
+ln -sf &#34;$(pwd)/docs/skills/kanboard&#34; .claude/skills/kanboard
+ln -sf &#34;$(pwd)/docs/skills/miniflux&#34; .claude/skills/miniflux
+ln -sf &#34;$(pwd)/docs/skills/memos&#34;    .claude/skills/memos
+ln -sf &#34;$(pwd)/docs/skills/trilium&#34;  .claude/skills/trilium
+ln -sf &#34;$(pwd)/docs/skills/fireflyiii&#34; .claude/skills/fireflyiii
+ln -sf &#34;$(pwd)/docs/skills/transmission&#34; .claude/skills/transmission
+ln -sf &#34;$(pwd)/docs/skills/nocodb&#34; .claude/skills/nocodb
+ln -sf &#34;$(pwd)/docs/skills/devops&#34; .claude/skills/devops
+ln -sf &#34;$(pwd)/docs/skills/gitea&#34;    .claude/skills/gitea
+ln -sf &#34;$(pwd)/docs/skills/github&#34;   .claude/skills/github
+ln -sf &#34;$(pwd)/docs/skills/workflow&#34; .claude/skills/workflow
+</code></pre>
+<p>For global availability:</p>
+<pre><code># Symlink into the global Claude Code skills directory
+mkdir -p ~/.claude/skills/
+ln -sf &#34;$(pwd)/docs/skills/karakeep&#34; ~/.claude/skills/karakeep
+ln -sf &#34;$(pwd)/docs/skills/kanboard&#34; ~/.claude/skills/kanboard
+ln -sf &#34;$(pwd)/docs/skills/miniflux&#34; ~/.claude/skills/miniflux
+ln -sf &#34;$(pwd)/docs/skills/memos&#34;    ~/.claude/skills/memos
+ln -sf &#34;$(pwd)/docs/skills/trilium&#34;  ~/.claude/skills/trilium
+ln -sf &#34;$(pwd)/docs/skills/fireflyiii&#34; ~/.claude/skills/fireflyiii
+ln -sf &#34;$(pwd)/docs/skills/transmission&#34; ~/.claude/skills/transmission
+ln -sf &#34;$(pwd)/docs/skills/nocodb&#34; ~/.claude/skills/nocodb
+ln -sf &#34;$(pwd)/docs/skills/devops&#34; ~/.claude/skills/devops
+ln -sf &#34;$(pwd)/docs/skills/gitea&#34;    ~/.claude/skills/gitea
+ln -sf &#34;$(pwd)/docs/skills/github&#34;   ~/.claude/skills/github
+ln -sf &#34;$(pwd)/docs/skills/workflow&#34; ~/.claude/skills/workflow
+</code></pre>
+<h2 id="generating-skills">Generating Skills</h2>
+<p>Skills are generated from the live CLI command tree by the composer tool.<br>
+This ensures the skill always matches the actual CLI interface. Capability<br>
+skills and the platform <code>workflow</code> skill are both produced by the same<br>
+command.</p>
+<pre><code># Generate all SKILL.md files to docs/skills/
+go tool task skills
+</code></pre>
+<p>When you add a new CLI command tree for a capability, register it in<br>
+<code>metaSpecs</code> in <code>cmd/composer/action/skills/skills.go</code> (Name = capability ID)<br>
+and re-run the generator. To change or add a platform skill (CLI recipes, step<br>
+types, teaching examples), edit <code>platformSpecs</code> / <code>workflow_skill.go</code> and<br>
+<code>testdata/workflow/*.yaml</code>, then regenerate.</p>
+<h3 id="import-into-the-database">Import into the database</h3>
+<p>The server binary embeds <code>docs/skills</code> (package <code>skills</code>) and <strong>upserts</strong> them<br>
+into <code>agent_skills</code> / <code>agent_skill_files</code> on every startup (after DB migrate in<br>
+<code>cmd</code> → <code>server.newDatabaseAdapter</code>). <code>source</code> is set to <code>bundled</code>. Existing<br>
+<code>enabled</code> / <code>disable_model_invocation</code> values are preserved on update.</p>
+<p>Flow:</p>
+<ol>
+<li><code>go tool task skills</code> — regenerate markdown under <code>docs/skills/</code></li>
+<li>Rebuild/restart the server (<code>go tool task run</code>) — auto-import into Postgres</li>
+<li>Chat agent loads skills from DB via <code>read_skill</code> / system prompt</li>
+</ol>
+<p>No manual Web UI paste or composer <code>--sync-db</code> step is required for bundled skills.</p>
+<h2 id="adding-a-new-skill">Adding a New Skill</h2>
+<ol>
+<li>
+<p>Implement the CLI command tree in <code>cmd/cli/command/</code> following existing<br>
+conventions.</p>
+</li>
+<li>
+<p>Register the capability in <code>metaSpecs</code> in<br>
+<code>cmd/composer/action/skills/skills.go</code>. <strong>Name must equal the capability ID</strong><br>
+from <code>pkg/hub</code> (e.g. <code>hub.CapKarakeep</code>), not the CLI domain name.<br>
+(<code>hub.CapExample</code> is shown only as a pattern — example has no CLI skill.)</p>
+<pre><code>{
+    Name:        string(hub.CapKarakeep),
+    Title:       &#34;Karakeep&#34;,
+    CommandFn:   command.BookmarkCommand,
+    Description: &#34;Create, list, search, archive, and delete bookmarks via flowbot bookmark.&#34;,
+    Keywords:    &#34;bookmarks, karakeep, saved URLs&#34;,
+    Workflows: []workflowSpec{
+        {
+            Title:       &#34;Common task name&#34;,
+            Description: &#34;When the user wants to do X:&#34;,
+            Steps: []workflowStep{
+                {Step: 1, Command: &#34;flowbot bookmark list&#34;},
+                {Step: 2, Command: &#34;flowbot bookmark get &lt;id&gt;&#34;},
+            },
+        },
+    },
+},
+</code></pre>
+</li>
+<li>
+<p>Regenerate the skills:</p>
+<pre><code>go tool task skills
+</code></pre>
+<p>The new subdirectory and SKILL.md will appear under <code>docs/skills/</code>.</p>
+</li>
+<li>
+<p>Add the skill directory to your AI assistant&#39;s skills path as shown above.</p>
+</li>
+</ol>
+<h2 id="skill-file-anatomy">Skill File Anatomy</h2>
+<p>Each capability skill directory follows Agent Skills progressive disclosure:</p>
+<pre><code>{capability-id}/
+├── SKILL.md              # frontmatter + setup + workflows (lean)
+└── references/
+    └── cli.md            # full CLI command/flag reference (on demand)
+</code></pre>
+<p>The platform <code>workflow</code> skill adds <code>references/steps.md</code> and <code>examples/*.yaml</code>.</p>
+<pre><code>---
+name: karakeep
+description: &gt;-
+  Create, list, search, archive, and delete bookmarks via flowbot bookmark.
+  Use when the user mentions bookmarks, karakeep, ...
+compatibility: Requires flowbot CLI, network access to a Flowbot server
+metadata:
+  capability: karakeep
+  cli_root: bookmark
+---
+
+# Karakeep
+
+## Setup
+
+## Workflows
+
+## Troubleshooting
+</code></pre>
+<ul>
+<li><strong>Frontmatter</strong>: <code>name</code> equals capability ID and directory name; <code>description</code><br>
+is WHAT + WHEN (≤1024 chars); <code>metadata.capability</code> mirrors the Cap ID<br>
+(platform skills use <code>metadata.platform</code> instead).</li>
+<li><strong>SKILL.md body</strong>: Imperative setup, workflows, and troubleshooting only.</li>
+<li><strong>references/cli.md</strong>: Auto-generated command tree from cobra (loaded only when needed).</li>
+<li><strong>references/steps.md</strong> (workflow only): Task action types, params, templates.</li>
+<li><strong>Workflows</strong>: Hand-written multi-step recipes for common tasks (in generator source).</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="../../cmd/composer/action/skills/skills.go" rel="nofollow">Composer skills code</a> — Capability<br>
+skill generator.</li>
+<li><a href="../../cmd/composer/action/skills/workflow_skill.go" rel="nofollow">Workflow platform skill</a> —<br>
+Platform workflow skill + step type docs.</li>
+<li><a href="../../pkg/hub/capability.go" rel="nofollow">Capability types</a> — Canonical capability IDs.</li>
+<li><a href="../../cmd/cli/command/" rel="nofollow">CLI commands</a> — The CLI command tree implementations.</li>
+<li><a href="../migrations/2026-07-agent-skills-cap-id.sql" rel="nofollow">Skill Cap ID migration</a> —<br>
+Rename <code>homelab-*</code> agent_skills rows to Cap IDs after upgrade.</li>
+</ul>
+<h2 id="migrating-from-homelab--names">Migrating from <code>homelab-*</code> names</h2>
+<p>Skill <strong>name</strong> and directory now equal the capability ID. If you previously<br>
+stored skills as <code>homelab-bookmark</code> / <code>homelab-kanban</code> / <code>homelab-reader</code>:</p>
+<ol>
+<li>Run <a href="../migrations/2026-07-agent-skills-cap-id.sql" rel="nofollow"><code>docs/migrations/2026-07-agent-skills-cap-id.sql</code></a>.</li>
+<li>Update pipeline / subagent allowlists to Cap IDs (<code>karakeep</code>, <code>kanboard</code>,<br>
+<code>miniflux</code>). Runtime still resolves the old names this release.</li>
+<li>Point Claude/opencode skill symlinks at <code>docs/skills/{cap}/</code>.</li>
+</ol>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../design.html">Design</a>
+<a href="../../api.html">API</a>
+<a href="../../tutorials.html">Tutorials</a>
+<a href="../../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>

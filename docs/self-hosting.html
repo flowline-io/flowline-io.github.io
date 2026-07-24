@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Self-hosting Flowbot — Flowbot</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../index.html#overview">Overview</a></li>
+<li><a href="../index.html#problem">Problem</a></li>
+<li><a href="../index.html#capabilities">Capabilities</a></li>
+<li><a href="../index.html#workflow">Workflow</a></li>
+<li><a href="../design.html">Design</a></li>
+<li><a href="../api.html">API</a></li>
+<li><a href="../tutorials.html">Tutorials</a></li>
+<li><a href="../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">GitHub</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Self-hosting Flowbot</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/self-hosting.html" class="docs-nav-link active">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="self-hosting-flowbot">Self-hosting Flowbot</h1>
+<p>Single-instance, single-admin Homelab deployment. Flowbot is not designed for multi-replica HA.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>PostgreSQL 16+</li>
+<li>Redis 6+ (URL must include a non-empty password)</li>
+<li>Docker (compose path) or a Linux host for binary/systemd</li>
+</ul>
+<h2 id="quick-start-docker-compose">Quick start (Docker Compose)</h2>
+<ol>
+<li>Copy the reference config and adjust secrets:</li>
+</ol>
+<pre><code>cp docs/reference/config.yaml deployments/flowbot.yaml
+</code></pre>
+<p>Minimal edits in <code>deployments/flowbot.yaml</code>:</p>
+<pre><code>listen: &#34;:6060&#34;
+postgres:
+  dsn: postgres://flowbot:flowbot@postgres/flowbot?sslmode=disable
+redis:
+  url: redis://:${REDIS_PASSWORD}@redis:6379/0
+modules:
+  web:
+    auth:
+      enabled: true
+      username: admin
+      password: ${WEB_PASSWORD}
+      cookie_secure: false   # set true behind HTTPS
+</code></pre>
+<p><code>${REDIS_PASSWORD}</code> and <code>${WEB_PASSWORD}</code> are expanded from the process environment (see compose <code>environment</code>).</p>
+<ol>
+<li>Start the stack from <code>deployments/</code>:</li>
+</ol>
+<pre><code>cd deployments
+docker compose up -d --build
+</code></pre>
+<ol>
+<li>Open <code>http://localhost:6060/service/web/login</code> (default reference username <code>admin</code>).</li>
+</ol>
+<p>Health probes:</p>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/livez</code></td>
+<td>Process is up (Docker <code>HEALTHCHECK</code>)</td>
+</tr>
+<tr>
+<td><code>/readyz</code></td>
+<td>PostgreSQL + Redis ping OK; returns <code>503</code> while shutting down</td>
+</tr>
+</tbody>
+</table>
+<h2 id="binary--systemd">Binary / systemd</h2>
+<p>See <a href="developer-guide/deployment.html" rel="nofollow">developer-guide/deployment.md</a>. Prefer <code>cookie_secure: true</code> and TLS termination at the reverse proxy.</p>
+<h2 id="reverse-proxy">Reverse proxy</h2>
+<h3 id="caddy">Caddy</h3>
+<pre><code>flowbot.example.com {
+  reverse_proxy 127.0.0.1:6060
+}
+</code></pre>
+<h3 id="nginx">nginx</h3>
+<pre><code>location / {
+  proxy_pass http://127.0.0.1:6060;
+  proxy_set_header Host $host;
+  proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  proxy_set_header X-Forwarded-Proto $scheme;
+}
+</code></pre>
+<p>When Flowbot sits behind a trusted proxy, set in <code>flowbot.yaml</code>:</p>
+<pre><code>http:
+  tls_behind_proxy: true
+  trusted_proxies:
+    - 127.0.0.1/32
+    - 10.0.0.0/8
+modules:
+  web:
+    auth:
+      cookie_secure: true
+</code></pre>
+<p><code>trusted_proxies</code> must list the reverse-proxy IPs/CIDRs; only then are <code>X-Forwarded-For</code> values used for login rate limiting.</p>
+<h2 id="security-baseline-checklist">Security baseline checklist</h2>
+<ul>
+<li> Use <code>modules.web.auth.password_hash</code> (bcrypt) or a strong <code>${WEB_PASSWORD}</code> — never leave weak defaults on a public host</li>
+<li> Keep login brute-force protection enabled (<code>modules.web.auth.brute_force.enabled</code>, default on)</li>
+<li> <code>cookie_secure: true</code> when serving HTTPS</li>
+<li> Inject secrets via <code>${ENV}</code> rather than committing them to YAML</li>
+<li> Restrict <code>/metrics</code> (<code>metrics.bearer_token</code> or scoped access token)</li>
+<li> Single instance only — do not run multiple Flowbot replicas against one Redis consumer group without reviewing cron/scan duplication</li>
+</ul>
+<h2 id="backup-and-restore">Backup and restore</h2>
+<p>PostgreSQL is the system of record (events, runs, audit, tokens). Redis is transport/cache.</p>
+<pre><code># Backup
+pg_dump &#34;$DATABASE_URL&#34; -Fc -f flowbot-$(date +%Y%m%d).dump
+
+# Restore
+pg_restore -d &#34;$DATABASE_URL&#34; --clean --if-exists flowbot-YYYYMMDD.dump
+</code></pre>
+<p>After restore, restart Flowbot. Rebuild Redis Streams from PostgreSQL outbox if needed (see <a href="developer-guide/recovery.html" rel="nofollow">Recovery</a>).</p>
+<h2 id="upgrade">Upgrade</h2>
+<ol>
+<li>Read <a href="../CHANGELOG.html" rel="nofollow">CHANGELOG.md</a> for Breaking notes.</li>
+<li>Back up PostgreSQL.</li>
+<li>Pull the new image/binary and restart.</li>
+<li>Schema changes are applied via Ent <code>Schema.Create</code> on startup (additive). Destructive config keys are rejected with a migration hint at load time.</li>
+</ol>
+<h2 id="single-instance">Single instance</h2>
+<p>Cron, Homelab scan, and event consumers assume one writer process. Scale vertically; do not run multiple app replicas unless you accept duplicate work.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../design.html">Design</a>
+<a href="../api.html">API</a>
+<a href="../tutorials.html">Tutorials</a>
+<a href="../docs/getting-started/">Docs</a>
+<span style="color: var(--white-muted); font-size: 0.82rem">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Built for the Homelabbers, by the Homelabbers.
+</div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
