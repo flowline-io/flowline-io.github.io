@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agent Engine — Flowbot</title>
+
+<link rel="canonical" href="https://flowline-io.github.io/docs/agent/" />
+<meta property="og:title" content="Agent Engine — Flowbot" />
+
+<meta property="og:url" content="https://flowline-io.github.io/docs/agent/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Flowbot" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Agent Engine — Flowbot" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../design.html">Product</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Learn</a></li>
+<li><a href="../../skills.html">Skills</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">Community</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Agent Engine</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link active">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+			<li><a href="../../docs/agent/headless-cli.html" class="docs-nav-link docs-nav-sub">Headless CLI (`flowbot-agent`)</a></li>
+			
+			<li><a href="../../docs/agent/local-cli-gateway.html" class="docs-nav-link docs-nav-sub">Local CLI Gateway</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+			<li><a href="../../docs/architecture/pkg-boundaries.html" class="docs-nav-link docs-nav-sub">pkg vs internal Boundaries</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Life</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/life/" class="docs-nav-link">Life</a></li>
+			
+			<li><a href="../../docs/life/architecture.html" class="docs-nav-link docs-nav-sub">Life Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/email/SKILL.html" class="docs-nav-link docs-nav-sub">Email</a></li>
+			
+			<li><a href="../../docs/skills/email/references/cli.html" class="docs-nav-link docs-nav-sub">Email CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/SKILL.html" class="docs-nav-link docs-nav-sub">Pipeline</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/cli.html" class="docs-nav-link docs-nav-sub">Pipeline CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/schema.html" class="docs-nav-link docs-nav-sub">Pipeline YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities.html" class="docs-nav-link docs-nav-sub">Pipeline capability operations reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/steps.html" class="docs-nav-link docs-nav-sub">Pipeline steps reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability operations</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="agent-engine">Agent Engine</h1>
+<p><code>pkg/agent/</code> is Flowbot&#39;s core <strong>Observe-Think-Act</strong> agent runtime. It orchestrates LLM calls, tool execution, session trees, and lifecycle events. LLM transport uses <a href="https://github.com/tmc/langchaingo" rel="nofollow noopener" target="_blank">langchaingo</a> (<code>llms.Model</code>) via <code>pkg/agent/llm</code>.</p>
+<p>This package is distinct from:</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Location</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Agent engine</strong></td>
+<td><code>pkg/agent/</code></td>
+<td>Multi-turn LLM loop with tools and session tree</td>
+</tr>
+<tr>
+<td><strong>LLM adapter</strong></td>
+<td><code>pkg/agent/llm/</code></td>
+<td>langchaingo models, single-shot helpers, <code>chat_agent</code> model lookup</td>
+</tr>
+<tr>
+<td><strong>Instruct protocol</strong></td>
+<td><code>pkg/types/agent.go</code>, <code>internal/server/agent.go</code></td>
+<td>Desktop agent online/offline/message protocol</td>
+</tr>
+<tr>
+<td><strong>Chat agent config</strong></td>
+<td><code>chat_agent</code> in <code>flowbot.yaml</code></td>
+<td>DM chat assistant runtime and model routing</td>
+</tr>
+</tbody>
+</table>
+<h2 id="documentation">Documentation</h2>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="./architecture.html" rel="nofollow">Architecture</a></td>
+<td>Layering, data flows, package map, design rules</td>
+</tr>
+<tr>
+<td><a href="./developer-guide.html" rel="nofollow">Developer Guide</a></td>
+<td>API usage, tools, sessions, hooks, testing</td>
+</tr>
+<tr>
+<td><a href="./chatagent-feature-checklist.html" rel="nofollow">Chat Agent Feature Checklist</a></td>
+<td>Frozen product acceptance boundary (REST/Web/DM/orchestration)</td>
+</tr>
+<tr>
+<td><a href="./chatagent-remediation-audit.html" rel="nofollow">Chat Agent Remediation Audit</a></td>
+<td>Schedule/stream duplication and <code>pkg/agent</code> boundary audit</td>
+</tr>
+<tr>
+<td><a href="./agent-sandbox.html" rel="nofollow">Agent Sandbox</a></td>
+<td>Cloud Agent ephemeral Docker image (<code>flowbot-agent-sandbox</code>)</td>
+</tr>
+<tr>
+<td><a href="./local-cli-gateway.html" rel="nofollow">Local CLI Gateway</a></td>
+<td>Homelab ↔ <code>cmd/gateway</code> worker (pull model; not notification gateway)</td>
+</tr>
+<tr>
+<td><a href="./headless-cli.html" rel="nofollow">Headless CLI</a></td>
+<td><code>flowbot-agent</code> local headless coding CLI (LLM via <code>/agent/v1</code>)</td>
+</tr>
+<tr>
+<td><a href="./agent.puml" rel="nofollow">Diagram</a></td>
+<td>PlantUML component diagram (render with PlantUML)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="quick-start">Quick Start</h2>
+<pre><code>import (
+    &#34;context&#34;
+
+    &#34;github.com/flowline-io/flowbot/pkg/agent&#34;
+    &#34;github.com/flowline-io/flowbot/pkg/agent/tools/echo&#34;
+    agentllm &#34;github.com/flowline-io/flowbot/pkg/agent/llm&#34;
+    &#34;github.com/flowline-io/flowbot/pkg/agent/tool&#34;
+)
+
+registry := tool.NewRegistry()
+_ = registry.Register(echo.Tool{})
+
+model := agentllm.NewFakeModel(/* scripted responses */)
+ag := agent.NewAgent(agent.Options{
+    Model:    model,
+    Registry: registry,
+    Config:   agent.DefaultConfig(),
+})
+
+stream, err := ag.Prompt(context.Background(), agent.NewUserMessage(&#34;hello&#34;))
+if err != nil {
+    return err
+}
+result, err := stream.Await(context.Background())
+_ = result
+</code></pre>
+<h2 id="source-layout">Source Layout</h2>
+<pre><code>pkg/agent/
+├── facade.go, types.go           # Public facade (re-exports loop + msg aliases)
+├── msg/                          # Shared domain types
+├── result/ event/                # Result pattern + lifecycle events
+├── loop/                         # Observe-Think-Act + stateful Agent
+├── llm/ tool/ session/ model/ transform/ hooks/
+├── ctxmgr/ harness/ subagent/    # Orchestration
+├── env/ sandbox/ permission/ approval/ dcg/
+├── tools/coding/                 # Engine coding tools
+├── tools/echo/                   # Reference tool
+├── eval/
+└── AGENTS.md
+</code></pre>
+<p>Product tools (clip, notify) live under <code>internal/server/chatagent/tools/</code>.</p>
+<h2 id="testing">Testing</h2>
+<pre><code>go test ./pkg/agent/...
+go tool task test:specs   # includes tests/specs/agent_spec_test.go
+</code></pre>
+<h2 id="agent-evaluation">Agent evaluation</h2>
+<p><code>pkg/agent/eval</code> scores agent runs with code graders (CI) and optional model graders (capability).</p>
+<table>
+<thead>
+<tr>
+<th>Suite</th>
+<th>Purpose</th>
+<th>How to run</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>regression</strong></td>
+<td>Near-100% FakeModel / deterministic gates</td>
+<td><code>go test ./pkg/agent/eval/...</code> or <code>go tool task agent:eval</code> (CI: <a href="../../.github/workflows/agent-eval.yml" rel="nofollow">Agent Eval</a>)</td>
+</tr>
+<tr>
+<td><strong>capability</strong></td>
+<td>Layered L1/L2/L3 climb; multi-trial Pass@1 + appendix <code>pass@k</code> / <code>pass^k</code></td>
+<td><code>go tool task agent:eval:live</code> (local/nightly; not a PR hard gate)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="fake-vs-true-outcome">Fake vs true outcome</h3>
+<ul>
+<li><strong>FakeModel regression</strong> exercises grader wiring and <strong>proxy outcomes</strong> (completion, forbidden tools, max steps). Scripts already choose the tool path, so tool <em>order</em> is soft by default (<code>ExpectedTools</code>); hard tool gates are <code>RequiredTools</code> coverage and <code>ForbiddenTools</code>.</li>
+<li><strong>True outcomes</strong> use isolated workspaces (e.g. <code>write_file</code> + file asserts) or live models. Workspaces go through the eval <code>Sandbox</code> interface (default <code>WorkspaceSandbox</code>; Docker deferred).</li>
+<li><strong>Product policy</strong> outcomes live in <code>internal/server/chatagent/eval</code> (permission.Evaluator / DCG with fixtures)—not inside <code>pkg/agent/eval</code>.</li>
+</ul>
+<h3 id="graders-and-gates">Graders and gates</h3>
+<ul>
+<li>CI hard gates: required/forbidden tools, args, outcome asserts, completion, max steps. LLM-as-judge never blocks PRs and does <strong>not</strong> enter Total.</li>
+<li>Live: default <code>k=3</code> trials; case PASS still requires all trials pass; <strong>Pass@1</strong> = successful trials / (cases×k) enters L3.</li>
+<li>OpenQA smoke ≤5 tasks; gold files under <code>pkg/agent/eval/testdata/capability/openqa/</code>. Judge–gold <strong>agreement</strong> = fraction of dimensions with <code>|judge−gold|≤1</code> on a 1–5 scale (skip score <code>0</code> / Unknown).</li>
+<li>Capability fixtures: <code>openqa/</code> + <code>tools/</code> + <code>repair/</code>. Default <code>--smoke</code> uses <code>DefaultSmokeCaseNames</code> (excludes repair/system); <code>--smoke=false</code> runs the full set.</li>
+</ul>
+<h3 id="scorecard-replaces-capability-index">Scorecard (replaces capability_index)</h3>
+<pre><code>Total = 100 * (0.2*L1 + 0.5*L2 + 0.3*L3)
+L1 = compliance rate (forbidden tools + text guardrails; not tool selection)
+L2 = (ToolCallAcc + RepairRate) / 2   # RepairRate from tier=repair only; else ToolCallAcc
+L3 = mean(Pass@1, LatencyScore?, TokenScore?)  # omit dims when actual==0
+</code></pre>
+<p>Appendix: judge quality, <code>pass@k</code> / <code>pass^k</code>, natural repair rate. Wilson CI on Pass@1/RepairRate; <code>--repeats N</code> (N≥2) for Total CI. Budgets: <code>--latency-budget-ms</code> (default 8000), <code>--token-budget</code> (default 6000). Historical <code>capability_index</code> trends are discontinued.</p>
+<h3 id="graduation">Graduation</h3>
+<p>When a capability task is stably near 100% <code>pass^k</code> and criteria are unambiguous, promote it into the regression suite (code graders only). Keep capability hard enough to avoid early saturation.</p>
+<h3 id="cli-artifacts">CLI artifacts</h3>
+<pre><code>go tool task agent:eval            # → tmp/agent_eval/regression_*.json
+go tool task agent:eval:live       # FakeModel offline live path
+go run ./cmd/composer agenteval live --model SUBJECT --judge-model JUDGE --judge-fake=false
+go run ./cmd/composer agenteval compare --baseline ... --candidate ...
+go run ./cmd/composer agenteval export --report ... --out tmp/agent_eval/drafts
+go run ./cmd/composer agenteval report --dir tmp/agent_eval   # HTML overview + detail pages
+</code></pre>
+<p>Flags: <code>--cases</code>, <code>--out</code>, <code>--trials</code>, <code>--smoke</code>, <code>--model</code>, <code>--judge-model</code>, <code>--config</code>, <code>--run</code>, <code>--difficulty</code>, <code>--tier</code>, <code>--latency-budget-ms</code>, <code>--token-budget</code>, <code>--repeats</code>.</p>
+<pre><code>go run ./cmd/composer agenteval live --model SUBJECT --judge-model JUDGE --judge-fake=false --difficulty medium+
+go run ./cmd/composer agenteval live --model SUBJECT --tier repair --smoke=false
+</code></pre>
+<p>Compare optimization A/B with scorecard deltas (<code>total</code> / L1 / L2 / L3):</p>
+<pre><code>go run ./cmd/composer agenteval compare --baseline before.json --candidate after.json
+</code></pre>
+<h3 id="phase-2">Phase 2</h3>
+<p>Harness reliability report is available through <code>agenteval harness</code> (runs through <code>pkg/agent/harness</code>), and Docker sandbox mode can be selected via <code>--sandbox=docker</code>.<br>
+For current eval fixtures, Docker isolation primarily applies to tools that execute commands (<code>Exec</code> path).<br>
+Examples:</p>
+<pre><code>go run ./cmd/composer agenteval live --model SUBJECT --run openqa_greet
+go run ./cmd/composer agenteval live --model SUBJECT --run &#39;refuse|explain&#39;
+go run ./cmd/composer agenteval run --run echo_happy
+</code></pre>
+<p>Reports are local/CI files only (no DB). Failed cases include a transcript summary—read that before changing agent or grader.</p>
+<p>Maintainer reference: <a href="../../pkg/agent/AGENTS.html" rel="nofollow">pkg/agent/AGENTS.md</a>.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../index.html">Home</a>
+<a href="../../design.html">Product Design</a>
+<a href="../../api.html">API Reference</a>
+<a href="../../tutorials.html">Tutorials &amp; Guides</a>
+<a href="../../skills.html">AI Skills</a>
+<a href="../../docs/getting-started/">Getting Started</a>
+<span class="footer-license">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Discover. Compose. Operate.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
