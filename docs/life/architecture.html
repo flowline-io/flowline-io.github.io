@@ -1,0 +1,970 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Life Architecture — Flowbot</title>
+
+<link rel="canonical" href="https://flowline-io.github.io/docs/life/architecture.html" />
+<meta property="og:title" content="Life Architecture — Flowbot" />
+
+<meta property="og:url" content="https://flowline-io.github.io/docs/life/architecture.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Flowbot" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Life Architecture — Flowbot" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../design.html">Product</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Learn</a></li>
+<li><a href="../../skills.html">Skills</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">Community</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Life Architecture</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">AGENTS.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/AGENTS.html" class="docs-nav-link">Documentation standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+			<li><a href="../../docs/agent/headless-cli.html" class="docs-nav-link docs-nav-sub">Headless CLI (`flowbot-agent`)</a></li>
+			
+			<li><a href="../../docs/agent/local-cli-gateway.html" class="docs-nav-link docs-nav-sub">Local CLI Gateway</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+			<li><a href="../../docs/architecture/pkg-boundaries.html" class="docs-nav-link docs-nav-sub">pkg vs internal Boundaries</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Ability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Life</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/life/" class="docs-nav-link">Life</a></li>
+			
+			<li><a href="../../docs/life/architecture.html" class="docs-nav-link docs-nav-sub active">Life Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/confluence/SKILL.html" class="docs-nav-link docs-nav-sub">Confluence</a></li>
+			
+			<li><a href="../../docs/skills/confluence/references/cli.html" class="docs-nav-link docs-nav-sub">Confluence CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/email/SKILL.html" class="docs-nav-link docs-nav-sub">Email</a></li>
+			
+			<li><a href="../../docs/skills/email/references/cli.html" class="docs-nav-link docs-nav-sub">Email CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/SKILL.html" class="docs-nav-link docs-nav-sub">Pipeline</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/cli.html" class="docs-nav-link docs-nav-sub">Pipeline CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/schema.html" class="docs-nav-link docs-nav-sub">Pipeline YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities.html" class="docs-nav-link docs-nav-sub">Pipeline capability operations reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/steps.html" class="docs-nav-link docs-nav-sub">Pipeline steps reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trello/SKILL.html" class="docs-nav-link docs-nav-sub">Trello</a></li>
+			
+			<li><a href="../../docs/skills/trello/references/cli.html" class="docs-nav-link docs-nav-sub">Trello CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability operations</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/" class="docs-nav-link">Testing</a></li>
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link docs-nav-sub">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link docs-nav-sub">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="life-architecture">Life Architecture</h1>
+<p>Product narrative: <a href="../../templ/prd.html" rel="nofollow"><code>templ/prd.md</code></a>. This document is the Flowbot implementation contract.</p>
+<h2 id="1-position-in-flowbot">1. Position in Flowbot</h2>
+<pre><code class="language-text">Layer 3 — Business Logic
+├── internal/modules/life/   # Use-case orchestration, seeds, lore outbox consumer
+├── pkg/life/                # Pure formulas (cascade, loot, buffs)
+└── pkg/capability/life/     # LLM quest evaluation and lore generation
+
+Layer 2 — Capability
+└── capability.Invoke(hub.CapLife, …) → LLM adapter
+
+Layer 1 / 0 — Store + infra
+└── life_* tables via LifeStore / ent; event_outbox for async lore
+</code></pre>
+<p>HTML UI lives in <code>internal/modules/web</code> under <code>/service/web/life*</code> (same pattern as hub/workflow pages).</p>
+<h2 id="2-package-map">2. Package map</h2>
+<pre><code class="language-text">internal/modules/life/          # Service, Bootstrap, outbox consumer, notify, config
+internal/modules/life/seed/     # embed JSON (equipment, loot tables)
+internal/modules/fx.go          # Register()
+pkg/life/                       # cascade, loot, buffs, PARA constants (no I/O)
+pkg/capability/life/            # EvaluateQuest, GenerateInstanceLore
+internal/store/ent/schema/      # life_*.go (int64 PK + string flag)
+internal/store/life.go         # LifeStore facade (package store)
+internal/store/postgres/        # only if methods are on Adapter (prefer LifeStore)
+internal/modules/web/           # life_*_webservice.go; SetLifeService via life.OnService
+pkg/views/pages|partials/       # life_*.templ
+public/js/life-radar.js         # Character radar chart
+public/js/life-stats.js         # Stats dashboard charts (Chart.js)
+public/css/custom.css           # Life page styles (`.life-*`)
+</code></pre>
+<h2 id="3-identity-model">3. Identity model</h2>
+<ul>
+<li>Platform <code>users</code> table is unchanged (account only).</li>
+<li><code>life_profiles</code> is 1:1 with the signed-in web operator.</li>
+<li><code>life_profiles.user_id</code> = web session UID from <code>authenticateWeb</code> / <code>route.RequestContext.UID</code> (string, e.g. <code>user-admin</code>).</li>
+<li>All domain rows FK to <code>life_profile_id</code> (int64), not platform user id.</li>
+</ul>
+<h2 id="4-deviations-from-prd">4. Deviations from PRD</h2>
+<table>
+<thead>
+<tr>
+<th>PRD</th>
+<th>Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UUID primary keys</td>
+<td>int64 PK + string <code>flag</code> (<code>types.Id()</code>) — repo convention</td>
+</tr>
+<tr>
+<td><code>UserInventory.is_equipped</code></td>
+<td>Removed; wear state only in <code>life_equipped_slots</code></td>
+</tr>
+<tr>
+<td>Pity counter entity missing</td>
+<td><code>life_profiles.pity_by_tier</code> JSON map</td>
+</tr>
+<tr>
+<td>Unique memorial gear as new Equipment rows</td>
+<td>Inventory instance overrides (<code>instance_name</code>, <code>instance_lore</code>, <code>instance_buffs</code>)</td>
+</tr>
+<tr>
+<td>Equipment rust logic</td>
+<td>Fail quest applies 24h <code>tarnished_until</code>; buffs ignored while active; Complete clears rust</td>
+</tr>
+<tr>
+<td>Sync AI lore on drop</td>
+<td>Sync drop + outbox; lore filled async</td>
+</tr>
+<tr>
+<td>Full AI always</td>
+<td><code>EvaluateQuest</code> / <code>GenerateInstanceLore</code> require chat LLM; errors surface to caller</td>
+</tr>
+<tr>
+<td>AIContext unused</td>
+<td>Loaded into EvaluateQuest (personality, completion rate, mood)</td>
+</tr>
+<tr>
+<td>Gear AI privilege unused</td>
+<td>Equipped <code>ai_unlocked_privilege</code> merged into EvaluateQuest</td>
+</tr>
+<tr>
+<td>LifeGoal CRUD</td>
+<td>Create / edit / pause / delete on Goals; optional <code>goal_flag</code> on quest create; Project/Resource may link <code>area_id</code> / <code>area_flag</code></td>
+</tr>
+<tr>
+<td>Drop rate preview</td>
+<td>Toast on create + pending card <code>~N% drop</code></td>
+</tr>
+<tr>
+<td>AI lore on every drop</td>
+<td>Lore outbox only for Boss quests or difficulty SS/SSS</td>
+</tr>
+<tr>
+<td>Ops <code>PageHeader</code> / <code>.flowbot-surface</code> / <code>.flowbot-chip</code></td>
+<td>Life UI uses <code>life-shell-header</code> + <code>life-panel</code> + <code>life-meta-chip</code> (gamified chrome, not ops console)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-er--tables">5. ER / tables</h2>
+<table>
+<thead>
+<tr>
+<th>Table</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>life_profiles</code></td>
+<td>level, exp, gold, class_type, base_drop_rate_bonus, pity_by_tier</td>
+</tr>
+<tr>
+<td><code>life_characteristics</code></td>
+<td>INT / PHY / WIL / CHA / CRE / FIN / WRI / FOC per profile</td>
+</tr>
+<tr>
+<td><code>life_skills</code></td>
+<td>skills under a characteristic</td>
+</tr>
+<tr>
+<td><code>life_goals</code></td>
+<td>PARA LifeGoal (<code>Project</code> / <code>Area</code> / <code>Resource</code>); optional <code>area_id</code> FK to parent Area</td>
+</tr>
+<tr>
+<td><code>life_quests</code></td>
+<td>One-Time / Daily / Boss quests; stores AI <code>title</code> plus original user <code>prompt</code></td>
+</tr>
+<tr>
+<td><code>life_ai_contexts</code></td>
+<td>DM personality + mood JSON (1:1 profile)</td>
+</tr>
+<tr>
+<td><code>life_equipments</code></td>
+<td>Catalog templates (seeded)</td>
+</tr>
+<tr>
+<td><code>life_inventories</code></td>
+<td>Owned instances + instance overrides + lore_status</td>
+</tr>
+<tr>
+<td><code>life_equipped_slots</code></td>
+<td>One row per profile; slot → inventory id</td>
+</tr>
+<tr>
+<td><code>life_loot_tables</code></td>
+<td>drop_tier → base chance + item flag pool</td>
+</tr>
+<tr>
+<td><code>life_action_logs</code></td>
+<td>completion + dice + drop audit</td>
+</tr>
+<tr>
+<td><code>life_rewards</code></td>
+<td>Player-defined real-life rewards (name, price, optional cooldown)</td>
+</tr>
+<tr>
+<td><code>life_reward_redemptions</code></td>
+<td>Gold spend audit with name/price snapshots</td>
+</tr>
+<tr>
+<td><code>life_achievements</code></td>
+<td>Memorial achievement catalog (seeded)</td>
+</tr>
+<tr>
+<td><code>life_achievement_progress</code></td>
+<td>Per-profile counters toward unlocks</td>
+</tr>
+<tr>
+<td><code>life_achievement_unlocks</code></td>
+<td>Unlocked memorial achievements</td>
+</tr>
+<tr>
+<td><code>life_plan_nodes</code></td>
+<td>Goal / milestone / action plan tree</td>
+</tr>
+<tr>
+<td><code>life_action_specs</code></td>
+<td>Action definitions (todo / recurring / habit / checkpoint)</td>
+</tr>
+<tr>
+<td><code>life_action_occurrences</code></td>
+<td>Today-board occurrences for actions</td>
+</tr>
+<tr>
+<td><code>life_action_dependencies</code></td>
+<td>Checkpoint dependency edges</td>
+</tr>
+<tr>
+<td><code>life_evidence</code></td>
+<td>Quest evidence submissions</td>
+</tr>
+<tr>
+<td><code>life_adjudications</code></td>
+<td>AI quest rulings (suggested → accepted)</td>
+</tr>
+<tr>
+<td><code>life_habit_checkins</code></td>
+<td>Habit check-in audit</td>
+</tr>
+</tbody>
+</table>
+<p>Reserved on inventory/slots: <code>tarnished_until</code> (nullable time). Lore: <code>lore_status</code> ∈ <code>none</code> | <code>pending</code> | <code>ready</code> | <code>failed</code>.</p>
+<h2 id="6-service-and-capability-api">6. Service and capability API</h2>
+<p><strong>LifeService</strong> (<code>internal/modules/life</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EnsureProfile</code></td>
+<td>Create profile + seed characteristics + empty slots/ai context</td>
+</tr>
+<tr>
+<td><code>CreateQuestFromPrompt</code></td>
+<td>Evaluate via capability → persist quest</td>
+</tr>
+<tr>
+<td><code>CompleteQuest</code></td>
+<td>Cascade + loot + action log + achievements + optional lore outbox + Daily respawn (one DB tx; loot resolved in-tx from live pity)</td>
+</tr>
+<tr>
+<td><code>FailQuest</code></td>
+<td>Mark failed + 24h equipment rust (one DB tx)</td>
+</tr>
+<tr>
+<td><code>DismissQuest</code></td>
+<td>Mark dismissed with no rust or completion-rate penalty</td>
+</tr>
+<tr>
+<td><code>CreateGoal</code> / <code>UpdateGoal</code> / <code>SetGoalStatus</code> / <code>DeleteGoal</code></td>
+<td>PARA goal CRUD + pause/activate; optional <code>area_flag</code> for Project/Resource (Goals page)</td>
+</tr>
+<tr>
+<td><code>MapGoalViews</code></td>
+<td>Resolve Area parent flag/title for UI rows</td>
+</tr>
+<tr>
+<td><code>ListActionLogs</code> / <code>ListActionLogsPage</code></td>
+<td>Recent or paged completion audit for Quests UI</td>
+</tr>
+<tr>
+<td><code>ListCompletedQuestsPage</code></td>
+<td>Paged completed quests for Quests history</td>
+</tr>
+<tr>
+<td><code>ListAchievements</code></td>
+<td>Catalog + progress/unlock state for Achievements UI</td>
+</tr>
+<tr>
+<td><code>ListRewardsPage</code> / <code>CreateReward</code> / <code>UpdateReward</code> / <code>DeactivateReward</code> / <code>RestoreReward</code> / <code>RedeemReward</code></td>
+<td>Real-life rewards market (gold sink); inactive + redemptions are paged</td>
+</tr>
+<tr>
+<td><code>GetStatsPage</code></td>
+<td>30-day analytics aggregates for Stats UI</td>
+</tr>
+<tr>
+<td><code>BuildSkillTree</code></td>
+<td>Skill-tree evidence UI model</td>
+</tr>
+<tr>
+<td><code>CreatePlanNode</code> / <code>ConfirmHabitAction</code> / <code>PreviewGoalBreakdown</code> / <code>ImportGoalBreakdown</code></td>
+<td>Plan tree + AI breakdown</td>
+</tr>
+<tr>
+<td><code>ListTodayActions</code> / <code>CompleteActionOccurrence</code> / <code>SkipActionOccurrence</code> / <code>CheckInHabit</code></td>
+<td>Today board execution</td>
+</tr>
+<tr>
+<td><code>SubmitQuestEvidence</code> / <code>AdjudicateQuest</code> / <code>ApplyQuestAdjudication</code></td>
+<td>Quest evidence + DM ruling</td>
+</tr>
+<tr>
+<td><code>Equip</code> / <code>Unequip</code></td>
+<td>Update <code>life_equipped_slots</code></td>
+</tr>
+<tr>
+<td><code>ListQuests</code> / <code>ListPendingQuestDMViews</code> / <code>ListInventory</code> / <code>ListInventoryPage</code> / <code>GetCharacter</code></td>
+<td>Read models for UI (backpack paged)</td>
+</tr>
+<tr>
+<td><code>SetClassType</code></td>
+<td>Update class (default <code>Architect</code>)</td>
+</tr>
+<tr>
+<td><code>ProcessPendingLore</code></td>
+<td>Outbox consumer for lore (retries on LLM failure)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Capability</strong> (<code>hub.CapLife</code>):</p>
+<table>
+<thead>
+<tr>
+<th>Op</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EvaluateQuest</code></td>
+<td>LLM JSON eval → difficulty, fear, rewards, drop_tier, skill/stat</td>
+</tr>
+<tr>
+<td><code>AdjudicateQuest</code></td>
+<td>LLM JSON ruling from quest evidence</td>
+</tr>
+<tr>
+<td><code>GenerateInstanceLore</code></td>
+<td>LLM JSON → instance name/lore for dropped gear</td>
+</tr>
+<tr>
+<td><code>BreakdownGoalTree</code></td>
+<td>LLM JSON → suggested plan tree</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-bootstrap--seeds">7. Bootstrap / seeds</h2>
+<ul>
+<li><code>EnsureProfile</code>: seed (and backfill) characteristics <code>INT</code>, <code>PHY</code>, <code>WIL</code>, <code>CHA</code>, <code>CRE</code>, <code>FIN</code>, <code>WRI</code>, <code>FOC</code>; <code>class_type=Architect</code>; empty equipped slots + AI context.</li>
+<li>Skills: <code>GetOrCreate</code> on evaluate/create (no default skill list).</li>
+<li><code>Bootstrap</code>: idempotent upsert of equipment + loot tables + achievements from <code>internal/modules/life/seed/*.json</code>.</li>
+</ul>
+<h2 id="8-http-routes-and-user-nav">8. HTTP routes and User nav</h2>
+<p>Prefix: <code>/service/web</code></p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td><code>/life</code></td>
+<td>Dashboard</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/stats</code></td>
+<td>Stats shell (30-day analytics)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/stats/panel</code></td>
+<td>Stats HTMX panel (<code>tz</code> IANA query)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/character</code></td>
+<td>Class + profile identity</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/character/class</code></td>
+<td>Set class type</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/goals</code></td>
+<td>PARA goals CRUD</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/goals</code></td>
+<td>Create goal</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/goals/:flag</code></td>
+<td>Update goal title/category/<code>area_flag</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/goals/:flag/status</code></td>
+<td>Pause / activate goal</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/goals/:flag/delete</code></td>
+<td>Delete goal</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/plan</code></td>
+<td>Plan tree + AI breakdown</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/character/plan</code></td>
+<td>Create plan node</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/character/plan/:flag/confirm-habit</code></td>
+<td>Confirm habit candidate</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/character/plan/breakdown/preview</code></td>
+<td>AI plan breakdown preview</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/character/plan/breakdown/import</code></td>
+<td>Import AI plan breakdown</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/quests</code></td>
+<td>Quest list + today board + evidence/DM; query <code>completed_page</code>, <code>logs_page</code>, <code>history_tab</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests</code></td>
+<td>Create quest from prompt</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/complete</code></td>
+<td>Complete quest (cascade + loot)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/fail</code></td>
+<td>Fail quest (24h gear rust)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/dismiss</code></td>
+<td>Dismiss pending quest (no penalty)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/evidence</code></td>
+<td>Submit quest evidence</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/adjudicate</code></td>
+<td>Request AI adjudication</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/quests/:flag/adjudication/:adjudicationFlag/apply</code></td>
+<td>Apply adjudication verdict</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/actions/:flag/complete</code></td>
+<td>Complete today action occurrence</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/actions/:flag/skip</code></td>
+<td>Skip today action occurrence</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/habits/:flag/checkin</code></td>
+<td>Habit check-in</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/skills</code></td>
+<td>Skill tree</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/inventory</code></td>
+<td>Backpack; query <code>backpack_page</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/inventory/:flag/equip</code></td>
+<td>Equip inventory item</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/inventory/slots/:slot/unequip</code></td>
+<td>Clear equipped slot</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/achievements</code></td>
+<td>Memorial achievements</td>
+</tr>
+<tr>
+<td>GET</td>
+<td><code>/life/rewards</code></td>
+<td>Player-defined real-life rewards market; query <code>redemptions_page</code>, <code>inactive_page</code>, <code>archive_tab</code></td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/rewards</code></td>
+<td>Create reward</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/rewards/:flag</code></td>
+<td>Update reward</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/rewards/:flag/deactivate</code></td>
+<td>Soft-delete reward</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/rewards/:flag/restore</code></td>
+<td>Restore soft-deleted reward</td>
+</tr>
+<tr>
+<td>POST</td>
+<td><code>/life/rewards/:flag/redeem</code></td>
+<td>Spend gold (honor system)</td>
+</tr>
+</tbody>
+</table>
+<p>Nav: Life module sidebar (by usage frequency) — Life, Quests, Rewards, Skills, Inventory, Goals, Plan, Stats, Character, Achievements.</p>
+<h2 id="9-core-flows-and-outbox-contract">9. Core flows and outbox contract</h2>
+<pre><code class="language-mermaid">flowchart LR
+  UserNav[UserNav] --&gt; WebLife[web_life_handlers]
+  WebLife --&gt; LifeSvc[modules_life_Service]
+  LifeSvc --&gt; PkgLife[pkg_life]
+  LifeSvc --&gt; Store[LifeStore]
+  LifeSvc --&gt; CapLife[capability_life]
+  CapLife --&gt; LLM[chat_LLM]
+  LifeSvc --&gt; Outbox[event_outbox]
+  Outbox --&gt; LoreWorker[ProcessPendingLore]
+  LoreWorker --&gt; CapLife
+  LoreWorker --&gt; Store
+</code></pre>
+<h3 id="create-quest">Create quest</h3>
+<p>Web → <code>CreateQuestFromPrompt</code> → <code>capability.Invoke(EvaluateQuest)</code> → get-or-create skill → insert <code>life_quests</code>.</p>
+<h3 id="complete-quest">Complete quest</h3>
+<p>In one transaction:</p>
+<ol>
+<li>Re-read profile pity; roll loot with pity; resolve drop equipment when needed.</li>
+<li>Apply <code>pkg/life</code> cascade (skill → characteristic → profile) including pity write.</li>
+<li>Mark quest completed.</li>
+<li>Clear rust on equipped gear.</li>
+<li>Maybe insert inventory + lore outbox (Boss, or difficulty SS/SSS).</li>
+<li>Write <code>life_action_logs</code>.</li>
+<li>Daily respawn clone when type is <code>Daily</code>.</li>
+<li>Update achievement progress / unlocks.</li>
+</ol>
+<p>HTMX returns immediate feedback (exp/gold/drop). Lore fills later. Completion-rate blend runs after commit.<br>
+After commit, <code>notify.go</code> enqueues an in-app inbox notification (<code>GatewaySend</code>, non-blocking).</p>
+<h3 id="fail-quest">Fail quest</h3>
+<p>In one transaction: mark quest <code>Failed</code> and set 24h <code>tarnished_until</code> on equipped slots + equipped inventory. Completion-rate blend runs after commit.<br>
+After commit, <code>notify.go</code> enqueues an in-app inbox notification (rust warning).</p>
+<h3 id="dismiss-quest">Dismiss quest</h3>
+<p>Mark a <code>Pending</code> quest <code>Dismissed</code> with no rust and no completion-rate blend. Used to clear stuck or unwanted quests from the board.</p>
+<h3 id="outbox">Outbox</h3>
+<ul>
+<li>Event type string: <code>life.inventory.lore_requested</code></li>
+<li>Payload: <code>event_id</code>, <code>type</code>, <code>life_profile_id</code>, <code>inventory_id</code></li>
+<li>Consumer: <code>modules/life</code> <code>ProcessPendingLore</code> (poll unpublished outbox rows of this type)</li>
+<li>On success: set instance lore fields, <code>lore_status=ready</code>, mark outbox published</li>
+<li>On LLM / transient failure: leave outbox unpublished for retry; do not mark <code>lore_status=failed</code></li>
+<li>On poison / malformed payload / malformed lore response / missing inventory: mark outbox published; if inventory is known and still <code>pending</code>, set <code>lore_status=failed</code></li>
+</ul>
+<h2 id="10-boundaries">10. Boundaries</h2>
+<ul>
+<li>Modules must not import <code>pkg/providers/*</code>.</li>
+<li>Web handlers must not run ent queries; call <code>LifeService</code> only.</li>
+<li>Formulas only in <code>pkg/life</code>.</li>
+<li>Persistence: <code>LifeStore</code> in package <code>store</code> (<code>internal/store/life.go</code>; not a separate <code>*_store.go</code> package); schemas <code>life_*</code>.</li>
+<li>No JSON API under <code>/service/life</code> in v1.</li>
+<li>Web installs the domain service via <code>life.OnService(web.SetLifeService)</code> at module register time.</li>
+<li>Capability LLM failures use <code>types.ErrProvider</code>; web maps them to a generic toast (no raw LLM text).</li>
+</ul>
+<h2 id="11-config">11. Config</h2>
+<pre><code class="language-yaml">modules:
+  - name: life
+    enabled: true
+    default_class: Architect
+</code></pre>
+<h2 id="12-testing-notes">12. Testing notes</h2>
+<ul>
+<li><code>pkg/life</code>: table-driven unit tests (cascade, loot, pity, buffs, soft HP, blend).</li>
+<li>Module / web: package tests with fakes where needed.</li>
+<li>Cross-boundary BDD under <code>tests/specs/life_spec_test.go</code> (requires Docker).</li>
+</ul>
+<h2 id="13-implementation-status">13. Implementation status</h2>
+<p>Implemented in-tree: schemas (<code>life_*</code>), <code>LifeStore</code>, <code>pkg/life</code>, <code>pkg/capability/life</code>, <code>internal/modules/life</code>, web routes/UI, User nav, seed catalog, BDD specs.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../index.html">Home</a>
+<a href="../../design.html">Product Design</a>
+<a href="../../api.html">API Reference</a>
+<a href="../../tutorials.html">Tutorials &amp; Guides</a>
+<a href="../../skills.html">AI Skills</a>
+<a href="../../docs/getting-started/">Getting Started</a>
+<span class="footer-license">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Discover. Compose. Operate.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
