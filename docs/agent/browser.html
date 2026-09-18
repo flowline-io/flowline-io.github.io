@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Browser tools (CDP) — Flowbot</title>
+
+<link rel="canonical" href="https://flowline-io.github.io/docs/agent/browser.html" />
+<meta property="og:title" content="Browser tools (CDP) — Flowbot" />
+
+<meta property="og:url" content="https://flowline-io.github.io/docs/agent/browser.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Flowbot" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Browser tools (CDP) — Flowbot" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../design.html">Product</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Learn</a></li>
+<li><a href="../../skills.html">Skills</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">Community</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>Browser tools (CDP)</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">AGENTS.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/AGENTS.html" class="docs-nav-link">Documentation standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/browser.html" class="docs-nav-link docs-nav-sub active">Browser tools (CDP)</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+			<li><a href="../../docs/agent/headless-cli.html" class="docs-nav-link docs-nav-sub">Headless CLI (`flowbot-agent`)</a></li>
+			
+			<li><a href="../../docs/agent/local-cli-gateway.html" class="docs-nav-link docs-nav-sub">Local CLI Gateway</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+			<li><a href="../../docs/architecture/pkg-boundaries.html" class="docs-nav-link docs-nav-sub">pkg vs internal Boundaries</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Capability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Life</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/life/" class="docs-nav-link">Life</a></li>
+			
+			<li><a href="../../docs/life/architecture.html" class="docs-nav-link docs-nav-sub">Life Architecture</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/confluence/SKILL.html" class="docs-nav-link docs-nav-sub">Confluence</a></li>
+			
+			<li><a href="../../docs/skills/confluence/references/cli.html" class="docs-nav-link docs-nav-sub">Confluence CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/email/SKILL.html" class="docs-nav-link docs-nav-sub">Email</a></li>
+			
+			<li><a href="../../docs/skills/email/references/cli.html" class="docs-nav-link docs-nav-sub">Email CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/SKILL.html" class="docs-nav-link docs-nav-sub">Pipeline</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/cli.html" class="docs-nav-link docs-nav-sub">Pipeline CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/schema.html" class="docs-nav-link docs-nav-sub">Pipeline YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities.html" class="docs-nav-link docs-nav-sub">Pipeline capability operations reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/steps.html" class="docs-nav-link docs-nav-sub">Pipeline steps reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trello/SKILL.html" class="docs-nav-link docs-nav-sub">Trello</a></li>
+			
+			<li><a href="../../docs/skills/trello/references/cli.html" class="docs-nav-link docs-nav-sub">Trello CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gateway.html" class="docs-nav-link docs-nav-sub">`gateway` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability operations</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/" class="docs-nav-link">Testing</a></li>
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link docs-nav-sub">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link docs-nav-sub">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="browser-tools-cdp">Browser tools (CDP)</h1>
+<p>Chat agent interactive browsing via Chrome DevTools Protocol. Implementation lives in <a href="../../pkg/agent/browser/" rel="nofollow"><code>pkg/agent/browser</code></a> and <a href="../../pkg/agent/tools/browser/" rel="nofollow"><code>pkg/agent/tools/browser</code></a>. Decision record: <a href="../../.agents/notes/implemented/architecture/2026-09-16-chat-agent-browser-cdp.html" rel="nofollow">.agents/notes/implemented/architecture/2026-09-16-chat-agent-browser-cdp.md</a>.</p>
+<h2 id="enable">Enable</h2>
+<pre><code class="language-yaml">chat_agent:
+  browser:
+    enabled: true
+    driver: lightpanda          # or playwright (Chromium CDP)
+    endpoint: ws://lightpanda:9222
+    allow_private: false
+    allow_hosts: []             # host or CIDR exceptions
+    timeout: 30s
+</code></pre>
+<p>Compose already defines a <code>lightpanda</code> service (image <code>ghcr.io/flowline-io/flowbot-lightpanda</code>). From the host for local debug, CDP is published on <code>127.0.0.1:9222</code>. Optional Chromium backend (<code>ghcr.io/flowline-io/flowbot-playwright-cdp</code>):</p>
+<pre><code class="language-bash">docker compose -f deployments/docker-compose.yaml --profile playwright-cdp up -d playwright-cdp
+</code></pre>
+<p>Then set <code>driver: playwright</code> and <code>endpoint: ws://playwright-cdp:9222</code> (or <code>ws://127.0.0.1:9223</code> from the host).</p>
+<h2 id="images--ci">Images / CI</h2>
+<table>
+<thead>
+<tr>
+<th>Image</th>
+<th>Dockerfile</th>
+<th>GHCR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lightpanda CDP</td>
+<td><a href="../../deployments/lightpanda/Dockerfile" rel="nofollow"><code>deployments/lightpanda/Dockerfile</code></a></td>
+<td><code>ghcr.io/flowline-io/flowbot-lightpanda</code></td>
+</tr>
+<tr>
+<td>Chromium CDP</td>
+<td><a href="../../deployments/playwright-cdp/Dockerfile" rel="nofollow"><code>deployments/playwright-cdp/Dockerfile</code></a></td>
+<td><code>ghcr.io/flowline-io/flowbot-playwright-cdp</code></td>
+</tr>
+</tbody>
+</table>
+<p>Chromium binds DevTools to loopback inside the container; the playwright-cdp image proxies <code>0.0.0.0:9222</code> → <code>127.0.0.1:9223</code> with <code>socat</code> so Compose siblings and host port maps can reach CDP.</p>
+<p>Release tags use <strong><code>cdp-v*</code></strong> (independent of server <code>v*</code> and sandbox <code>sandbox-v*</code>). Workflow: <a href="../../.github/workflows/docker-browser-cdp.yml" rel="nofollow"><code>.github/workflows/docker-browser-cdp.yml</code></a> (also supports manual <code>workflow_dispatch</code>).</p>
+<pre><code class="language-bash">git tag cdp-v1.0.0 &amp;&amp; git push origin cdp-v1.0.0
+</code></pre>
+<h2 id="tools">Tools</h2>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>browser_navigate</code></td>
+<td>Open an http(s) URL (SSRF gate)</td>
+</tr>
+<tr>
+<td><code>browser_snapshot</code></td>
+<td>Compact interactive tree with opaque <code>ref</code>s</td>
+</tr>
+<tr>
+<td><code>browser_click</code> / <code>browser_type</code></td>
+<td>Act by <code>ref</code> from the latest snapshot</td>
+</tr>
+<tr>
+<td><code>browser_scroll</code> / <code>browser_wait</code></td>
+<td>Page settle helpers</td>
+</tr>
+<tr>
+<td><code>browser_screenshot</code></td>
+<td>PNG for vision-capable models</td>
+</tr>
+</tbody>
+</table>
+<p>Workflow: navigate → snapshot → click/type by <code>ref</code> → snapshot again. Snapshot prefers the accessibility tree and falls back to a DOM-role tree. Refs are invalidated after every navigate.</p>
+<p>Permission key: <code>browser</code> (default ask). Scheduled/autonomous overlays deny it.</p>
+<h2 id="session-model">Session model</h2>
+<p>One isolated CDP browser context per chat agent run. Context is attached in <code>Service.Run</code> and closed when the run finishes. Parallel <code>browser_*</code> calls in the same run are serialized.</p>
+<h2 id="screenshots">Screenshots</h2>
+<p><code>browser_screenshot</code> returns text metadata plus an image <code>MediaPart</code>. The LLM convert path keeps the tool result text and injects a follow-up human message with the image bytes so providers that reject images on the tool role still see the screenshot.</p>
+<h2 id="related">Related</h2>
+<ul>
+<li><a href="./agent-sandbox.html" rel="nofollow">Agent Sandbox</a> — coding image only (no Playwright variant)</li>
+<li><a href="./developer-guide.html" rel="nofollow">Developer Guide</a> — general tool authoring</li>
+</ul>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../index.html">Home</a>
+<a href="../../design.html">Product Design</a>
+<a href="../../api.html">API Reference</a>
+<a href="../../tutorials.html">Tutorials &amp; Guides</a>
+<a href="../../skills.html">AI Skills</a>
+<a href="../../docs/getting-started/">Getting Started</a>
+<span class="footer-license">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Discover. Compose. Operate.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
