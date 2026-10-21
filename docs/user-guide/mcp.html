@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>MCP — Flowbot</title>
+
+<link rel="canonical" href="https://flowline-io.github.io/docs/user-guide/mcp.html" />
+<meta property="og:title" content="MCP — Flowbot" />
+
+<meta property="og:url" content="https://flowline-io.github.io/docs/user-guide/mcp.html" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Flowbot" />
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="MCP — Flowbot" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../../css/style.css" />
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' fill='none' stroke='%2300e5ff' stroke-width='3'/><circle cx='50' cy='50' r='15' fill='%2300e5ff'/></svg>" />
+</head>
+<body>
+<div class="bg-grid"><canvas id="bg-canvas"></canvas></div>
+<nav class="nav">
+<div class="nav-inner">
+<a href="../../index.html" class="nav-logo">flowbot<span>.io</span></a>
+<ul class="nav-links">
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../../design.html">Product</a></li>
+<li><a href="../../api.html">API</a></li>
+<li><a href="../../tutorials.html">Learn</a></li>
+<li><a href="../../skills.html">Skills</a></li>
+<li><a href="../../docs/getting-started/">Docs</a></li>
+</ul>
+<a href="https://github.com/flowline-io/flowbot" class="nav-cta" target="_blank" rel="noopener">Community</a>
+<button class="nav-toggle" aria-label="Menu">
+<span></span><span></span><span></span>
+</button>
+</div>
+</nav>
+<div class="page">
+<div class="page-hero">
+<h1>MCP</h1>
+
+</div>
+<div class="docs-layout">
+
+<aside class="docs-sidebar">
+<nav class="docs-nav">
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Getting Started</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/getting-started/" class="docs-nav-link">Getting Started</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">AGENTS.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/AGENTS.html" class="docs-nav-link">Documentation standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Agent Engine</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/agent/" class="docs-nav-link">Agent Engine</a></li>
+			
+			<li><a href="../../docs/agent/architecture.html" class="docs-nav-link docs-nav-sub">Agent Engine Architecture</a></li>
+			
+			<li><a href="../../docs/agent/developer-guide.html" class="docs-nav-link docs-nav-sub">Agent Engine Developer Guide</a></li>
+			
+			<li><a href="../../docs/agent/agent-sandbox.html" class="docs-nav-link docs-nav-sub">Agent Sandbox Image</a></li>
+			
+			<li><a href="../../docs/agent/browser.html" class="docs-nav-link docs-nav-sub">Browser tools (CDP)</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-feature-checklist.html" class="docs-nav-link docs-nav-sub">Chat Agent Feature Checklist</a></li>
+			
+			<li><a href="../../docs/agent/chatagent-remediation-audit.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Analytics</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/analytics/" class="docs-nav-link">Analytics</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">System Architecture</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/architecture/" class="docs-nav-link">System Architecture</a></li>
+			
+			<li><a href="../../docs/architecture/pkg-boundaries.html" class="docs-nav-link docs-nav-sub">pkg vs internal Boundaries</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Developer Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/developer-guide/" class="docs-nav-link">Developer Guide</a></li>
+			
+			<li><a href="../../docs/developer-guide/conformance.html" class="docs-nav-link docs-nav-sub">Capability Adapter Conformance Tests</a></li>
+			
+			<li><a href="../../docs/developer-guide/cursor-cloud.html" class="docs-nav-link docs-nav-sub">Cursor Cloud Environment</a></li>
+			
+			<li><a href="../../docs/developer-guide/deployment.html" class="docs-nav-link docs-nav-sub">Deployment Documentation</a></li>
+			
+			<li><a href="../../docs/developer-guide/tracing.html" class="docs-nav-link docs-nav-sub">Distributed Tracing</a></li>
+			
+			<li><a href="../../docs/developer-guide/monitoring.html" class="docs-nav-link docs-nav-sub">Monitoring</a></li>
+			
+			<li><a href="../../docs/developer-guide/recovery.html" class="docs-nav-link docs-nav-sub">Recovery Manager</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Reference</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/reference/" class="docs-nav-link">Reference</a></li>
+			
+			<li><a href="../../docs/reference/config-reference.html" class="docs-nav-link docs-nav-sub">Configuration Files</a></li>
+			
+			<li><a href="../../docs/reference/database-reference.html" class="docs-nav-link docs-nav-sub">Database Documentation</a></li>
+			
+			<li><a href="../../docs/reference/schema.html" class="docs-nav-link docs-nav-sub">Documentation</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Self Hosting.md</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/self-hosting.html" class="docs-nav-link">Self-hosting Flowbot</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Skills</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/skills/" class="docs-nav-link">Skills</a></li>
+			
+			<li><a href="../../docs/skills/confluence/SKILL.html" class="docs-nav-link docs-nav-sub">Confluence</a></li>
+			
+			<li><a href="../../docs/skills/confluence/references/cli.html" class="docs-nav-link docs-nav-sub">Confluence CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/devops/SKILL.html" class="docs-nav-link docs-nav-sub">DevOps</a></li>
+			
+			<li><a href="../../docs/skills/devops/references/cli.html" class="docs-nav-link docs-nav-sub">DevOps CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/email/SKILL.html" class="docs-nav-link docs-nav-sub">Email</a></li>
+			
+			<li><a href="../../docs/skills/email/references/cli.html" class="docs-nav-link docs-nav-sub">Email CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/SKILL.html" class="docs-nav-link docs-nav-sub">Firefly III</a></li>
+			
+			<li><a href="../../docs/skills/fireflyiii/references/cli.html" class="docs-nav-link docs-nav-sub">Firefly III CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/github/SKILL.html" class="docs-nav-link docs-nav-sub">GitHub</a></li>
+			
+			<li><a href="../../docs/skills/github/references/cli.html" class="docs-nav-link docs-nav-sub">GitHub CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/gitea/SKILL.html" class="docs-nav-link docs-nav-sub">Gitea</a></li>
+			
+			<li><a href="../../docs/skills/gitea/references/cli.html" class="docs-nav-link docs-nav-sub">Gitea CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/SKILL.html" class="docs-nav-link docs-nav-sub">Kanboard</a></li>
+			
+			<li><a href="../../docs/skills/kanboard/references/cli.html" class="docs-nav-link docs-nav-sub">Kanboard CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/SKILL.html" class="docs-nav-link docs-nav-sub">Karakeep</a></li>
+			
+			<li><a href="../../docs/skills/karakeep/references/cli.html" class="docs-nav-link docs-nav-sub">Karakeep CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/memos/SKILL.html" class="docs-nav-link docs-nav-sub">Memos</a></li>
+			
+			<li><a href="../../docs/skills/memos/references/cli.html" class="docs-nav-link docs-nav-sub">Memos CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/SKILL.html" class="docs-nav-link docs-nav-sub">Miniflux</a></li>
+			
+			<li><a href="../../docs/skills/miniflux/references/cli.html" class="docs-nav-link docs-nav-sub">Miniflux CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/SKILL.html" class="docs-nav-link docs-nav-sub">NocoDB</a></li>
+			
+			<li><a href="../../docs/skills/nocodb/references/cli.html" class="docs-nav-link docs-nav-sub">NocoDB CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/SKILL.html" class="docs-nav-link docs-nav-sub">Pipeline</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/cli.html" class="docs-nav-link docs-nav-sub">Pipeline CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/schema.html" class="docs-nav-link docs-nav-sub">Pipeline YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities.html" class="docs-nav-link docs-nav-sub">Pipeline capability operations reference</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/steps.html" class="docs-nav-link docs-nav-sub">Pipeline steps reference</a></li>
+			
+			<li><a href="../../docs/skills/transmission/SKILL.html" class="docs-nav-link docs-nav-sub">Transmission</a></li>
+			
+			<li><a href="../../docs/skills/transmission/references/cli.html" class="docs-nav-link docs-nav-sub">Transmission CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trello/SKILL.html" class="docs-nav-link docs-nav-sub">Trello</a></li>
+			
+			<li><a href="../../docs/skills/trello/references/cli.html" class="docs-nav-link docs-nav-sub">Trello CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/trilium/SKILL.html" class="docs-nav-link docs-nav-sub">Trilium</a></li>
+			
+			<li><a href="../../docs/skills/trilium/references/cli.html" class="docs-nav-link docs-nav-sub">Trilium CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/SKILL.html" class="docs-nav-link docs-nav-sub">Workflow</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/cli.html" class="docs-nav-link docs-nav-sub">Workflow CLI reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/schema.html" class="docs-nav-link docs-nav-sub">Workflow YAML schema</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities.html" class="docs-nav-link docs-nav-sub">Workflow capability actions reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/steps.html" class="docs-nav-link docs-nav-sub">Workflow task steps reference</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/confluence.html" class="docs-nav-link docs-nav-sub">`confluence` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/core.html" class="docs-nav-link docs-nav-sub">`core` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/devops.html" class="docs-nav-link docs-nav-sub">`devops` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/drone.html" class="docs-nav-link docs-nav-sub">`drone` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/drone.html" class="docs-nav-link docs-nav-sub">`drone` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/email.html" class="docs-nav-link docs-nav-sub">`email` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/fireflyiii.html" class="docs-nav-link docs-nav-sub">`fireflyiii` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/functions.html" class="docs-nav-link docs-nav-sub">`functions` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/gitea.html" class="docs-nav-link docs-nav-sub">`gitea` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/github.html" class="docs-nav-link docs-nav-sub">`github` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/kanboard.html" class="docs-nav-link docs-nav-sub">`kanboard` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/karakeep.html" class="docs-nav-link docs-nav-sub">`karakeep` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/memos.html" class="docs-nav-link docs-nav-sub">`memos` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/miniflux.html" class="docs-nav-link docs-nav-sub">`miniflux` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/nocodb.html" class="docs-nav-link docs-nav-sub">`nocodb` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/transmission.html" class="docs-nav-link docs-nav-sub">`transmission` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trello.html" class="docs-nav-link docs-nav-sub">`trello` capability operations</a></li>
+			
+			<li><a href="../../docs/skills/workflow/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability actions</a></li>
+			
+			<li><a href="../../docs/skills/pipeline/references/capabilities/trilium.html" class="docs-nav-link docs-nav-sub">`trilium` capability operations</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">Testing</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/testing/" class="docs-nav-link">Testing</a></li>
+			
+			<li><a href="../../docs/testing/bdd-specs.html" class="docs-nav-link docs-nav-sub">BDD Acceptance Testing with Ginkgo</a></li>
+			
+			<li><a href="../../docs/testing/tdd-specs.html" class="docs-nav-link docs-nav-sub">TDD Unit Test Standard</a></li>
+			
+</ul>
+</div>
+
+<div class="docs-nav-section">
+<h3 class="docs-nav-title">User Guide</h3>
+<ul class="docs-nav-items">
+			
+			<li><a href="../../docs/user-guide/" class="docs-nav-link">User Guide</a></li>
+			
+			<li><a href="../../docs/user-guide/capability-webhooks.html" class="docs-nav-link docs-nav-sub">Capability Webhooks</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-discovery.html" class="docs-nav-link docs-nav-sub">Homelab App Discovery</a></li>
+			
+			<li><a href="../../docs/user-guide/homelab-image-updates.html" class="docs-nav-link docs-nav-sub">Homelab image update checks</a></li>
+			
+			<li><a href="../../docs/user-guide/mcp.html" class="docs-nav-link docs-nav-sub active">MCP</a></li>
+			
+			<li><a href="../../docs/user-guide/notifications.html" class="docs-nav-link docs-nav-sub">Notification Configuration</a></li>
+			
+			<li><a href="../../docs/user-guide/notification-gateway.html" class="docs-nav-link docs-nav-sub">Notification Gateway</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline.html" class="docs-nav-link docs-nav-sub">Pipeline Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/pipeline-template.html" class="docs-nav-link docs-nav-sub">Pipeline Template Engine</a></li>
+			
+			<li><a href="../../docs/user-guide/blueprints.html" class="docs-nav-link docs-nav-sub">Pipeline blueprints</a></li>
+			
+			<li><a href="../../docs/user-guide/workflow.html" class="docs-nav-link docs-nav-sub">Workflow Engine</a></li>
+			
+</ul>
+</div>
+
+</nav>
+</aside>
+
+<main class="docs-content">
+<h1 id="mcp">MCP</h1>
+<p>Flowbot speaks MCP in two directions. CLI and generated <code>docs/skills</code> stay as they are; MCP does not replace them.</p>
+<h2 id="inbound-server-mcp">Inbound server (<code>/mcp</code>)</h2>
+<p>Set <code>mcp.enabled: true</code> and connect a client with a <strong>header</strong> token (<code>Authorization: Bearer</code> or <code>X-AccessToken</code>). Cookies and full web sessions (<code>kind=full</code>) are rejected. The endpoint is Streamable HTTP, stateless (MCP <code>2026-07-28</code>): POST is the protocol; GET and DELETE return 405. Default is off.</p>
+<p><code>GET /mcp/server-card</code> is a public <a href="https://modelcontextprotocol.io/seps/2127-mcp-server-cards" rel="nofollow noopener" target="_blank">MCP Server Card</a> (no token) when <code>mcp.enabled</code> is true and <code>mcp.server_card</code> is not false. The JSON is <code>$schema</code>, <code>name</code> (<code>flowline-io/flowbot</code>), <code>version</code>, <code>description</code>, and one <code>streamable-http</code> remote with protocol <code>2026-07-28</code>. The remote is <code>flowbot.url</code> plus <code>/mcp</code> when <code>flowbot.url</code> is set; otherwise it is the request host, and <code>X-Forwarded-Proto: https</code> or a TLS request selects https. It does not list tools. The extension schema is still pre-release, so those fields can change. <code>flowbot mcp config</code> prints that URL as the first stdout line, then the snippet. <code>-o json</code> puts it on <code>data.server_card</code>. The CLI prints the path for the endpoint you pass; it does not read this process&#39;s <code>mcp.server_card</code>. <code>/service/web/settings/mcp</code> shows the URL only while this process publishes the card.</p>
+<p>Cursor example (<code>mcp.json</code>):</p>
+<pre><code class="language-json">{
+  &#34;mcpServers&#34;: {
+    &#34;flowbot&#34;: {
+      &#34;url&#34;: &#34;http://127.0.0.1:6060/mcp&#34;,
+      &#34;headers&#34;: {
+        &#34;Authorization&#34;: &#34;Bearer &lt;access-token&gt;&#34;
+      }
+    }
+  }
+}
+</code></pre>
+<p>Use a narrow token (<code>service:karakeep:read</code>, <code>pipeline:run</code>, …) rather than <code>admin:*</code> when possible. <code>mcp.include</code> / <code>mcp.exclude</code> further crop the tool list (capability name or full <code>capability.operation</code>). A deny-list never exposes <code>core.run_terminal</code>, <code>core.run_code</code>, <code>core.http_request</code>, or <code>core.agent_run</code>. Write tools run when the token has write/run scope; they are not sent through chat-agent approval. Pipeline/workflow/function <strong>apply</strong> (YAML upsert) is not an MCP tool — use CLI or Web to change definitions; MCP can list, get, run, and inspect runs.</p>
+<p>Successful calls return the payload in <code>structuredContent</code> and repeat that JSON as text. <code>pipeline.list</code>, <code>workflow.list</code>, <code>function.list</code>, and <code>hub.apps</code> use <code>items</code>. <code>get_run</code> without <code>run_id</code> returns <code>runs</code>. Other objects keep their fields. Every result includes <code>trace.request_id</code>, the same value as the HTTP <code>X-Request-ID</code> header. <code>trace.trace_id</code> is present when the call has a W3C trace.</p>
+<p>Failed calls set <code>isError</code> and return <code>structuredContent.error</code> with <code>code</code>, <code>message</code>, <code>retryable</code>, and <code>hint</code>. The text body is the same JSON. Retry only when <code>retryable</code> is true, and wait <code>retry_after_ms</code> when that field is present.</p>
+<p>Codes, hints, and schema scope: <a href="../../.agents/notes/implemented/architecture/2026-10-16-mcp-tool-contract.html" rel="nofollow">.agents/notes/implemented/architecture/2026-10-16-mcp-tool-contract.md</a>.</p>
+<p>List tools take <code>limit</code> (default 20, maximum 100) and an opaque <code>cursor</code>. The next page is <code>page.next_cursor</code>. When a result is shortened to <code>mcp.max_output_bytes</code> (default 32768), <code>page.truncated</code> is true. <code>flowbot mcp config --client codex|claude|cursor|generic</code> prints a snippet and does not write client files. The Web page <code>/service/web/settings/mcp</code> shows the same snippets and can mint a read or run token for the signed-in user. <code>mcp.enabled</code> and <code>mcp.server_card</code> are read from the process config; changing them requires a restart.</p>
+<h2 id="client-check">Client check</h2>
+<p>Confirm a client against a running instance. Record the client version and the result with the change that introduces the client; this file does not store that record.</p>
+<ol>
+<li>Start an instance with <code>deployments/docker-compose.yaml</code>, <code>mcp.enabled: true</code>, and miniflux or karakeep test data.</li>
+<li>On <code>/service/web/settings/mcp</code>, create a read-only token and <code>export FLOWBOT_MCP_TOKEN=...</code>.</li>
+<li>Codex: paste the TOML, run <code>codex mcp list</code>, open <code>/mcp</code> in the TUI, and ask for the first 5 unread RSS entries. Confirm the page hint. A write call returns <code>permission_denied</code>.</li>
+<li>Claude Code: run the printed <code>claude mcp add</code> command, confirm <code>/mcp</code>, and run the same read task.</li>
+<li>Cursor: write <code>.cursor/mcp.json</code>, confirm the server and tools under Customize, run the same read task, and check MCP Logs.</li>
+<li>Switch to a read-and-run token. In Codex set <code>default_tools_approval_mode = &#34;writes&#34;</code> and run <code>pipeline.run</code>. Codex should ask before the call.</li>
+</ol>
+<h2 id="outbound-client-chat-agent">Outbound client (chat agent)</h2>
+<p><code>chat_agent.mcp_servers</code> registers external MCP servers as agent tools named <code>mcp_&lt;server&gt;_&lt;tool&gt;</code>. HTTP uses <code>url</code> plus optional <code>headers</code>. stdio uses <code>command</code> + <code>args</code> (no shell, long-lived process). <code>npx</code> / <code>uvx</code> work but pull arbitrary code at start. There is no Web UI to add commands. URLs that would hit this process’s <code>/mcp</code> are rejected.</p>
+<p>Permission key is <code>mcp.&lt;server&gt;</code> (default ask; read-only remote tools default allow). Auto-approval treats destructive/write MCP tools as flagged. DCG does not apply to external MCP tools.</p>
+
+</main>
+</div>
+</div>
+<footer class="footer">
+<div class="footer-left">
+<a href="https://github.com/flowline-io/flowbot" target="_blank" rel="noopener">GitHub</a>
+<a href="../../index.html">Home</a>
+<a href="../../design.html">Product Design</a>
+<a href="../../api.html">API Reference</a>
+<a href="../../tutorials.html">Tutorials &amp; Guides</a>
+<a href="../../skills.html">AI Skills</a>
+<a href="../../docs/getting-started/">Getting Started</a>
+<span class="footer-license">GPL-3.0</span>
+</div>
+<div class="footer-right">
+Discover. Compose. Operate.
+</div>
+</footer>
+<script src="../../js/main.js"></script>
+</body>
+</html>
